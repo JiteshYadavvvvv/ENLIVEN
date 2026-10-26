@@ -21,9 +21,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GDG Enliven 4",
+  title: "ENLIVEN",
   description:
-    "Enliven 4, the annual tech event by Google Developer Groups, Army Institute of Technology, Pune.",
+    "ENLIVEN is the flagship tech event by Google Developer Groups, Army Institute of Technology, Pune. Enliven 4 marks its fourth edition.",
 };
 
 export const viewport: Viewport = {
