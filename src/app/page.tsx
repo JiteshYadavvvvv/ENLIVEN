@@ -7,6 +7,7 @@ import buildingSilhouette from "@/assets/environment/midground/building-silhouet
 import EnvironmentBackground from "@/components/environment/EnvironmentBackground";
 import EnvironmentProp from "@/components/environment/EnvironmentProp";
 import EnvironmentScene from "@/components/environment/EnvironmentScene";
+import Navbar from "@/components/layout/Navbar";
 import Button from "@/components/ui/Button";
 import Divider from "@/components/ui/Divider";
 import SectionLabel from "@/components/ui/SectionLabel";
@@ -30,6 +31,8 @@ export default function Home() {
           className="left-[2%] bottom-0 w-[140px] sm:left-[5%] sm:w-[200px] lg:w-[260px]"
           parallax={14}
         />
+
+        <Navbar />
 
         <div className="container-enliven relative z-[var(--layer-content)] flex min-h-screen flex-col items-center justify-center gap-6 py-24 text-center">
           <SectionLabel>Edition 04 · GDG AIT Pune</SectionLabel>
