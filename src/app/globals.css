@@ -158,6 +158,26 @@
     text-shadow: 0 1px 3px
       color-mix(in srgb, var(--color-void) 60%, transparent);
   }
+
+  @keyframes idle-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(var(--float-distance, -8px));
+    }
+  }
+
+  .animate-idle-float {
+    animation: idle-float var(--float-duration, 6s) ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-idle-float {
+      animation: none;
+    }
+  }
 }
 
 @layer components {

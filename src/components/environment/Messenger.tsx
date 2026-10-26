@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { CSSProperties } from "react";
 
 import messenger from "@/assets/characters/messenger.webp";
 import { useParallax } from "@/utils/useParallax";
@@ -26,16 +27,26 @@ export default function Messenger({
         transition: "transform 300ms var(--ease-cinematic)",
       }}
     >
-      <SpeechBubble className="absolute -top-6 left-2 w-36 sm:-top-10 sm:left-8 sm:w-56">
+      <SpeechBubble className="absolute -top-6 left-2 w-32 sm:left-6 sm:w-40 lg:-top-10 lg:left-8 lg:w-56">
         Welcome to Enliven 4!
       </SpeechBubble>
-      <Image
-        src={messenger}
-        alt=""
-        priority
-        className="h-auto w-full"
-        draggable={false}
-      />
+      <div
+        className="animate-idle-float"
+        style={
+          {
+            "--float-distance": "-3px",
+            "--float-duration": "5s",
+          } as CSSProperties
+        }
+      >
+        <Image
+          src={messenger}
+          alt=""
+          priority
+          className="h-auto w-full"
+          draggable={false}
+        />
+      </div>
     </div>
   );
 }

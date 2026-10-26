@@ -9,11 +9,10 @@ import { FiBookOpen, FiMenu, FiX } from "react-icons/fi";
 import logo from "@/assets/brand/enliven-logo.webp";
 
 const NAV_LINKS = [
-  { label: "Events", href: "#events" },
+  { label: "Prizes", href: "#prizes" },
+  { label: "Tracks", href: "#tracks" },
   { label: "Timeline", href: "#timeline" },
-  { label: "Sponsors", href: "#sponsors" },
-  { label: "Team", href: "#team" },
-  { label: "FAQs", href: "#faqs" },
+  { label: "Sponsor", href: "#sponsor" },
 ];
 
 function BrochureButton({ className = "" }: { className?: string }) {
@@ -23,7 +22,7 @@ function BrochureButton({ className = "" }: { className?: string }) {
       disabled
       title="Brochure coming soon"
       aria-label="Brochure, coming soon"
-      className={`inline-flex items-center gap-2 rounded-lg border-2 border-[#3a2410] bg-[#f4e2b8] px-4 py-2 text-xs font-bold tracking-[0.08em] text-[#3a2410] uppercase disabled:opacity-60 ${className}`}
+      className={`inline-flex items-center gap-2 rounded-lg border-2 border-[#3a2410] bg-[#f4e2b8] px-4 py-2 text-xs font-bold tracking-[0.08em] text-[#3a2410] uppercase disabled:grayscale-[35%] ${className}`}
     >
       Brochure
       <FiBookOpen aria-hidden />
@@ -56,7 +55,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-shadow-crisp text-sm font-semibold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
+                className="text-shadow-crisp font-display text-lg tracking-[0.04em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
               >
                 {item.label}
               </a>
@@ -97,7 +96,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="text-sm font-semibold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
+                className="font-display text-lg tracking-[0.04em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
               >
                 {item.label}
               </a>
