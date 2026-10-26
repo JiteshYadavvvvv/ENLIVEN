@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiDownload, FiMenu, FiX } from "react-icons/fi";
 
-import emblem from "@/assets/brand/enliven-emblem.svg";
+import logo from "@/assets/brand/enliven-logo.webp";
 
 const NAV_LINKS = [
   { label: "Prizes", href: "#prizes" },
@@ -37,7 +37,7 @@ export default function Navbar() {
     <nav className="absolute inset-x-0 top-0 z-[var(--layer-hud)]">
       <div className="container-enliven grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[1fr_auto_1fr]">
         <Link href="/" className="flex items-center gap-2">
-          <Image src={emblem} alt="" priority className="h-8 w-auto" />
+          <Image src={logo} alt="" priority className="h-9 w-auto" />
           <span className="font-display text-xl tracking-[0.04em] text-paper uppercase">
             Enliven
           </span>
