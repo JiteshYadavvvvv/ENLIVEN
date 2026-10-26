@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 560">
+  <defs>
+    <linearGradient id="frond" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1a0a35"/>
+      <stop offset="1" stop-color="#04050a"/>
+    </linearGradient>
+    <linearGradient id="trunk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0a0e1f"/>
+      <stop offset="1" stop-color="#04050a"/>
+    </linearGradient>
+  </defs>
+  <path d="M 160.4,560.0 C 154.4,420.0 170.4,308.0 225.2,166.8 L 245.2,162.8 C 190.4,308.0 178.4,436.8 192.4,560.0 Z" fill="url(#trunk)"/>
+  <ellipse cx="173.4" cy="479.4" rx="13" ry="4" fill="#04050a" opacity="0.5" transform="rotate(-8 173.4 479.4)"/>
+<ellipse cx="186.3" cy="398.7" rx="13" ry="4" fill="#04050a" opacity="0.5" transform="rotate(-8 186.3 398.7)"/>
+<ellipse cx="199.3" cy="318.1" rx="13" ry="4" fill="#04050a" opacity="0.5" transform="rotate(-8 199.3 318.1)"/>
+<ellipse cx="212.2" cy="237.4" rx="13" ry="4" fill="#04050a" opacity="0.5" transform="rotate(-8 212.2 237.4)"/>
+  <path d="M 235.2,156.8 C 169.7,147.0 106.5,104.8 70.7,76.1 C 196.5,121.3 128.8,89.0 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 194.3,122.1 174.1,65.3 165.5,29.7 C 228.5,115.1 199.3,63.5 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 223.6,101.1 248.7,36.2 268.2,-2.2 C 261.2,113.7 273.8,48.6 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 259.6,112.3 315.4,76.7 351.9,57.6 C 279.0,137.2 326.1,96.2 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 289.6,124.3 369.5,116.2 418.7,115.0 C 292.2,158.7 366.9,140.8 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 292.7,152.5 356.9,175.8 394.6,193.1 C 277.1,179.2 342.4,193.4 235.2,156.8 Z" fill="url(#frond)"/>
+<path d="M 235.2,156.8 C 292.8,185.0 335.2,243.1 357.3,280.5 C 257.3,201.5 307.9,251.5 235.2,156.8 Z" fill="url(#frond)"/>
+</svg>
