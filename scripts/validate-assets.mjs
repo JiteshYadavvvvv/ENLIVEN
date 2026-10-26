@@ -30,6 +30,11 @@ const BUDGETS = [
     maxBytes: 120 * 1024,
   },
   {
+    match: /^src\/assets\/characters\//,
+    label: "character artwork",
+    maxBytes: 300 * 1024,
+  },
+  {
     match: /^src\/assets\/textures\//,
     label: "texture or overlay",
     maxBytes: 60 * 1024,
