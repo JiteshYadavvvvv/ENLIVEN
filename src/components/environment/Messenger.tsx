@@ -26,7 +26,7 @@ export default function Messenger({
         transition: "transform 300ms var(--ease-cinematic)",
       }}
     >
-      <SpeechBubble className="absolute -top-4 left-5 max-w-[9rem] sm:-top-8 sm:left-12 sm:max-w-[14rem]">
+      <SpeechBubble className="absolute -top-6 left-2 w-36 sm:-top-10 sm:left-8 sm:w-56">
         Welcome to Enliven 4!
       </SpeechBubble>
       <Image

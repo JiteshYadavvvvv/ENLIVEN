@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FiDownload, FiMenu, FiX } from "react-icons/fi";
+import { FaCrown } from "react-icons/fa";
+import { FiBookOpen, FiMenu, FiX } from "react-icons/fi";
 
 import logo from "@/assets/brand/enliven-logo.webp";
 
@@ -22,10 +23,10 @@ function BrochureButton({ className = "" }: { className?: string }) {
       disabled
       title="Brochure coming soon"
       aria-label="Brochure, coming soon"
-      className={`btn btn-secondary ${className}`}
+      className={`inline-flex items-center gap-2 rounded-lg border-2 border-[#3a2410] bg-[#f4e2b8] px-4 py-2 text-xs font-bold tracking-[0.08em] text-[#3a2410] uppercase disabled:opacity-60 ${className}`}
     >
-      <FiDownload aria-hidden size={14} />
       Brochure
+      <FiBookOpen aria-hidden />
     </button>
   );
 }
@@ -39,8 +40,14 @@ export default function Navbar() {
       <div className="container-enliven relative grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[1fr_auto_1fr]">
         <Link href="/" className="flex items-center gap-2">
           <Image src={logo} alt="" priority className="h-9 w-auto" />
-          <span className="font-display text-xl tracking-[0.04em] text-paper uppercase">
-            Enliven
+          <span className="flex flex-col leading-none">
+            <span className="text-shadow-crisp font-display text-base tracking-[0.04em] text-paper uppercase">
+              Alive
+            </span>
+            <span className="text-shadow-crisp flex items-center gap-1 font-display text-base tracking-[0.04em] text-paper uppercase">
+              To Create.{" "}
+              <FaCrown aria-hidden className="text-magenta" size={12} />
+            </span>
           </span>
         </Link>
 
@@ -49,7 +56,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-sm tracking-[0.12em] text-paper/80 uppercase transition-colors duration-200 hover:text-cyan"
+                className="text-shadow-crisp text-sm font-semibold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
               >
                 {item.label}
               </a>
@@ -66,7 +73,7 @@ export default function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}
-          className="col-start-3 row-start-1 justify-self-end text-paper lg:hidden"
+          className="text-shadow-crisp col-start-3 row-start-1 justify-self-end text-paper lg:hidden"
         >
           {open ? (
             <FiX aria-hidden size={24} />
@@ -90,7 +97,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="text-sm tracking-[0.12em] text-paper/80 uppercase transition-colors duration-200 hover:text-cyan"
+                className="text-sm font-semibold tracking-[0.12em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
               >
                 {item.label}
               </a>
