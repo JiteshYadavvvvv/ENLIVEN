@@ -3,10 +3,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { FaCrown } from "react-icons/fa";
 import { FiBookOpen, FiMenu, FiX } from "react-icons/fi";
 
-import logo from "@/assets/brand/enliven-logo.webp";
+import logoTagline from "@/assets/brand/enliven-logo-tagline.webp";
 
 const NAV_LINKS = [
   { label: "Prizes", href: "#prizes" },
@@ -37,17 +36,13 @@ export default function Navbar() {
     <nav className="absolute inset-x-0 top-0 z-[var(--layer-hud)]">
       <div aria-hidden className="nav-scrim" />
       <div className="container-enliven relative grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[1fr_auto_1fr]">
-        <Link href="/" className="flex items-center gap-2">
-          <Image src={logo} alt="" priority className="h-9 w-auto" />
-          <span className="flex flex-col leading-none">
-            <span className="text-shadow-crisp font-display text-base tracking-[0.04em] text-paper uppercase">
-              Alive
-            </span>
-            <span className="text-shadow-crisp flex items-center gap-1 font-display text-base tracking-[0.04em] text-paper uppercase">
-              To Create.{" "}
-              <FaCrown aria-hidden className="text-magenta" size={12} />
-            </span>
-          </span>
+        <Link href="/" aria-label="Enliven, Alive to Create.">
+          <Image
+            src={logoTagline}
+            alt=""
+            priority
+            className="h-10 w-auto sm:h-12"
+          />
         </Link>
 
         <ul className="col-start-2 row-start-1 hidden items-center gap-8 lg:flex xl:gap-10">

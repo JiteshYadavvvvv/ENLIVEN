@@ -54,7 +54,7 @@ export default function Home() {
               priority
               className="relative z-10 -mb-6 w-full max-w-xl sm:-mb-10 sm:max-w-3xl lg:max-w-4xl 2xl:max-w-5xl"
             />
-            <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-3xl">
+            <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-4xl">
               <Image
                 src={floatingPlatform}
                 alt=""
