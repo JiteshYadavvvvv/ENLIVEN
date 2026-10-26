@@ -1,3 +1,23 @@
+# agent and coding-assistant instructions
+**/AGENTS.md
+**/CLAUDE.md
+**/GEMINI.md
+.cursorrules
+.cursor/rules/
+.windsurfrules
+.clinerules
+
+# markdown (root README is the only tracked exception)
+*.md
+!/README.md
+
+# nonessential notes
+notes.txt
+NOTES.txt
+TODO.txt
+todo.txt
+*.notes.txt
+
 # dependencies
 /node_modules
 /.pnp
@@ -18,9 +38,23 @@
 # production
 /build
 
+# editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
 # misc
 .DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
 *.pem
+*.tmp
+*.temp
 
 # debug
 npm-debug.log*

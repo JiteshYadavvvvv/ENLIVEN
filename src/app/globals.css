@@ -3,15 +3,11 @@
 @theme {
   --color-void: #04050a;
   --color-midnight: #0a0e1f;
-  --color-midnight-2: #121735;
   --color-purple: #8b2fe8;
-  --color-purple-deep: #4c1483;
   --color-magenta: #ff2bd6;
   --color-cyan: #27e8ff;
   --color-sunset: #ff7a3d;
-  --color-sunset-deep: #ff4d6d;
   --color-paper: #f4f1ff;
-  --color-haze: #8b2fe81f;
   --color-border: color-mix(in srgb, var(--color-paper) 16%, transparent);
 
   --color-google-blue: #4285f4;
