@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 
 import emblem from "@/assets/brand/enliven-logo.webp";
-import wordmark from "@/assets/brand/enliven-wordmark.svg";
+import wordmark from "@/assets/brand/enliven-wordmark.png";
 import cityWideDesktop from "@/assets/environment/background/city-wide-desktop.webp";
 import cityWideMobile from "@/assets/environment/background/city-wide-mobile.webp";
 import floatingPlatform from "@/assets/environment/midground/floating-platform.webp";
@@ -37,7 +37,7 @@ export default function Home() {
 
         <Navbar />
 
-        <Messenger className="bottom-0 left-[2%] z-[var(--layer-content)] w-[110px] sm:left-[4%] sm:w-[220px] lg:w-[300px] xl:w-[340px]" />
+        <Messenger className="bottom-0 left-2 z-[var(--layer-content)] w-[140px] sm:left-3 sm:w-[260px] lg:left-4 lg:w-[360px] xl:w-[420px]" />
 
         <div className="container-enliven relative z-[var(--layer-content)] flex min-h-screen flex-col items-center justify-center gap-4 pt-20 pb-56 text-center sm:py-28">
           <RevealOnLoad className="flex w-full flex-col items-center">
@@ -46,15 +46,15 @@ export default function Home() {
               alt=""
               priority
               style={emblemFloat}
-              className="animate-idle-float h-24 w-auto sm:h-32"
+              className="animate-idle-float h-28 w-auto sm:h-40 lg:h-48"
             />
             <Image
               src={wordmark}
               alt="ENLIVEN"
               priority
-              className="relative z-10 -mb-10 w-full max-w-lg sm:-mb-16 sm:max-w-3xl"
+              className="relative z-10 -mb-6 w-full max-w-xl sm:-mb-10 sm:max-w-3xl lg:max-w-4xl 2xl:max-w-5xl"
             />
-            <div className="relative w-full max-w-sm lg:max-w-2xl">
+            <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-3xl">
               <Image
                 src={floatingPlatform}
                 alt=""
