@@ -46,8 +46,8 @@ export default function Messenger({
           src={MESSENGER_SRC}
           alt=""
           priority
-          width={1300}
-          height={1199}
+          width={900}
+          height={600}
           className="h-auto w-full"
           draggable={false}
         />

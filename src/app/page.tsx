@@ -11,8 +11,7 @@ import Navbar from "@/components/layout/Navbar";
 const ASSET_BASE = "/assets/enliven-world";
 const emblemSrc = `${ASSET_BASE}/branding/enliven-emblem.webp`;
 const wordmarkSrc = `${ASSET_BASE}/branding/enliven-wordmark.png`;
-const cityDesktopSrc = `${ASSET_BASE}/background/city-desktop.webp`;
-const cityMobileSrc = `${ASSET_BASE}/background/city-mobile.webp`;
+const heroBackgroundSrc = `${ASSET_BASE}/background/hero-background.webp`;
 const floatingPlatformSrc = `${ASSET_BASE}/environment/floating-platform.webp`;
 const rocketBusSrc = `${ASSET_BASE}/environment/rocket-bus.webp`;
 const dragonLeftSrc = `${ASSET_BASE}/environment/dragon-left.webp`;
@@ -58,16 +57,16 @@ export default function Home() {
     <main className="relative min-h-screen">
       <EnvironmentScene className="min-h-screen">
         <EnvironmentBackground
-          desktopSrc={cityDesktopSrc}
-          mobileSrc={cityMobileSrc}
+          desktopSrc={heroBackgroundSrc}
+          mobileSrc={heroBackgroundSrc}
           alt="A bright floating city at golden hour, with waterfalls, bridges, palm trees and floating islands"
         />
 
         <Image
           src={rocketBusSrc}
           alt=""
-          width={448}
-          height={179}
+          width={700}
+          height={294}
           sizes="210px"
           style={rocketBusDrift}
           className="animate-drift-x absolute top-[22%] left-[85%] z-[var(--layer-ambient)] hidden w-[140px] md:block lg:w-[180px] xl:w-[210px]"
@@ -77,8 +76,8 @@ export default function Home() {
         <Image
           src={dragonLeftSrc}
           alt=""
-          width={259}
-          height={140}
+          width={520}
+          height={305}
           sizes="105px"
           style={dragonLeftFlight}
           className="animate-flight-path absolute top-[13%] left-[6%] z-[var(--layer-ambient)] hidden w-[70px] md:block lg:w-[90px] xl:w-[105px]"
@@ -88,8 +87,8 @@ export default function Home() {
         <Image
           src={dragonRightSrc}
           alt=""
-          width={256}
-          height={136}
+          width={520}
+          height={257}
           sizes="96px"
           style={dragonRightFlight}
           className="animate-flight-path absolute top-[9%] left-[63%] z-[var(--layer-ambient)] hidden w-[64px] md:block lg:w-[82px] xl:w-[96px]"
