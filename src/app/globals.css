@@ -27,6 +27,7 @@
 :root {
   color-scheme: dark;
   --layer-backdrop: 0;
+  --layer-ambient: 5;
   --layer-content: 10;
   --layer-hud: 20;
 }
@@ -368,17 +369,23 @@
     border: none;
     background: none;
     padding: 0;
-    transition: transform 200ms var(--ease-cinematic);
+    transition:
+      transform 200ms var(--ease-cinematic),
+      filter 200ms var(--ease-cinematic);
+  }
+
+  .plate-button:hover {
+    filter: brightness(1.1);
   }
 
   .plate-button:active {
     transform: scale(0.97);
   }
 
-  .plate-button:disabled {
-    opacity: 0.85;
-    filter: grayscale(25%);
-    pointer-events: none;
+  .plate-button:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 3px;
+    border-radius: 0.5rem;
   }
 
   .plate-button-badge {

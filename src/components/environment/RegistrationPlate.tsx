@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 
 type RegistrationPlateProps = {
@@ -7,7 +8,7 @@ type RegistrationPlateProps = {
   height: number;
   badge: string;
   children: string;
-  disabled?: boolean;
+  href: string;
   title?: string;
   "aria-label"?: string;
 };
@@ -18,18 +19,12 @@ export default function RegistrationPlate({
   height,
   badge,
   children,
-  disabled,
+  href,
   title,
   ...rest
 }: RegistrationPlateProps) {
   return (
-    <button
-      type="button"
-      className="plate-button"
-      disabled={disabled}
-      title={title}
-      {...rest}
-    >
+    <Link href={href} className="plate-button" title={title} {...rest}>
       <Image
         src={src}
         alt=""
@@ -45,6 +40,6 @@ export default function RegistrationPlate({
         {children}
         <FiArrowRight aria-hidden />
       </span>
-    </button>
+    </Link>
   );
 }

@@ -18,12 +18,10 @@ const NAV_LINKS = [
 
 function BrochureButton({ className = "" }: { className?: string }) {
   return (
-    <button
-      type="button"
-      disabled
-      title="Brochure coming soon"
-      aria-label="Brochure, coming soon"
-      className={`inline-flex items-center justify-center transition-transform duration-200 ease-out disabled:grayscale-[15%] active:scale-[0.97] motion-reduce:transition-none motion-reduce:active:scale-100 ${className}`}
+    <Link
+      href="/"
+      aria-label="Brochure"
+      className={`inline-flex items-center justify-center rounded-lg transition-[transform,filter] duration-200 ease-out hover:brightness-110 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100 ${className}`}
     >
       <Image
         src={BROCHURE_PLAQUE_SRC}
@@ -33,7 +31,7 @@ function BrochureButton({ className = "" }: { className?: string }) {
         className="h-auto w-[170px] lg:w-[195px]"
         draggable={false}
       />
-    </button>
+    </Link>
   );
 }
 
@@ -60,7 +58,7 @@ export default function Navbar() {
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-shadow-crisp font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan xl:text-2xl"
+                className="text-shadow-crisp rounded-sm font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan focus-visible:text-cyan focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-4 xl:text-2xl"
               >
                 {item.label}
               </a>
@@ -101,7 +99,7 @@ export default function Navbar() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
+                className="rounded-sm font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan focus-visible:text-cyan focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-4"
               >
                 {item.label}
               </a>

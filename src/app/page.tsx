@@ -67,39 +67,43 @@ export default function Home() {
           src={rocketBusSrc}
           alt=""
           width={448}
-          height={180}
+          height={179}
+          sizes="210px"
           style={rocketBusDrift}
-          className="animate-drift-x absolute top-[22%] left-[85%] z-[var(--layer-content)] hidden w-[140px] md:block lg:w-[180px] xl:w-[210px]"
+          className="animate-drift-x absolute top-[22%] left-[85%] z-[var(--layer-ambient)] hidden w-[140px] md:block lg:w-[180px] xl:w-[210px]"
           draggable={false}
         />
 
         <Image
           src={dragonLeftSrc}
           alt=""
-          width={271}
-          height={148}
+          width={259}
+          height={140}
+          sizes="105px"
           style={dragonLeftFlight}
-          className="animate-flight-path absolute top-[13%] left-[6%] z-[var(--layer-content)] hidden w-[70px] md:block lg:w-[90px] xl:w-[105px]"
+          className="animate-flight-path absolute top-[13%] left-[6%] z-[var(--layer-ambient)] hidden w-[70px] md:block lg:w-[90px] xl:w-[105px]"
           draggable={false}
         />
 
         <Image
           src={dragonRightSrc}
           alt=""
-          width={275}
-          height={148}
+          width={256}
+          height={136}
+          sizes="96px"
           style={dragonRightFlight}
-          className="animate-flight-path absolute top-[9%] left-[63%] z-[var(--layer-content)] hidden w-[64px] md:block lg:w-[82px] xl:w-[96px]"
+          className="animate-flight-path absolute top-[9%] left-[63%] z-[var(--layer-ambient)] hidden w-[64px] md:block lg:w-[82px] xl:w-[96px]"
           draggable={false}
         />
 
         <Image
           src={cloudSrc}
           alt=""
-          width={246}
-          height={148}
+          width={228}
+          height={120}
+          sizes="120px"
           style={cloudDrift}
-          className="animate-cloud-drift absolute top-[6%] left-[36%] z-[var(--layer-content)] hidden w-[90px] opacity-80 md:block lg:w-[120px]"
+          className="animate-cloud-drift absolute top-[6%] left-[36%] z-[var(--layer-ambient)] hidden w-[90px] opacity-80 md:block lg:w-[120px]"
           draggable={false}
         />
 
@@ -147,9 +151,8 @@ export default function Home() {
                   width={700}
                   height={124}
                   badge="D"
-                  disabled
-                  title="Devpost registration coming soon"
-                  aria-label="Register on Devpost, coming soon"
+                  href="/"
+                  aria-label="Register on Devpost"
                 >
                   Devpost
                 </RegistrationPlate>
@@ -158,9 +161,8 @@ export default function Home() {
                   width={700}
                   height={111}
                   badge="U"
-                  disabled
-                  title="Unstop registration coming soon"
-                  aria-label="Register on Unstop, coming soon"
+                  href="/"
+                  aria-label="Register on Unstop"
                 >
                   Unstop
                 </RegistrationPlate>
