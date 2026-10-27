@@ -1,8 +1,10 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
 import { FiArrowRight } from "react-icons/fi";
 
 type RegistrationPlateProps = {
-  src: StaticImageData;
+  src: string;
+  width: number;
+  height: number;
   badge: string;
   children: string;
   disabled?: boolean;
@@ -12,6 +14,8 @@ type RegistrationPlateProps = {
 
 export default function RegistrationPlate({
   src,
+  width,
+  height,
   badge,
   children,
   disabled,
@@ -29,6 +33,8 @@ export default function RegistrationPlate({
       <Image
         src={src}
         alt=""
+        width={width}
+        height={height}
         className="h-auto w-[190px] sm:w-[230px] lg:w-[270px]"
         draggable={false}
       />

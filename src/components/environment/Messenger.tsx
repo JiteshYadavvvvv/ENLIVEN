@@ -3,8 +3,9 @@
 import Image from "next/image";
 import type { CSSProperties } from "react";
 
-import messenger from "@/assets/characters/messenger.webp";
 import { useParallax } from "@/utils/useParallax";
+
+const MESSENGER_SRC = "/assets/enliven-world/character/hero-character.webp";
 
 import SpeechBubble from "./SpeechBubble";
 
@@ -40,9 +41,11 @@ export default function Messenger({
         }
       >
         <Image
-          src={messenger}
+          src={MESSENGER_SRC}
           alt=""
           priority
+          width={1300}
+          height={1199}
           className="h-auto w-full"
           draggable={false}
         />

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { FiBookOpen, FiMenu, FiX } from "react-icons/fi";
 
-import logoTagline from "@/assets/brand/enliven-logo-tagline.webp";
+const LOGO_LOCKUP_SRC =
+  "/assets/enliven-world/branding/enliven-logo-lockup.webp";
 
 const NAV_LINKS = [
   { label: "Prizes", href: "#prizes" },
@@ -38,9 +39,11 @@ export default function Navbar() {
       <div className="container-enliven relative grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[1fr_auto_1fr]">
         <Link href="/" aria-label="Enliven, Alive to Create.">
           <Image
-            src={logoTagline}
+            src={LOGO_LOCKUP_SRC}
             alt=""
             priority
+            width={900}
+            height={410}
             className="h-10 w-auto sm:h-12"
           />
         </Link>

@@ -178,6 +178,26 @@
       animation: none;
     }
   }
+
+  @keyframes drift-x {
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(var(--drift-distance, 18px));
+    }
+  }
+
+  .animate-drift-x {
+    animation: drift-x var(--drift-duration, 10s) ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-drift-x {
+      animation: none;
+    }
+  }
 }
 
 @layer components {

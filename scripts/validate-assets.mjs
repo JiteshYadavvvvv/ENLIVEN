@@ -45,6 +45,31 @@ const BUDGETS = [
     maxBytes: 40 * 1024,
   },
   { match: /^public\/media\//, label: "media", maxBytes: 300 * 1024 },
+  {
+    match: /^public\/assets\/enliven-world\/branding\//,
+    label: "brand artwork",
+    maxBytes: 400 * 1024,
+  },
+  {
+    match: /^public\/assets\/enliven-world\/background\//,
+    label: "environment background",
+    maxBytes: 350 * 1024,
+  },
+  {
+    match: /^public\/assets\/enliven-world\/environment\//,
+    label: "environment prop",
+    maxBytes: 120 * 1024,
+  },
+  {
+    match: /^public\/assets\/enliven-world\/character\//,
+    label: "character artwork",
+    maxBytes: 300 * 1024,
+  },
+  {
+    match: /^public\/assets\/enliven-world\/(ui|messages)\//,
+    label: "interface art",
+    maxBytes: 40 * 1024,
+  },
 ];
 
 function findBudget(relPath) {
