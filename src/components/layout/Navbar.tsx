@@ -1,8 +1,9 @@
 "use client";
 
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 
 const LOGO_LOCKUP_SRC =
@@ -21,7 +22,7 @@ function BrochureButton({ className = "" }: { className?: string }) {
     <Link
       href="/"
       aria-label="Brochure"
-      className={`inline-flex items-center justify-center rounded-lg transition-[transform,filter] duration-200 ease-out hover:brightness-110 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:active:scale-100 ${className}`}
+      className={`inline-flex items-center justify-center rounded-lg transition-transform duration-200 ease-out hover:scale-[1.01] active:scale-95 focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-[3px] motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:active:scale-100 ${className}`}
     >
       <Image
         src={BROCHURE_PLAQUE_SRC}
@@ -38,10 +39,32 @@ function BrochureButton({ className = "" }: { className?: string }) {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
+  // Lock body scroll while the full-screen mobile menu is open, matching
+  // Innerve's own NavigationBar.tsx behavior (scroll position is saved and
+  // restored rather than just toggling overflow, so the page doesn't jump).
+  useEffect(() => {
+    if (!open) return;
+
+    const scrollY = window.scrollY;
+    const { body } = document;
+    body.style.overflow = "hidden";
+    body.style.position = "fixed";
+    body.style.top = `-${scrollY}px`;
+    body.style.width = "100%";
+
+    return () => {
+      body.style.overflow = "";
+      body.style.position = "";
+      body.style.top = "";
+      body.style.width = "";
+      window.scrollTo(0, scrollY);
+    };
+  }, [open]);
+
   return (
-    <nav className="absolute inset-x-0 top-0 z-[var(--layer-hud)]">
+    <nav className="absolute top-0 z-[var(--layer-hud)] w-full bg-transparent">
       <div aria-hidden className="nav-scrim" />
-      <div className="container-enliven relative grid grid-cols-[auto_1fr_auto] items-center gap-4 py-4 lg:grid-cols-[1fr_auto_1fr]">
+      <div className="relative flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 md:px-8 md:py-5 lg:px-14">
         <Link href="/" aria-label="Enliven, Alive to Create.">
           <Image
             src={LOGO_LOCKUP_SRC}
@@ -53,12 +76,12 @@ export default function Navbar() {
           />
         </Link>
 
-        <ul className="col-start-2 row-start-1 hidden items-center gap-8 lg:flex xl:gap-10">
+        <ul className="mx-5 hidden items-center gap-4 md:flex lg:gap-[4vw]">
           {NAV_LINKS.map((item) => (
             <li key={item.href}>
               <a
                 href={item.href}
-                className="text-shadow-crisp rounded-sm font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan focus-visible:text-cyan focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-4 xl:text-2xl"
+                className="text-shadow-gta rounded-sm font-display-gta text-xl tracking-[0.04em] text-paper uppercase transition-colors duration-200 hover:text-cyan focus-visible:text-cyan focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-4 lg:text-2xl"
               >
                 {item.label}
               </a>
@@ -66,7 +89,7 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <div className="hidden justify-self-end lg:block">
+        <div className="hidden md:block">
           <BrochureButton />
         </div>
 
@@ -75,39 +98,58 @@ export default function Navbar() {
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((value) => !value)}
-          className="text-shadow-crisp col-start-3 row-start-1 justify-self-end text-paper lg:hidden"
+          className="text-shadow-crisp relative z-[var(--layer-hud)] text-paper md:hidden"
         >
           {open ? (
-            <FiX aria-hidden size={24} />
+            <FiX aria-hidden size={28} />
           ) : (
-            <FiMenu aria-hidden size={24} />
+            <FiMenu aria-hidden size={28} />
           )}
           <span className="sr-only">Toggle navigation menu</span>
         </button>
       </div>
 
-      <div
-        id="mobile-nav"
-        className={`grid transition-[grid-template-rows] duration-300 ease-out lg:hidden ${
-          open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="container-enliven flex flex-col items-start gap-5 border-t border-border bg-void/95 py-6">
-            {NAV_LINKS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="rounded-sm font-display text-xl tracking-[0.06em] text-paper uppercase transition-colors duration-200 hover:text-cyan focus-visible:text-cyan focus-visible:outline-2 focus-visible:outline-cyan focus-visible:outline-offset-4"
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-nav"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[var(--layer-hud)] flex items-center justify-center bg-void/55 pt-20 backdrop-blur-md md:hidden"
+          >
+            <div className="flex w-full max-w-xs flex-col items-center gap-8 px-6">
+              <ul className="flex flex-col items-center gap-6">
+                {NAV_LINKS.map((item, index) => (
+                  <motion.li
+                    key={item.href}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <a
+                      href={item.href}
+                      onClick={() => setOpen(false)}
+                      className="text-shadow-gta font-display-gta text-4xl tracking-[0.04em] text-paper uppercase transition-colors duration-200 hover:text-cyan"
+                    >
+                      {item.label}
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: NAV_LINKS.length * 0.1 }}
+                className="w-full border-t border-border pt-6"
               >
-                {item.label}
-              </a>
-            ))}
-            <BrochureButton className="mt-2" />
-          </div>
-        </div>
-      </div>
+                <BrochureButton className="mx-auto" />
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

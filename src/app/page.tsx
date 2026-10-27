@@ -109,7 +109,7 @@ export default function Home() {
         <Navbar />
 
         <Messenger
-          className="bottom-0 left-2 z-[var(--layer-content)] w-[140px] sm:left-3 sm:w-[260px] lg:left-6 lg:w-[340px] xl:w-[370px]"
+          className="bottom-0 left-2 z-[var(--layer-content)] w-[90px] sm:left-3 sm:w-[162px] lg:left-6 lg:w-[213px] xl:w-[230px]"
           message="SAME CITY. NEW PLAYGROUND."
         />
 

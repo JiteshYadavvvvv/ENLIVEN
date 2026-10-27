@@ -18,6 +18,14 @@
   --font-display: var(--font-bebas), "Arial Narrow", sans-serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  /* GTA-style display font for the navbar and selected hero UI. No
+     Pricedown font file exists anywhere in this project or in the Innerve
+     reference repo -- this is an integration point, not an active font:
+     --font-pricedown is never set, so this always falls back to Bebas Neue
+     until a real Pricedown font file is supplied and loaded via
+     next/font/local in layout.tsx (see the comment there). */
+  --font-display-gta:
+    var(--font-pricedown, var(--font-bebas)), "Arial Narrow", sans-serif;
 
   --tracking-display: 0.04em;
 
@@ -158,6 +166,16 @@
   .text-shadow-crisp {
     text-shadow: 0 1px 3px
       color-mix(in srgb, var(--color-void) 60%, transparent);
+  }
+
+  /* Hard flat offset-shadow + thin stroke, the actual technique Innerve
+     uses on its nav labels (its own .text-shadow utility in globals.css:
+     text-shadow 0px 3px 0px black + -webkit-text-stroke .5px black) --
+     reimplemented here rather than copied, since the repo has no LICENSE
+     file permitting reuse of its source. */
+  .text-shadow-gta {
+    text-shadow: 0 3px 0 var(--color-void);
+    -webkit-text-stroke: 0.5px var(--color-void);
   }
 
   @keyframes idle-float {

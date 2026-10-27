@@ -30,7 +30,7 @@ export default function Messenger({
         transition: "transform 300ms var(--ease-cinematic)",
       }}
     >
-      <SpeechBubble className="absolute -top-6 left-[28px] w-32 sm:-top-8 sm:left-[55px] sm:w-48 lg:-top-10 lg:left-[70px] lg:w-36 xl:left-10 xl:w-[220px] min-[1400px]:left-16 min-[1400px]:w-[230px] 2xl:left-[90px] 2xl:w-[280px]">
+      <SpeechBubble className="absolute top-[22px] left-[39px] w-40 sm:top-[39px] sm:left-[71px] sm:w-56 lg:top-[52px] lg:left-[93px] lg:w-44 xl:top-[66px] xl:left-[40px] xl:w-[260px] min-[1400px]:top-[70px] min-[1400px]:left-[42px] min-[1400px]:w-[270px] 2xl:top-[76px] 2xl:left-[45px] 2xl:w-[320px]">
         {message}
       </SpeechBubble>
       <div
@@ -47,7 +47,7 @@ export default function Messenger({
           alt=""
           priority
           width={900}
-          height={600}
+          height={1350}
           className="h-auto w-full"
           draggable={false}
         />
