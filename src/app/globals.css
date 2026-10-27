@@ -198,6 +198,57 @@
       animation: none;
     }
   }
+
+  @keyframes flight-path {
+    0%,
+    100% {
+      transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+      transform: translate(var(--flight-x, -14px), var(--flight-y, -10px))
+        rotate(-2deg);
+    }
+    50% {
+      transform: translate(0, calc(var(--flight-y, -10px) * -0.4)) rotate(0deg);
+    }
+    75% {
+      transform: translate(
+          calc(var(--flight-x, -14px) * -1),
+          var(--flight-y, -10px)
+        )
+        rotate(2deg);
+    }
+  }
+
+  .animate-flight-path {
+    animation: flight-path var(--flight-duration, 15s) ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-flight-path {
+      animation: none;
+    }
+  }
+
+  @keyframes cloud-drift {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(var(--cloud-distance, 40px));
+    }
+  }
+
+  .animate-cloud-drift {
+    animation: cloud-drift var(--cloud-duration, 22s) ease-in-out infinite
+      alternate;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-cloud-drift {
+      animation: none;
+    }
+  }
 }
 
 @layer components {

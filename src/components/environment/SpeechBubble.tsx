@@ -14,12 +14,12 @@ export default function SpeechBubble({
       <Image
         src={MESSAGE_CARD_SRC}
         alt=""
-        width={560}
-        height={237}
+        width={366}
+        height={184}
         className="w-full"
         draggable={false}
       />
-      <p className="absolute inset-x-[12%] top-[14%] text-center text-xs leading-tight font-bold text-[#3a2410] sm:text-sm">
+      <p className="absolute inset-x-[10%] top-[15%] text-center text-xs leading-tight font-bold text-[#3a2410] sm:text-sm">
         {children}
       </p>
     </div>

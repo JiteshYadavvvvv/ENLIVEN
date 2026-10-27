@@ -14,7 +14,10 @@ const wordmarkSrc = `${ASSET_BASE}/branding/enliven-wordmark.png`;
 const cityDesktopSrc = `${ASSET_BASE}/background/city-desktop.webp`;
 const cityMobileSrc = `${ASSET_BASE}/background/city-mobile.webp`;
 const floatingPlatformSrc = `${ASSET_BASE}/environment/floating-platform.webp`;
-const airshipSrc = `${ASSET_BASE}/environment/airship.webp`;
+const rocketBusSrc = `${ASSET_BASE}/environment/rocket-bus.webp`;
+const dragonLeftSrc = `${ASSET_BASE}/environment/dragon-left.webp`;
+const dragonRightSrc = `${ASSET_BASE}/environment/dragon-right.webp`;
+const cloudSrc = `${ASSET_BASE}/environment/cloud.webp`;
 const plateDevpostSrc = `${ASSET_BASE}/ui/devpost-plate.webp`;
 const plateUnstopSrc = `${ASSET_BASE}/ui/unstop-plate.webp`;
 
@@ -28,9 +31,26 @@ const platformFloat = {
   "--float-duration": "7s",
 } as CSSProperties;
 
-const airshipDrift = {
+const rocketBusDrift = {
   "--drift-distance": "22px",
   "--drift-duration": "11s",
+} as CSSProperties;
+
+const dragonLeftFlight = {
+  "--flight-x": "-16px",
+  "--flight-y": "-12px",
+  "--flight-duration": "14s",
+} as CSSProperties;
+
+const dragonRightFlight = {
+  "--flight-x": "18px",
+  "--flight-y": "-9px",
+  "--flight-duration": "18s",
+} as CSSProperties;
+
+const cloudDrift = {
+  "--cloud-distance": "36px",
+  "--cloud-duration": "24s",
 } as CSSProperties;
 
 export default function Home() {
@@ -44,18 +64,51 @@ export default function Home() {
         />
 
         <Image
-          src={airshipSrc}
+          src={rocketBusSrc}
           alt=""
-          width={264}
-          height={168}
-          style={airshipDrift}
+          width={448}
+          height={180}
+          style={rocketBusDrift}
           className="animate-drift-x absolute top-[22%] left-[85%] z-[var(--layer-content)] hidden w-[140px] md:block lg:w-[180px] xl:w-[210px]"
+          draggable={false}
+        />
+
+        <Image
+          src={dragonLeftSrc}
+          alt=""
+          width={271}
+          height={148}
+          style={dragonLeftFlight}
+          className="animate-flight-path absolute top-[13%] left-[6%] z-[var(--layer-content)] hidden w-[70px] md:block lg:w-[90px] xl:w-[105px]"
+          draggable={false}
+        />
+
+        <Image
+          src={dragonRightSrc}
+          alt=""
+          width={275}
+          height={148}
+          style={dragonRightFlight}
+          className="animate-flight-path absolute top-[9%] left-[63%] z-[var(--layer-content)] hidden w-[64px] md:block lg:w-[82px] xl:w-[96px]"
+          draggable={false}
+        />
+
+        <Image
+          src={cloudSrc}
+          alt=""
+          width={246}
+          height={148}
+          style={cloudDrift}
+          className="animate-cloud-drift absolute top-[6%] left-[36%] z-[var(--layer-content)] hidden w-[90px] opacity-80 md:block lg:w-[120px]"
           draggable={false}
         />
 
         <Navbar />
 
-        <Messenger className="bottom-0 left-2 z-[var(--layer-content)] w-[140px] sm:left-3 sm:w-[260px] lg:left-6 lg:w-[340px] xl:w-[370px]" />
+        <Messenger
+          className="bottom-0 left-2 z-[var(--layer-content)] w-[140px] sm:left-3 sm:w-[260px] lg:left-6 lg:w-[340px] xl:w-[370px]"
+          message="SAME CITY. NEW PLAYGROUND."
+        />
 
         <div className="container-enliven relative z-[var(--layer-content)] flex min-h-screen flex-col items-center justify-center gap-4 pt-20 pb-56 text-center sm:py-28">
           <RevealOnLoad className="flex w-full flex-col items-center">
