@@ -21,7 +21,7 @@ function BrochureButton({ className = "" }: { className?: string }) {
       disabled
       title="Brochure coming soon"
       aria-label="Brochure, coming soon"
-      className={`inline-flex items-center gap-2 rounded-lg border-2 border-[#3a2410] bg-[#f4e2b8] px-4 py-2 text-xs font-bold tracking-[0.08em] text-[#3a2410] uppercase disabled:grayscale-[35%] ${className}`}
+      className={`inline-flex w-[150px] items-center justify-center gap-2 rounded-lg border-2 border-[#3a2410] bg-[#f4e2b8] px-4 py-2 text-xs font-bold tracking-[0.08em] text-[#3a2410] uppercase disabled:grayscale-[35%] lg:w-[160px] ${className}`}
     >
       Brochure
       <FiBookOpen aria-hidden />

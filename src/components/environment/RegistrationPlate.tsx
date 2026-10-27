@@ -29,7 +29,7 @@ export default function RegistrationPlate({
       <Image
         src={src}
         alt=""
-        className="h-auto w-[220px] sm:w-[280px] lg:w-[320px]"
+        className="h-auto w-[190px] sm:w-[230px] lg:w-[270px]"
         draggable={false}
       />
       <span className="absolute inset-0 flex items-center justify-center gap-2 px-4 text-sm font-bold tracking-[0.06em] text-white uppercase sm:text-base">
