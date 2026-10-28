@@ -268,6 +268,41 @@
       animation: none;
     }
   }
+
+  /* === Floating Island Animations === */
+
+  /* island-float: gentle vertical bob with a slight horizontal drift */
+  @keyframes island-float {
+    0% {
+      transform: translate(0, 0);
+    }
+    30% {
+      transform: translate(
+        calc(var(--island-drift-x, 6px) * 0.4),
+        var(--island-float-y, -10px)
+      );
+    }
+    60% {
+      transform: translate(
+        var(--island-drift-x, 6px),
+        calc(var(--island-float-y, -10px) * 0.2)
+      );
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  .animate-island-float {
+    animation: island-float var(--island-duration, 9s) ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-island-float {
+      animation: none;
+    }
+  }
 }
 
 @layer components {
