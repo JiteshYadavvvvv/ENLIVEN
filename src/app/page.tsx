@@ -58,26 +58,26 @@ const cloudDrift = {
   "--cloud-duration": "24s",
 } as CSSProperties;
 
-// Island float CSS custom props — different durations & phases for each
+// Island float CSS custom props — restrained independent motion with different durations & phases
 const islandLeftFloat = {
-  "--island-float-y": "-14px",
-  "--island-drift-x": "8px",
-  "--island-duration": "9s",
+  "--island-float-y": "-12px",
+  "--island-drift-x": "6px",
+  "--island-duration": "9.5s",
   animationDelay: "0s",
 } as CSSProperties;
 
 const islandCenterFloat = {
-  "--island-float-y": "-7px", // Less movement → appears farther away
-  "--island-drift-x": "5px",
-  "--island-duration": "12s",
-  animationDelay: "-4s",
+  "--island-float-y": "-5px", // Less movement → atmospheric distance
+  "--island-drift-x": "3px",
+  "--island-duration": "13s",
+  animationDelay: "-4.5s",
 } as CSSProperties;
 
 const islandRightFloat = {
-  "--island-float-y": "-11px",
-  "--island-drift-x": "-9px", // Drift in opposite direction
-  "--island-duration": "10.5s",
-  animationDelay: "-7s",
+  "--island-float-y": "-9px",
+  "--island-drift-x": "-6px", // Drift in opposite direction
+  "--island-duration": "11s",
+  animationDelay: "-8s",
 } as CSSProperties;
 
 export default function Home() {
@@ -90,7 +90,7 @@ export default function Home() {
           alt="A cinematic coastal city at golden-hour sunset, with bridges, palm trees, mountains and reflective water"
         />
 
-        {/* === Floating Castle Islands (z-index: ambient, between bg and content) === */}
+        {/* === Floating Castle Islands === */}
 
         {/* Island LEFT — large, left sky area */}
         <Image
@@ -98,48 +98,48 @@ export default function Home() {
           alt=""
           width={534}
           height={492}
-          sizes="(min-width: 1280px) 420px, (min-width: 768px) 340px, 220px"
+          sizes="(min-width: 1440px) 340px, (min-width: 1024px) 250px, (min-width: 768px) 190px, 150px"
           style={islandLeftFloat}
-          className="animate-island-float pointer-events-none absolute top-[8%] left-[1%] z-[var(--layer-ambient)] hidden w-[220px] select-none md:block lg:w-[340px] xl:w-[420px]"
+          className="animate-island-float pointer-events-none absolute top-[12%] sm:top-[13%] lg:top-[14%] left-[1%] sm:left-[2%] xl:left-[3%] z-[var(--layer-ambient)] w-[100px] sm:w-[150px] md:w-[190px] lg:w-[250px] xl:w-[340px] select-none"
           draggable={false}
           priority
         />
 
-        {/* Island CENTER — smaller, center-lower, appears more distant */}
+        {/* Island CENTER — smaller, distant sky between left island and central branding */}
         <Image
           src={islandCenterSrc}
           alt=""
           width={366}
           height={352}
-          sizes="(min-width: 1280px) 220px, (min-width: 768px) 180px, 120px"
+          sizes="(min-width: 1440px) 165px, (min-width: 1024px) 135px, 110px"
           style={islandCenterFloat}
-          className="animate-island-float pointer-events-none absolute top-[26%] left-[36%] z-[var(--layer-ambient)] hidden w-[120px] select-none opacity-90 md:block lg:w-[180px] xl:w-[220px]"
+          className="animate-island-float pointer-events-none absolute top-[16%] md:top-[17%] lg:top-[18%] xl:top-[19%] left-[20%] md:left-[21%] lg:left-[22%] xl:left-[23%] z-[var(--layer-distant)] hidden sm:block w-[90px] md:w-[110px] lg:w-[135px] xl:w-[165px] select-none opacity-85"
           draggable={false}
           priority
         />
 
-        {/* Island RIGHT — large, right sky area */}
+        {/* Island RIGHT — large, right-middle area of the sky */}
         <Image
           src={islandRightSrc}
           alt=""
           width={438}
           height={484}
-          sizes="(min-width: 1280px) 380px, (min-width: 768px) 310px, 200px"
+          sizes="(min-width: 1440px) 320px, (min-width: 1024px) 240px, (min-width: 768px) 170px, 140px"
           style={islandRightFloat}
-          className="animate-island-float pointer-events-none absolute top-[6%] right-[1%] z-[var(--layer-ambient)] hidden w-[200px] select-none md:block lg:w-[310px] xl:w-[380px]"
+          className="animate-island-float pointer-events-none absolute top-[26%] md:top-[27%] lg:top-[28%] xl:top-[29%] right-[2%] sm:right-[3%] md:right-[4%] lg:right-[5%] xl:right-[6%] z-[var(--layer-ambient)] w-[90px] sm:w-[140px] md:w-[170px] lg:w-[240px] xl:w-[320px] select-none"
           draggable={false}
           priority
         />
 
-        {/* === Existing ambient props === */}
+        {/* === Ambient props (scenery & atmosphere) === */}
         <Image
           src={rocketBusSrc}
           alt=""
           width={700}
           height={294}
-          sizes="210px"
+          sizes="200px"
           style={rocketBusDrift}
-          className="animate-drift-x absolute top-[22%] left-[85%] z-[var(--layer-ambient)] hidden w-[140px] md:block lg:w-[180px] xl:w-[210px]"
+          className="animate-drift-x pointer-events-none absolute top-[13%] md:top-[14%] right-[10%] xl:right-[13%] z-[6] hidden md:block w-[120px] lg:w-[160px] xl:w-[185px] select-none"
           draggable={false}
         />
 
@@ -150,7 +150,7 @@ export default function Home() {
           height={305}
           sizes="105px"
           style={dragonLeftFlight}
-          className="animate-flight-path absolute top-[13%] left-[6%] z-[var(--layer-ambient)] hidden w-[70px] md:block lg:w-[90px] xl:w-[105px]"
+          className="animate-flight-path pointer-events-none absolute top-[10%] md:top-[11%] left-[22%] md:left-[24%] z-[var(--layer-distant)] hidden md:block w-[65px] lg:w-[85px] xl:w-[95px] select-none"
           draggable={false}
         />
 
@@ -161,7 +161,7 @@ export default function Home() {
           height={257}
           sizes="96px"
           style={dragonRightFlight}
-          className="animate-flight-path absolute top-[9%] left-[63%] z-[var(--layer-ambient)] hidden w-[64px] md:block lg:w-[82px] xl:w-[96px]"
+          className="animate-flight-path pointer-events-none absolute top-[9%] md:top-[10%] left-[62%] md:left-[64%] z-[var(--layer-distant)] hidden md:block w-[60px] lg:w-[75px] xl:w-[88px] select-none"
           draggable={false}
         />
 
@@ -172,49 +172,58 @@ export default function Home() {
           height={120}
           sizes="120px"
           style={cloudDrift}
-          className="animate-cloud-drift absolute top-[6%] left-[36%] z-[var(--layer-ambient)] hidden w-[90px] opacity-80 md:block lg:w-[120px]"
+          className="animate-cloud-drift pointer-events-none absolute top-[7%] left-[34%] z-[var(--layer-distant)] hidden md:block w-[85px] opacity-75 lg:w-[115px] select-none"
           draggable={false}
         />
 
         <Navbar />
 
         <Messenger
-          className="bottom-0 left-2 z-[var(--layer-content)] w-[140px] sm:left-3 sm:w-[260px] lg:left-6 lg:w-[340px] xl:w-[370px]"
+          className="bottom-0 left-2 sm:left-3 md:left-4 lg:left-5 xl:left-7 z-[var(--layer-character)] w-[135px] sm:w-[190px] md:w-[210px] lg:w-[250px] xl:w-[290px]"
           message="SAME CITY. NEW PLAYGROUND."
         />
 
-        <div className="container-enliven relative z-[var(--layer-content)] flex min-h-screen flex-col items-center justify-center gap-4 pt-20 pb-56 text-center sm:py-28">
+        <div className="container-enliven relative z-[var(--layer-content)] flex min-h-screen flex-col items-center justify-center pt-16 pb-44 text-center sm:pt-20 sm:pb-48 lg:pt-24 lg:pb-52">
           <RevealOnLoad className="flex w-full flex-col items-center">
+            {/* Central geometric emblem with clear vertical gap above wordmark */}
             <Image
               src={emblemSrc}
               alt=""
               priority
               width={546}
               height={897}
-              sizes="(min-width: 1024px) 88px, (min-width: 640px) 78px, 58px"
+              sizes="(min-width: 1440px) 135px, (min-width: 1024px) 120px, (min-width: 640px) 100px, 80px"
               style={emblemFloat}
-              className="animate-idle-float -mb-2 h-24 w-auto sm:h-32 lg:-mb-3 lg:h-36"
+              className="animate-idle-float mb-2 sm:mb-2.5 lg:mb-3.5 h-20 w-auto sm:h-24 lg:h-28 xl:h-32"
             />
+
+            {/* Central ENLIVEN wordmark */}
             <Image
               src={wordmarkSrc}
               alt="ENLIVEN"
               priority
               width={675}
               height={173}
-              sizes="(min-width: 1024px) 672px, (min-width: 640px) 576px, 384px"
-              className="relative z-10 -mb-4 w-full max-w-sm sm:-mb-6 sm:max-w-xl lg:max-w-2xl"
+              sizes="(min-width: 1440px) 650px, (min-width: 1024px) 560px, (min-width: 640px) 460px, 300px"
+              className="relative z-10 mb-2 sm:mb-3 lg:mb-4 w-full max-w-[300px] sm:max-w-md lg:max-w-xl xl:max-w-2xl"
             />
-            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-3xl">
+
+            {/* Central floating platform with registration plates on upper surface */}
+            <div
+              style={platformFloat}
+              className="animate-idle-float relative w-full max-w-[310px] sm:max-w-md lg:max-w-xl xl:max-w-2xl"
+            >
               <Image
                 src={floatingPlatformSrc}
                 alt=""
+                priority
                 width={1400}
                 height={496}
-                sizes="(min-width: 1024px) 768px, (min-width: 640px) 448px, 384px"
-                style={platformFloat}
-                className="animate-idle-float w-full"
+                sizes="(min-width: 1440px) 700px, (min-width: 1024px) 580px, (min-width: 640px) 440px, 310px"
+                className="h-auto w-full select-none pointer-events-none"
+                draggable={false}
               />
-              <div className="absolute inset-x-0 top-[14%] flex flex-wrap items-center justify-center gap-5 sm:gap-7">
+              <div className="absolute inset-x-0 top-[26%] sm:top-[28%] lg:top-[30%] flex flex-row items-center justify-center gap-2 sm:gap-4 lg:gap-6 px-2 sm:px-4">
                 <RegistrationPlate
                   src={plateDevpostSrc}
                   width={700}

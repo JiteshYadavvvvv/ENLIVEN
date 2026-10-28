@@ -24,21 +24,26 @@ export default function RegistrationPlate({
   ...rest
 }: RegistrationPlateProps) {
   return (
-    <Link href={href} className="plate-button" title={title} {...rest}>
+    <Link
+      href={href}
+      className="plate-button flex-shrink-0"
+      title={title}
+      {...rest}
+    >
       <Image
         src={src}
         alt=""
         width={width}
         height={height}
-        className="h-auto w-[190px] sm:w-[230px] lg:w-[270px]"
+        className="h-auto w-[130px] sm:w-[185px] md:w-[215px] lg:w-[255px]"
         draggable={false}
       />
-      <span className="absolute inset-0 flex items-center justify-center gap-2 px-4 text-sm font-bold tracking-[0.06em] text-white uppercase sm:text-base">
+      <span className="absolute inset-0 flex items-center justify-center gap-1.5 px-2 text-xs font-bold tracking-[0.06em] text-white uppercase sm:gap-2 sm:px-3 sm:text-sm lg:px-4 lg:text-base">
         <span className="plate-button-badge text-[0.65em] text-void">
           {badge}
         </span>
         {children}
-        <FiArrowRight aria-hidden />
+        <FiArrowRight aria-hidden className="text-xs sm:text-sm" />
       </span>
     </Link>
   );

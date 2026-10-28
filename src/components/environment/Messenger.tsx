@@ -24,13 +24,13 @@ export default function Messenger({
 
   return (
     <div
-      className={`absolute ${className}`}
+      className={`absolute select-none ${className}`}
       style={{
         transform: `translate3d(${offset.x}px, ${offset.y}px, 0)`,
         transition: "transform 300ms var(--ease-cinematic)",
       }}
     >
-      <SpeechBubble className="absolute top-[22px] left-[39px] w-40 sm:top-[39px] sm:left-[71px] sm:w-56 lg:top-[52px] lg:left-[93px] lg:w-44 xl:top-[66px] xl:left-[40px] xl:w-[260px] min-[1400px]:top-[70px] min-[1400px]:left-[42px] min-[1400px]:w-[270px] 2xl:top-[76px] 2xl:left-[45px] 2xl:w-[320px]">
+      <SpeechBubble className="absolute -top-2 left-[48%] z-10 w-[140px] sm:-top-3 sm:left-[50%] sm:w-[175px] lg:-top-4 lg:left-[52%] lg:w-[210px] xl:w-[230px]">
         {message}
       </SpeechBubble>
       <div
@@ -44,11 +44,11 @@ export default function Messenger({
       >
         <Image
           src={MESSENGER_SRC}
-          alt=""
+          alt="Enliven character in tropical shirt with sunglasses"
           priority
           width={900}
           height={1350}
-          className="h-auto w-full"
+          className="h-auto w-full select-none"
           draggable={false}
         />
       </div>

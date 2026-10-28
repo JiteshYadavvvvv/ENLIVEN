@@ -16,10 +16,10 @@ export default function SpeechBubble({
         alt=""
         width={366}
         height={184}
-        className="w-full"
+        className="h-auto w-full select-none drop-shadow-md"
         draggable={false}
       />
-      <p className="absolute inset-x-[10%] top-[15%] text-center text-xs leading-tight font-bold text-[#3a2410] sm:text-sm">
+      <p className="absolute inset-x-[11%] top-[17%] text-center text-[10px] font-bold tracking-wide text-[#3a2410] uppercase select-none leading-snug sm:text-xs lg:text-[13px]">
         {children}
       </p>
     </div>

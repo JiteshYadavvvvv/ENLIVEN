@@ -35,8 +35,11 @@
 :root {
   color-scheme: dark;
   --layer-backdrop: 0;
+  --layer-distant: 2;
   --layer-ambient: 5;
+  --layer-scenery: 8;
   --layer-content: 10;
+  --layer-character: 15;
   --layer-hud: 20;
 }
 
@@ -445,11 +448,12 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: clamp(1.1rem, 2vw, 1.5rem);
+    height: clamp(1.1rem, 2vw, 1.5rem);
     border-radius: 999px;
     background: var(--color-paper);
     font-family: var(--font-display);
+    flex-shrink: 0;
   }
 
   @media (prefers-reduced-motion: reduce) {
