@@ -181,6 +181,11 @@
     -webkit-text-stroke: 0.5px var(--color-void);
   }
 
+  /* ─── idle-float ──────────────────────────────────────────────────────────
+     Symmetric 0/50/100 keyframes guarantee a perfectly smooth loop: the
+     position at frame 0 equals frame 100 and the easing is symmetric around
+     the 50% midpoint. animationDelay can be set inline to stagger phases.
+  ──────────────────────────────────────────────────────────────────────── */
   @keyframes idle-float {
     0%,
     100% {
@@ -193,6 +198,8 @@
 
   .animate-idle-float {
     animation: idle-float var(--float-duration, 6s) ease-in-out infinite;
+    /* animationDelay is applied inline via the style prop (e.g. animationDelay: "-2.8s") */
+    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -201,18 +208,24 @@
     }
   }
 
+  /* ─── drift-x ──────────────────────────────────────────────────────────────
+     Symmetric alternate oscillation using `alternate` direction so the motion
+     reverses smoothly at both ends without a visible jump on the return trip.
+  ──────────────────────────────────────────────────────────────────────── */
   @keyframes drift-x {
-    0%,
-    100% {
+    0% {
       transform: translateX(0);
     }
-    50% {
+    100% {
       transform: translateX(var(--drift-distance, 18px));
     }
   }
 
   .animate-drift-x {
-    animation: drift-x var(--drift-duration, 10s) ease-in-out infinite;
+    /* `alternate` makes the keyframe reverse on every other iteration, giving
+       a smooth back-and-forth. `ease-in-out` on each half keeps it calm. */
+    animation: drift-x var(--drift-duration, 10s) ease-in-out infinite alternate;
+    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -221,6 +234,11 @@
     }
   }
 
+  /* ─── flight-path ──────────────────────────────────────────────────────────
+     Four evenly-spaced keyframes (0/25/50/75/100 via 0%,100% sharing).
+     The path is figure-eight-like: drift left-up → return → right-up → return.
+     animationDelay set inline per element to stagger dragons.
+  ──────────────────────────────────────────────────────────────────────── */
   @keyframes flight-path {
     0%,
     100% {
@@ -228,22 +246,23 @@
     }
     25% {
       transform: translate(var(--flight-x, -14px), var(--flight-y, -10px))
-        rotate(-2deg);
+        rotate(-1.5deg);
     }
     50% {
-      transform: translate(0, calc(var(--flight-y, -10px) * -0.4)) rotate(0deg);
+      transform: translate(0, calc(var(--flight-y, -10px) * -0.35)) rotate(0deg);
     }
     75% {
       transform: translate(
           calc(var(--flight-x, -14px) * -1),
           var(--flight-y, -10px)
         )
-        rotate(2deg);
+        rotate(1.5deg);
     }
   }
 
   .animate-flight-path {
     animation: flight-path var(--flight-duration, 15s) ease-in-out infinite;
+    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -252,6 +271,10 @@
     }
   }
 
+  /* ─── cloud-drift ──────────────────────────────────────────────────────────
+     `alternate` reverses direction at each end → no teleport jump.
+     `ease-in-out` on each leg gives a natural deceleration at the extremes.
+  ──────────────────────────────────────────────────────────────────────── */
   @keyframes cloud-drift {
     0% {
       transform: translateX(0);
@@ -264,6 +287,7 @@
   .animate-cloud-drift {
     animation: cloud-drift var(--cloud-duration, 22s) ease-in-out infinite
       alternate;
+    will-change: transform;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -272,27 +296,28 @@
     }
   }
 
-  /* === Floating Island Animations === */
+  /* ─── island-float ─────────────────────────────────────────────────────────
+     FIXED: The previous 0/30/60/100 distribution was asymmetric — the easing
+     function was applied non-uniformly across the cycle, causing a perceptible
+     snap/jerk as the loop restarted. The new 0/50/100 symmetric distribution
+     with shared 0%,100% values guarantees a smooth, jerk-free infinite loop.
 
-  /* island-float: gentle vertical bob with a slight horizontal drift */
+     A slight simultaneous horizontal drift (--island-drift-x) gives each
+     island its own character while remaining restrained.
+
+     animationDelay is applied inline per element to ensure they never move
+     in synchronisation with each other or with the central composition.
+  ──────────────────────────────────────────────────────────────────────── */
   @keyframes island-float {
-    0% {
-      transform: translate(0, 0);
-    }
-    30% {
-      transform: translate(
-        calc(var(--island-drift-x, 6px) * 0.4),
-        var(--island-float-y, -10px)
-      );
-    }
-    60% {
-      transform: translate(
-        var(--island-drift-x, 6px),
-        calc(var(--island-float-y, -10px) * 0.2)
-      );
-    }
+    0%,
     100% {
       transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(
+        var(--island-drift-x, 5px),
+        var(--island-float-y, -10px)
+      );
     }
   }
 
