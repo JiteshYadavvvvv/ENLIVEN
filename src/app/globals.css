@@ -208,89 +208,6 @@
       animation: none;
     }
   }
-
-  @keyframes drift-x {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      transform: translate3d(var(--drift-distance, 18px), 0, 0);
-    }
-  }
-
-  .animate-drift-x {
-    animation: drift-x var(--drift-duration, 10s) ease-in-out infinite;
-    will-change: transform;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-drift-x {
-      animation: none;
-    }
-  }
-
-  @keyframes flight-path {
-    0%,
-    100% {
-      transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-      transform: translate(var(--flight-x, -14px), var(--flight-y, -10px))
-        rotate(-2deg);
-    }
-    50% {
-      transform: translate(0, calc(var(--flight-y, -10px) * -0.4)) rotate(0deg);
-    }
-    75% {
-      transform: translate(
-          calc(var(--flight-x, -14px) * -1),
-          var(--flight-y, -10px)
-        )
-        rotate(2deg);
-    }
-  }
-
-  .animate-flight-path {
-    animation: flight-path var(--flight-duration, 15s) ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-flight-path {
-      animation: none;
-    }
-  }
-
-  /* === Floating Island Animations === */
-
-  /* island-float: smooth, continuous bob with gentle horizontal drift.
-     Symmetric 0/50/100 loop with translate3d eliminates the 3-stop velocity
-     disconnect that caused jerky stutter and visible snapping on loop repeat.
-  */
-  @keyframes island-float {
-    0%,
-    100% {
-      transform: translate3d(0, 0, 0);
-    }
-    50% {
-      transform: translate3d(
-        var(--island-drift-x, 6px),
-        var(--island-float-y, -10px),
-        0
-      );
-    }
-  }
-
-  .animate-island-float {
-    animation: island-float var(--island-duration, 9s) ease-in-out infinite;
-    will-change: transform;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-island-float {
-      animation: none;
-    }
-  }
 }
 
 @layer components {
@@ -485,13 +402,19 @@
     user-select: none;
   }
 
-  .scene-layer > img {
+  .scene-layer img {
     width: 100%;
     height: auto;
     rotate: var(--r);
   }
 
-  .scene-cloud > img {
+  .cloud-bank {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .scene-cloud img {
     filter: drop-shadow(0 0 1.2cqw rgb(255 255 255 / 0.55));
   }
 
@@ -512,7 +435,7 @@
       width: var(--mw, auto);
     }
 
-    .scene-layer > img {
+    .scene-layer img {
       rotate: var(--mr);
     }
 
@@ -525,11 +448,187 @@
     }
   }
 
+  .scene-hover {
+    --bob: var(--bob-d);
+    --drift-from: var(--drift-from-d);
+    --drift-to: var(--drift-to-d);
+    --tilt: var(--tilt-d);
+    animation:
+      hover-bob var(--bob-time) ease-in-out var(--hover-delay) infinite
+      alternate,
+      hover-drift var(--drift-time) ease-in-out var(--hover-delay) infinite
+      alternate,
+      hover-tilt var(--tilt-time) ease-in-out var(--hover-delay) infinite
+      alternate;
+  }
+
+  @keyframes hover-bob {
+    to {
+      transform: translate3d(0, var(--bob), 0);
+    }
+  }
+
+  @keyframes hover-drift {
+    from {
+      translate: var(--drift-from) 0;
+    }
+    to {
+      translate: var(--drift-to) 0;
+    }
+  }
+
+  @keyframes hover-tilt {
+    from {
+      rotate: calc(var(--tilt) * -1);
+    }
+    to {
+      rotate: var(--tilt);
+    }
+  }
+
+  .car-drive {
+    --car-in: calc(var(--a) * 35), calc(var(--a) * 260);
+    --car-cruise: calc(var(--a) * 30), calc(var(--a) * -20);
+    --car-far: calc(var(--a) * 100), calc(var(--a) * -77);
+    --car-gone: calc(var(--a) * 115), calc(var(--a) * -100);
+    transform-origin: 50% 100%;
+    animation: car-drive 18s -3s infinite;
+  }
+
+  @keyframes car-drive {
+    0% {
+      transform: translate(var(--car-in)) scale(1.15);
+      animation-timing-function: cubic-bezier(0.2, 0.65, 0.3, 1);
+    }
+    14% {
+      transform: translate(0, 0) scale(1);
+      animation-timing-function: linear;
+    }
+    50% {
+      transform: translate(var(--car-cruise)) scale(0.9);
+      animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.55);
+    }
+    70% {
+      transform: translate(var(--car-far)) scale(0.45);
+      opacity: 1;
+      animation-timing-function: linear;
+    }
+    78% {
+      transform: translate(var(--car-gone)) scale(0.32);
+      opacity: 0;
+    }
+    78.1% {
+      transform: translate(var(--car-in)) scale(1.15);
+      opacity: 0;
+    }
+    80%,
+    100% {
+      transform: translate(var(--car-in)) scale(1.15);
+      opacity: 1;
+    }
+  }
+
+  .metro-run {
+    clip-path: inset(-100vmax -100vmax -100vmax calc(var(--a) * -17));
+  }
+
+  .metro-run > img {
+    --metro-rest: translate(
+        calc(var(--view-left) + 96.5cqw - var(--a) * 494),
+        0
+      )
+      rotate(-3deg);
+    transform-origin: 50% 100%;
+    transform: var(--metro-rest);
+    animation: metro-run 20s linear -9s infinite;
+  }
+
+  @keyframes metro-run {
+    0% {
+      transform: translate(calc(var(--a) * -231), calc(var(--a) * -118))
+        rotate(11.5deg) scale(0.7);
+    }
+    10.5% {
+      transform: translate(calc(var(--a) * 2), calc(var(--a) * -68))
+        rotate(11.5deg) scale(0.76);
+    }
+    21.3% {
+      transform: translate(calc(var(--a) * 242), calc(var(--a) * -19))
+        rotate(7deg) scale(0.88);
+    }
+    29.3% {
+      transform: translate(calc(var(--a) * 422), 0) rotate(-3deg) scale(0.98);
+    }
+    39% {
+      transform: translate(calc(var(--a) * 642), 0) rotate(-3deg) scale(1);
+    }
+    70%,
+    100% {
+      transform: translate(calc(var(--a) * 1342), 0) rotate(-3deg) scale(1);
+    }
+  }
+
+  @keyframes metro-run-portrait {
+    0% {
+      transform: translate(calc(var(--a) * -176), calc(var(--a) * -28))
+        rotate(5.6deg) scale(0.9);
+    }
+    19.6% {
+      transform: translate(calc(var(--a) * 5), 0) rotate(5.6deg) scale(0.95);
+    }
+    33.6% {
+      transform: translate(calc(var(--a) * 135), calc(var(--a) * 18))
+        rotate(3.4deg) scale(1);
+    }
+    64%,
+    100% {
+      transform: translate(calc(var(--a) * 415), calc(var(--a) * 48))
+        rotate(3deg) scale(1.05);
+    }
+  }
+
+  @media (orientation: portrait) {
+    .scene-hover {
+      --bob: var(--bob-m);
+      --drift-from: var(--drift-from-m);
+      --drift-to: var(--drift-to-m);
+      --tilt: var(--tilt-m);
+    }
+
+    .car-drive {
+      --car-in: calc(var(--a) * 15), calc(var(--a) * 150);
+      --car-cruise: calc(var(--a) * 20), calc(var(--a) * -14);
+      --car-far: calc(var(--a) * 110), calc(var(--a) * -60);
+      --car-gone: calc(var(--a) * 150), calc(var(--a) * -80);
+    }
+
+    .metro-run {
+      clip-path: inset(-100vmax -100vmax -100vmax calc(var(--a) * -5));
+    }
+
+    .metro-run > img {
+      --metro-rest: translate(calc(var(--a) * 140), calc(var(--a) * 22))
+        rotate(2.6deg);
+      animation-name: metro-run-portrait;
+      animation-duration: 14s;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scene-hover,
+    .car-drive,
+    .metro-run > img {
+      animation: none;
+    }
+  }
+
   .wordmark-enliven {
-    position: relative;
-    top: -0.18em;
+    position: absolute;
+    top: -1.02em;
+    left: 50%;
+    translate: -50% 0;
     font-family: var(--font-display-gta);
-    font-size: calc(var(--b) * 154);
+    font-size: min(var(--b) * 208, 30cqw);
     line-height: 0.84;
     white-space: nowrap;
     color: #fff3e2;

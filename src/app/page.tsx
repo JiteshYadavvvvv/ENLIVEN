@@ -3,6 +3,7 @@ import type { CSSProperties } from "react";
 import EnvironmentBackground from "@/components/environment/EnvironmentBackground";
 import EnvironmentScene from "@/components/environment/EnvironmentScene";
 import HeroBranding from "@/components/environment/HeroBranding";
+import HeroCloudBank from "@/components/environment/HeroCloudBank";
 import { HERO_ART, HERO_LAYERS } from "@/components/environment/heroScene";
 // Character is temporarily disabled for the GTA hero rebuild (see below).
 // import Messenger from "@/components/environment/Messenger";
@@ -33,6 +34,8 @@ export default function Home() {
           {HERO_LAYERS.map((layer) => (
             <SceneImage key={layer.id} layer={layer} />
           ))}
+
+          <HeroCloudBank />
 
           <HeroBranding href={ENTER_HREF} />
         </div>

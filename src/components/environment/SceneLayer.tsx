@@ -5,23 +5,22 @@ import {
   type ArtSize,
   HERO_ART,
   type HeroLayer,
+  type HoverPath,
+  type HoverTiming,
   type Placement,
 } from "./heroScene";
 
 const percent = (value: number, total: number) =>
   `${+((value / total) * 100).toFixed(3)}%`;
 
-function anchoredLeft(placement: Placement, art: ArtSize) {
+const artLength = (amount: HoverPath["drift"][number]) =>
+  typeof amount === "number" ? `calc(var(--a) * ${amount})` : amount;
+
+function left(placement: Placement, art: ArtSize) {
   if ("x" in placement) return percent(placement.x, art.width);
   if ("vx" in placement)
     return `calc(var(--view-left) + ${placement.vx * 100}cqw)`;
   return `calc(var(--view-left) + ${(1 - placement.vr) * 100}cqw - ${percent(placement.w, art.width)})`;
-}
-
-function left(placement: Placement, art: ArtSize) {
-  const anchored = anchoredLeft(placement, art);
-  if (placement.minFromCenter === undefined) return anchored;
-  return `max(${anchored}, calc(var(--view-left) + 50cqw + ${placement.minFromCenter} * var(--a)))`;
 }
 
 function top(placement: Placement, art: ArtSize) {
@@ -44,11 +43,30 @@ function placementVars(
   };
 }
 
+function hoverVars(path: HoverPath, suffix: "d" | "m") {
+  return {
+    [`--bob-${suffix}`]: artLength(path.bob),
+    [`--drift-from-${suffix}`]: artLength(path.drift[0]),
+    [`--drift-to-${suffix}`]: artLength(path.drift[1]),
+    [`--tilt-${suffix}`]: `${path.tilt}deg`,
+  };
+}
+
+function hoverTimingVars(timing: HoverTiming) {
+  return {
+    "--bob-time": `${timing.bob}s`,
+    "--drift-time": `${timing.drift}s`,
+    "--tilt-time": `${timing.tilt}s`,
+    "--hover-delay": `${timing.delay}s`,
+  };
+}
+
 type SceneLayerProps = {
   id: string;
   z: string;
   desktop: Placement;
   mobile?: Placement;
+  hoverTiming?: HoverTiming;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
@@ -59,20 +77,27 @@ export function SceneLayer({
   z,
   desktop,
   mobile,
+  hoverTiming,
   className = "",
   style,
   children,
 }: SceneLayerProps) {
+  const mobileHover = mobile?.hover ?? desktop.hover;
+  const hovers = Boolean(desktop.hover && hoverTiming);
+
   return (
     <div
       data-layer={id}
       data-portrait={mobile ? undefined : "hidden"}
-      className={`scene-layer ${className}`}
+      className={`scene-layer ${hovers ? "scene-hover" : ""} ${className}`}
       style={
         {
           zIndex: z,
           ...placementVars(desktop, HERO_ART.desktop, ""),
           ...(mobile && placementVars(mobile, HERO_ART.mobile, "m")),
+          ...(hovers && desktop.hover && hoverVars(desktop.hover, "d")),
+          ...(hovers && mobileHover && hoverVars(mobileHover, "m")),
+          ...(hovers && hoverTiming && hoverTimingVars(hoverTiming)),
           ...style,
         } as CSSProperties
       }
@@ -91,7 +116,27 @@ function sizes({ desktop, mobile }: HeroLayer) {
     : desktopSize;
 }
 
-export function SceneImage({ layer }: { layer: HeroLayer }) {
+export function LayerArt({ layer }: { layer: HeroLayer }) {
+  return (
+    <Image
+      src={layer.src}
+      alt=""
+      width={layer.width}
+      height={layer.height}
+      sizes={sizes(layer)}
+      loading="eager"
+      draggable={false}
+    />
+  );
+}
+
+export function SceneImage({
+  layer,
+  children,
+}: {
+  layer: HeroLayer;
+  children?: ReactNode;
+}) {
   return (
     <SceneLayer
       id={layer.id}
@@ -99,16 +144,9 @@ export function SceneImage({ layer }: { layer: HeroLayer }) {
       className={layer.className}
       desktop={layer.desktop}
       mobile={layer.mobile}
+      hoverTiming={layer.hoverTiming}
     >
-      <Image
-        src={layer.src}
-        alt=""
-        width={layer.width}
-        height={layer.height}
-        sizes={sizes(layer)}
-        loading="eager"
-        draggable={false}
-      />
+      {children ?? <LayerArt layer={layer} />}
     </SceneLayer>
   );
 }
