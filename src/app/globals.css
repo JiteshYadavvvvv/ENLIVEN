@@ -145,8 +145,8 @@
     inset: 0;
     background: linear-gradient(
       180deg,
-      transparent 0%,
-      color-mix(in srgb, var(--color-void) 75%, transparent) 100%
+      transparent 80%,
+      color-mix(in srgb, var(--color-void) 15%, transparent) 100%
     );
     pointer-events: none;
   }
@@ -449,28 +449,18 @@
     }
   }
 
-  /* === Hero scene geometry ===
-     .hero-scene is a size container. .hero-stage is a box with the
-     background artwork's exact aspect ratio that covers the scene the same
-     way object-fit: cover would, so anything positioned in stage
-     percentages (vehicles, the bridge anchor) stays pinned to the same spot
-     in the painting at every viewport size. The artwork's ratio comes in
-     as --art-ratio, set next to the background src in page.tsx. */
+  /* .hero-stage covers the scene like object-fit: cover at the artwork's
+     aspect ratio, so layers placed in stage percentages stay pinned to the
+     painting. --a is one artwork pixel, capped so the 560px-wide wordmark
+     still fits narrow screens. */
   .hero-scene {
     container-type: size;
-    /* Branding unit: tracks the limiting viewport dimension against 16:9. */
-    --u: min(1cqw, 1.78cqh);
-  }
-
-  @media (orientation: portrait) {
-    .hero-scene {
-      --u: min(2.6cqw, 1.4cqh);
-    }
   }
 
   .hero-stage {
-    --stage-w: max(100cqw, 100cqh * var(--art-ratio));
-    --stage-h: max(100cqh, 100cqw / var(--art-ratio));
+    --stage-w: max(100cqw, 100cqh * var(--art-w) / var(--art-h));
+    --stage-h: max(100cqh, 100cqw * var(--art-h) / var(--art-w));
+    --a: min(var(--stage-w) / var(--art-w), 0.15cqw);
     position: absolute;
     width: var(--stage-w);
     height: var(--stage-h);
@@ -478,51 +468,37 @@
     top: calc((100cqh - var(--stage-h)) / 2);
   }
 
-  .hero-emblem {
-    height: calc(12 * var(--u));
-    width: auto;
-  }
-
-  /* Live Pricedown text with a stepped magenta extrusion — no text image. */
   .wordmark-enliven {
     font-family: var(--font-display-gta);
-    font-size: calc(9.5 * var(--u));
     line-height: 0.9;
     letter-spacing: 0.01em;
     color: #fff3e2;
     -webkit-text-stroke: 0.035em #2a0f2e;
     paint-order: stroke fill;
     text-shadow:
-      0.008em 0.016em 0 #ff6fc7,
-      0.016em 0.032em 0 #f24aac,
-      0.024em 0.048em 0 #d52f93,
-      0.032em 0.064em 0 #b11f7d,
-      0.04em 0.08em 0 #2a0f2e,
-      0.05em 0.11em 0.12em rgb(20 6 30 / 0.55);
+      0.006em 0.012em 0 #e8489f,
+      0.012em 0.024em 0 #d23a92,
+      0.018em 0.036em 0 #b82d82,
+      0.024em 0.048em 0 #9c2172,
+      0.03em 0.06em 0 #801863,
+      0.036em 0.072em 0 #661254,
+      0.042em 0.084em 0 #2a0f2e,
+      0.05em 0.11em 0.14em rgb(20 6 30 / 0.5);
   }
 
-  /* The card art is blank; the label and arrow are real text on top. */
   .enter-cta {
-    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.4em;
-    width: calc(25 * var(--u));
-    aspect-ratio: 600 / 140;
-    padding-bottom: calc(0.6 * var(--u));
     background:
-      url("/assets/enliven-hero/ui/enter-button-bg.svg") center / 100% 100%
+      url("/assets/enliven-hero/ui/enter-card.webp") center / 100% 100%
       no-repeat;
     font-family: var(--font-display-gta);
-    font-size: calc(2.4 * var(--u));
     line-height: 1;
     letter-spacing: 0.03em;
     color: #2a0f2e;
     text-transform: uppercase;
-    filter: drop-shadow(
-      0 calc(0.5 * var(--u)) calc(0.8 * var(--u)) rgb(20 6 30 / 0.45)
-    );
     transition:
       transform 200ms var(--ease-cinematic),
       filter 200ms var(--ease-cinematic);

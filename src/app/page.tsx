@@ -9,20 +9,15 @@ import EnvironmentScene from "@/components/environment/EnvironmentScene";
 import RevealOnLoad from "@/components/environment/RevealOnLoad";
 import Navbar from "@/components/layout/Navbar";
 
-const ASSET_BASE = "/assets/enliven-world";
 const HERO_BASE = "/assets/enliven-hero";
-const emblemSrc = `${ASSET_BASE}/branding/enliven-emblem.webp`;
-const rocketBusSrc = `${ASSET_BASE}/environment/rocket-bus.webp`;
+const backgroundDesktopSrc = `${HERO_BASE}/backgrounds/city-desktop-v1.webp`;
+const backgroundMobileSrc = `${HERO_BASE}/backgrounds/city-mobile-v1.webp`;
+const emblemSrc = `${HERO_BASE}/branding/enliven-emblem.webp`;
+const carSrc = `${HERO_BASE}/vehicles/car.webp`;
+const metroSrc = `${HERO_BASE}/vehicles/metro.webp`;
+const rocketBusSrc = `${HERO_BASE}/vehicles/rocket-bus.webp`;
 
-// Interim artwork: city-bright desktop/mobile from src/assets, with the
-// desktop sky retouched clear of its painted airship and small craft. The
-// production 3840x2160 / 1080x1920 renders with a clear road and rail bridge
-// haven't been supplied yet. When they are, give them new filenames (image
-// URLs are served `immutable`, so overwriting in place serves stale art),
-// update the --art-ratio values on the scene below, and re-tune the
-// stage-percentage positions (rocket bus, brand anchor) against the new art.
-const backgroundDesktopSrc = `${HERO_BASE}/backgrounds/city-desktop-interim.webp`;
-const backgroundMobileSrc = `${HERO_BASE}/backgrounds/city-mobile-interim.webp`;
+const ENTER_HREF = "/";
 
 const emblemFloat = {
   "--float-distance": "-5px",
@@ -32,49 +27,70 @@ const emblemFloat = {
 export default function Home() {
   return (
     <main className="relative min-h-screen">
-      {/* --art-ratio = background width / height (1672x941 landscape, 820x941 portrait) */}
-      <EnvironmentScene className="hero-scene h-svh min-h-[32rem] [--art-ratio:1.7768] portrait:[--art-ratio:0.8714]">
+      {/* Positions are artwork pixels / percentages of the 1672x941 desktop
+          art, or of its 706x941 portrait crop (x 495-1201). */}
+      <EnvironmentScene className="hero-scene h-svh min-h-[32rem] [--art-h:941] [--art-w:1672] portrait:[--art-w:706]">
         <div className="hero-stage">
           <EnvironmentBackground
             desktopSrc={backgroundDesktopSrc}
             mobileSrc={backgroundMobileSrc}
-            alt="A tropical futuristic coastal city at sunset, with floating islands, waterfalls, event banners, palm trees and bridges over a turquoise bay"
+            alt="A bright tropical coastal city at sunset with floating islands, palm-lined road, an elevated railway bridge and pink event banners"
           />
 
-          {/* Rocket bus — upper-right sky, the patch retouched clear of the
-              painting's own airship so the two never double up. */}
           <Image
             src={rocketBusSrc}
             alt=""
-            width={700}
-            height={294}
-            sizes="(orientation: portrait) 50vw, 16vw"
+            width={249}
+            height={123}
+            sizes="(orientation: portrait) 40vw, 17vw"
             loading="eager"
-            className="pointer-events-none absolute top-[19%] left-[66%] z-[var(--layer-ambient)] w-[14%] select-none portrait:top-[13%] portrait:left-[56%] portrait:w-[17%]"
+            className="pointer-events-none absolute top-[16.9%] left-[66.75%] z-[var(--layer-ambient)] w-[14.89%] select-none portrait:top-[9%] portrait:left-[55%] portrait:w-[24%]"
             draggable={false}
           />
 
-          {/* Branding hangs from the bridge line: its bottom edge (the CTA)
-              sits at the deck, so it stays attached to the bridge as the
-              stage crops at different aspect ratios. */}
-          <div className="absolute inset-x-0 top-[64%] z-[var(--layer-content)] -translate-y-full portrait:top-[60%]">
-            <RevealOnLoad className="flex flex-col items-center">
+          <Image
+            src={metroSrc}
+            alt=""
+            width={332}
+            height={57}
+            sizes="22vw"
+            loading="eager"
+            className="pointer-events-none absolute top-[66.63%] left-[75.54%] z-[var(--layer-ambient)] w-[19.86%] select-none portrait:hidden"
+            draggable={false}
+          />
+
+          <Image
+            src={carSrc}
+            alt=""
+            width={393}
+            height={162}
+            sizes="26vw"
+            loading="eager"
+            className="pointer-events-none absolute top-[72.37%] left-[4.49%] z-[var(--layer-scenery)] w-[23.5%] select-none portrait:hidden"
+            draggable={false}
+          />
+
+          {/* Anchor = centre of the painted wordmark (849, 538); children
+              are offset from it in artwork pixels (--a). */}
+          <div className="absolute top-[57.17%] left-[50.78%] z-[var(--layer-content)] portrait:left-[50.14%]">
+            <RevealOnLoad>
               <Image
                 src={emblemSrc}
                 alt=""
-                priority
+                loading="eager"
                 width={546}
                 height={897}
-                sizes="(orientation: portrait) 18vw, 8vw"
+                sizes="(orientation: portrait) 30vw, 11vw"
                 style={emblemFloat}
-                className="hero-emblem animate-idle-float"
+                className="animate-idle-float absolute top-[calc(var(--a)*-342)] left-[calc(var(--a)*-10)] w-[calc(var(--a)*165)] max-w-none -translate-x-1/2"
               />
-              <h1 className="wordmark-enliven mt-[calc(var(--u)*-1)]">
+              <h1 className="wordmark-enliven absolute top-[calc(var(--a)*-33)] left-0 -translate-x-1/2 -translate-y-1/2 text-[calc(var(--a)*189)] whitespace-nowrap">
                 ENLIVEN
               </h1>
-              <div className="mt-[calc(var(--u)*0.6)]">
-                <EnterButton href="/" />
-              </div>
+              <EnterButton
+                href={ENTER_HREF}
+                className="absolute top-[calc(var(--a)*58)] left-[calc(var(--a)*-174)] aspect-[347/98] w-[calc(var(--a)*347)] text-[calc(var(--a)*32)]"
+              />
             </RevealOnLoad>
           </div>
         </div>
