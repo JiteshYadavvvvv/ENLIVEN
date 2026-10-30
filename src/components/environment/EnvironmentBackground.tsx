@@ -12,7 +12,7 @@ export default function EnvironmentBackground({
   return (
     <picture>
       {/* Orientation, not width: portrait tablets get the tall artwork too.
-          Must match the `portrait:` art-ratio switch in page.tsx. */}
+          Must match the orientation switch on .hero-stage in globals.css. */}
       <source media="(orientation: landscape)" srcSet={desktopSrc} />
       <img
         src={mobileSrc}

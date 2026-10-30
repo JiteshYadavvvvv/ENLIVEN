@@ -43,6 +43,8 @@
   --layer-backdrop: 0;
   --layer-distant: 2;
   --layer-ambient: 5;
+  --layer-transit: 6;
+  --layer-atmosphere: 7;
   --layer-scenery: 8;
   --layer-content: 10;
   --layer-character: 15;
@@ -450,28 +452,86 @@
   }
 
   /* .hero-stage covers the scene like object-fit: cover at the artwork's
-     aspect ratio, so layers placed in stage percentages stay pinned to the
-     painting. --a is one artwork pixel, capped so the 560px-wide wordmark
-     still fits narrow screens. */
+     aspect ratio; --a is one artwork pixel. The horizontal crop is centred
+     but never cuts more than --crop-max artwork pixels off the left edge,
+     so the road stays in frame on narrow screens. --view-left and
+     --view-top locate the visible frame inside the stage. */
   .hero-scene {
     container-type: size;
   }
 
   .hero-stage {
+    --art-w: var(--desk-w);
+    --art-h: var(--desk-h);
+    --crop-max: var(--desk-crop-left);
     --stage-w: max(100cqw, 100cqh * var(--art-w) / var(--art-h));
     --stage-h: max(100cqh, 100cqw * var(--art-h) / var(--art-w));
-    --a: min(var(--stage-w) / var(--art-w), 0.15cqw);
+    --a: calc(var(--stage-w) / var(--art-w));
+    --view-left: min((var(--stage-w) - 100cqw) / 2, var(--crop-max) * var(--a));
+    --view-top: calc((var(--stage-h) - 100cqh) / 2);
     position: absolute;
     width: var(--stage-w);
     height: var(--stage-h);
-    left: calc((100cqw - var(--stage-w)) / 2);
-    top: calc((100cqh - var(--stage-h)) / 2);
+    left: calc(var(--view-left) * -1);
+    top: calc(var(--view-top) * -1);
+  }
+
+  .scene-layer {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w, auto);
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .scene-layer > img {
+    width: 100%;
+    height: auto;
+    rotate: var(--r);
+  }
+
+  .scene-cloud > img {
+    filter: drop-shadow(0 0 1.2cqw rgb(255 255 255 / 0.55));
+  }
+
+  .hero-branding {
+    --b: min(var(--a), 0.19cqw);
+  }
+
+  @media (orientation: portrait) {
+    .hero-stage {
+      --art-w: var(--mob-w);
+      --art-h: var(--mob-h);
+      --crop-max: 100000;
+    }
+
+    .scene-layer {
+      left: var(--mx);
+      top: var(--my);
+      width: var(--mw, auto);
+    }
+
+    .scene-layer > img {
+      rotate: var(--mr);
+    }
+
+    .scene-layer[data-portrait="hidden"] {
+      display: none;
+    }
+
+    .hero-branding {
+      --b: min(var(--a) * var(--mbs), 0.19cqw);
+    }
   }
 
   .wordmark-enliven {
+    position: relative;
+    top: -0.18em;
     font-family: var(--font-display-gta);
-    line-height: 0.9;
-    letter-spacing: 0.01em;
+    font-size: calc(var(--b) * 154);
+    line-height: 0.84;
+    white-space: nowrap;
     color: #fff3e2;
     -webkit-text-stroke: 0.035em #2a0f2e;
     paint-order: stroke fill;
@@ -487,13 +547,11 @@
   }
 
   .enter-cta {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4em;
-    background:
-      url("/assets/enliven-hero/ui/enter-card.webp") center / 100% 100%
-      no-repeat;
+    aspect-ratio: 380 / 96;
     font-family: var(--font-display-gta);
     line-height: 1;
     letter-spacing: 0.03em;
