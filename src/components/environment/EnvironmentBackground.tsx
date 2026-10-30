@@ -11,10 +11,13 @@ export default function EnvironmentBackground({
 }: EnvironmentBackgroundProps) {
   return (
     <picture>
-      <source media="(min-width: 768px)" srcSet={desktopSrc} />
+      {/* Orientation, not width: portrait tablets get the tall artwork too.
+          Must match the `portrait:` art-ratio switch in page.tsx. */}
+      <source media="(orientation: landscape)" srcSet={desktopSrc} />
       <img
         src={mobileSrc}
         alt={alt}
+        fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover"
         draggable={false}
       />

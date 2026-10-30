@@ -1,43 +1,24 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Inter, JetBrains_Mono } from "next/font/google";
+import { Bebas_Neue } from "next/font/google";
+import { preload } from "react-dom";
 
 import "./globals.css";
 import SmoothScrollProvider from "@/utils/SmoothScrollProvider";
 
+// Bebas Neue is only the swap-period fallback for Pricedown (declared via
+// @font-face in globals.css), so the layout doesn't jump to a system font
+// while the GTA face loads. Its variable class goes on <html>: the theme's
+// --font-display is declared on :root and references --font-bebas, and a
+// var() that's undefined where it's declared invalidates the whole stack.
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas",
   weight: "400",
   subsets: ["latin"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
-  subsets: ["latin"],
-});
-
-// Pricedown (the GTA logo/UI typeface) integration point: no such font file
-// exists anywhere in this project, and the Innerve reference doesn't use it
-// either (it uses a local "Clash" font via next/font/local, loaded the same
-// way this would be). Navbar/UI text currently falls back to Bebas Neue via
-// the --font-display-gta CSS variable in globals.css. To activate the real
-// font once a licensed file is supplied, add it to src/assets/fonts/ and
-// uncomment:
-//
-// import localFont from "next/font/local";
-// const pricedown = localFont({
-//   src: "../assets/fonts/pricedown.woff2",
-//   variable: "--font-pricedown",
-//   weight: "400",
-// });
-//
-// ...then add `${pricedown.variable}` to the body className below. No
-// other code needs to change -- --font-display-gta already prefers
-// --font-pricedown whenever it's defined.
+// Must match the @font-face src URL in globals.css exactly, or the browser
+// downloads the font twice.
+const PRICEDOWN_SRC = "/fonts/pricedown/Pricedown%20Bl.otf";
 
 export const metadata: Metadata = {
   title: "ENLIVEN",
@@ -56,11 +37,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  preload(PRICEDOWN_SRC, {
+    as: "font",
+    type: "font/otf",
+    crossOrigin: "anonymous",
+  });
+
   return (
-    <html lang="en">
-      <body
-        className={`${bebasNeue.variable} ${inter.variable} ${jetbrainsMono.variable} antialiased`}
-      >
+    <html lang="en" className={bebasNeue.variable}>
+      <body className="antialiased">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
