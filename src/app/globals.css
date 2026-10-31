@@ -516,14 +516,14 @@
     filter: saturate(0.8) contrast(0.9) brightness(1.06);
   }
 
-  .car-run {
-    --q0: 220;
-    --lane-dx: -0.427;
-    transform-origin: 45% 100%;
-    animation: car-run 13s linear -2s infinite;
+  .car-rig {
+    transform-origin: 50% 100%;
+    animation: car-drive 15s linear -1s infinite;
   }
 
-  .car-run img {
+  .car-body {
+    position: relative;
+    container-type: inline-size;
     animation: suspension 0.8s ease-in-out infinite alternate;
   }
 
@@ -533,129 +533,267 @@
     }
   }
 
-  @keyframes car-run {
+  .car-shadow {
+    position: absolute;
+    left: 4%;
+    bottom: -3%;
+    width: 92%;
+    height: 10%;
+    background: radial-gradient(
+      closest-side,
+      rgb(14 6 24 / 0.6),
+      rgb(14 6 24 / 0.25) 60%,
+      transparent
+    );
+  }
+
+  .exhaust {
+    position: absolute;
+    top: 66%;
+    width: 0;
+    height: 0;
+  }
+
+  .exhaust[data-side="left"] {
+    --puff-drift: -7cqw;
+  }
+
+  .exhaust[data-side="right"] {
+    --puff-drift: 7cqw;
+  }
+
+  .exhaust-glow {
+    position: absolute;
+    left: -3.5cqw;
+    top: -3.5cqw;
+    width: 7cqw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(
+      closest-side,
+      rgb(255 150 70 / 0.55),
+      transparent
+    );
+    animation: exhaust-glow 0.22s steps(2, jump-none) infinite alternate;
+  }
+
+  .exhaust-puff {
+    position: absolute;
+    left: -3.5cqw;
+    top: -3.5cqw;
+    width: 7cqw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    opacity: 0;
+    background: radial-gradient(
+      closest-side,
+      rgb(236 226 240 / 0.34),
+      rgb(214 200 222 / 0.14) 55%,
+      transparent
+    );
+    animation: exhaust-puff 1.6s ease-out infinite;
+  }
+
+  @keyframes exhaust-glow {
+    to {
+      opacity: 0.55;
+    }
+  }
+
+  @keyframes exhaust-puff {
     0% {
-      translate: calc(var(--a) * 80 * var(--lane-dx)) calc(var(--a) * 80);
-      scale: calc(300 / var(--q0));
+      translate: 0 0;
+      scale: 0.35;
       opacity: 0;
     }
-    3% {
-      opacity: 1;
+    15% {
+      opacity: 0.5;
     }
-    9.75% {
-      translate: calc(var(--a) * -17 * var(--lane-dx)) calc(var(--a) * -17);
-      scale: calc(203 / var(--q0));
-    }
-    19.5% {
-      translate: calc(var(--a) * -83 * var(--lane-dx)) calc(var(--a) * -83);
-      scale: calc(137 / var(--q0));
-    }
-    29.25% {
-      translate: calc(var(--a) * -127.6 * var(--lane-dx))
-        calc(var(--a) * -127.6);
-      scale: calc(92.4 / var(--q0));
-    }
-    39% {
-      translate: calc(var(--a) * -157.6 * var(--lane-dx))
-        calc(var(--a) * -157.6);
-      scale: calc(62.4 / var(--q0));
-    }
-    48.75% {
-      translate: calc(var(--a) * -177.9 * var(--lane-dx))
-        calc(var(--a) * -177.9);
-      scale: calc(42.1 / var(--q0));
-    }
-    58.5% {
-      translate: calc(var(--a) * -191.6 * var(--lane-dx))
-        calc(var(--a) * -191.6);
-      scale: calc(28.4 / var(--q0));
-    }
-    68.25% {
-      translate: calc(var(--a) * -200.8 * var(--lane-dx))
-        calc(var(--a) * -200.8);
-      scale: calc(19.2 / var(--q0));
-      opacity: 1;
-    }
-    78% {
-      translate: calc(var(--a) * -207 * var(--lane-dx)) calc(var(--a) * -207);
-      scale: calc(13 / var(--q0));
-      opacity: 0;
-    }
-    78.1%,
     100% {
-      translate: calc(var(--a) * 80 * var(--lane-dx)) calc(var(--a) * 80);
-      scale: calc(300 / var(--q0));
+      translate: var(--puff-drift) 8cqw;
+      scale: 2.2;
       opacity: 0;
     }
   }
 
-  .metro-run {
-    --d0: 947;
-    --slope: 0.0633;
-    transform-origin: 50% 100%;
-    animation: metro-run 22s linear -6s infinite;
+  @keyframes car-drive {
+    0% {
+      translate: calc(var(--a) * -134.5) calc(var(--a) * 300);
+      scale: 3.156;
+      opacity: 0;
+    }
+    4.7% {
+      translate: calc(var(--a) * -94) calc(var(--a) * 240);
+      scale: 2.718;
+      opacity: 1;
+    }
+    7.2% {
+      translate: calc(var(--a) * -60.3) calc(var(--a) * 180);
+      scale: 2.284;
+    }
+    9.8% {
+      translate: calc(var(--a) * -33.4) calc(var(--a) * 120);
+      scale: 1.853;
+    }
+    12.9% {
+      translate: calc(var(--a) * -13.3) calc(var(--a) * 60);
+      scale: 1.425;
+    }
+    17.2% {
+      translate: calc(var(--a) * 0) calc(var(--a) * 0);
+      scale: 1;
+    }
+    21.5% {
+      translate: calc(var(--a) * 5.1) calc(var(--a) * -40);
+      scale: 0.718;
+    }
+    29.1% {
+      translate: calc(var(--a) * 7.2) calc(var(--a) * -80);
+      scale: 0.438;
+    }
+    36.2% {
+      translate: calc(var(--a) * 3.4) calc(var(--a) * -100);
+      scale: 0.298;
+    }
+    44% {
+      translate: calc(var(--a) * -9.6) calc(var(--a) * -120);
+      scale: 0.206;
+    }
+    51% {
+      translate: calc(var(--a) * -17.6) calc(var(--a) * -132);
+      scale: 0.156;
+    }
+    57% {
+      translate: calc(var(--a) * -24.6) calc(var(--a) * -142);
+      scale: 0.119;
+    }
+    62% {
+      translate: calc(var(--a) * -33.6) calc(var(--a) * -149);
+      scale: 0.094;
+    }
+    67% {
+      translate: calc(var(--a) * -45.6) calc(var(--a) * -153);
+      scale: 0.081;
+      opacity: 1;
+    }
+    70% {
+      translate: calc(var(--a) * -58) calc(var(--a) * -155);
+      scale: 0.075;
+      opacity: 0;
+    }
+    70.1%,
+    100% {
+      translate: calc(var(--a) * -134.5) calc(var(--a) * 300);
+      scale: 3.156;
+      opacity: 0;
+    }
   }
 
-  @keyframes metro-run {
+  @keyframes car-drive-portrait {
     0% {
-      translate: calc(var(--a) * (114 - var(--d0)))
-        calc(var(--a) * (114 - var(--d0)) * var(--slope));
-      scale: calc(114 / var(--d0));
+      translate: calc(var(--a) * -33.4) calc(var(--a) * 120);
+      scale: 1.853;
       opacity: 0;
     }
-    9.2% {
-      translate: calc(var(--a) * (133 - var(--d0)))
-        calc(var(--a) * (133 - var(--d0)) * var(--slope));
-      scale: calc(133 / var(--d0));
+    5% {
+      translate: calc(var(--a) * -13.3) calc(var(--a) * 60);
+      scale: 1.425;
       opacity: 1;
     }
-    19.1% {
-      translate: calc(var(--a) * (161 - var(--d0)))
-        calc(var(--a) * (161 - var(--d0)) * var(--slope));
-      scale: calc(161 / var(--d0));
+    11% {
+      translate: calc(var(--a) * 0) calc(var(--a) * 0);
+      scale: 1;
     }
-    27.8% {
-      translate: calc(var(--a) * (199 - var(--d0)))
-        calc(var(--a) * (199 - var(--d0)) * var(--slope));
-      scale: calc(199 / var(--d0));
+    16% {
+      translate: calc(var(--a) * 5.1) calc(var(--a) * -40);
+      scale: 0.718;
     }
-    36% {
-      translate: calc(var(--a) * (256 - var(--d0)))
-        calc(var(--a) * (256 - var(--d0)) * var(--slope));
-      scale: calc(256 / var(--d0));
+    24% {
+      translate: calc(var(--a) * 7.2) calc(var(--a) * -80);
+      scale: 0.438;
     }
-    43.2% {
-      translate: calc(var(--a) * (341 - var(--d0)))
-        calc(var(--a) * (341 - var(--d0)) * var(--slope));
-      scale: calc(341 / var(--d0));
+    32% {
+      translate: calc(var(--a) * 3.4) calc(var(--a) * -100);
+      scale: 0.298;
     }
-    49.2% {
-      translate: calc(var(--a) * (473 - var(--d0)))
-        calc(var(--a) * (473 - var(--d0)) * var(--slope));
-      scale: calc(473 / var(--d0));
+    40% {
+      translate: calc(var(--a) * -9.6) calc(var(--a) * -120);
+      scale: 0.206;
     }
-    54.5% {
-      translate: calc(var(--a) * (710 - var(--d0)))
-        calc(var(--a) * (710 - var(--d0)) * var(--slope));
-      scale: calc(710 / var(--d0));
+    47% {
+      translate: calc(var(--a) * -17.6) calc(var(--a) * -132);
+      scale: 0.156;
     }
-    57.7% {
-      translate: calc(var(--a) * (1042 - var(--d0)))
-        calc(var(--a) * (1042 - var(--d0)) * var(--slope));
-      scale: calc(1042 / var(--d0));
+    53% {
+      translate: calc(var(--a) * -24.6) calc(var(--a) * -142);
+      scale: 0.119;
     }
-    60% {
-      translate: calc(var(--a) * (1515 - var(--d0)))
-        calc(var(--a) * (1515 - var(--d0)) * var(--slope));
-      scale: calc(1515 / var(--d0));
+    58% {
+      translate: calc(var(--a) * -33.6) calc(var(--a) * -149);
+      scale: 0.094;
+    }
+    63% {
+      translate: calc(var(--a) * -45.6) calc(var(--a) * -153);
+      scale: 0.081;
       opacity: 1;
     }
-    60.1%,
+    66% {
+      translate: calc(var(--a) * -58) calc(var(--a) * -155);
+      scale: 0.075;
+      opacity: 0;
+    }
+    66.1%,
     100% {
-      translate: calc(var(--a) * (1515 - var(--d0)))
-        calc(var(--a) * (1515 - var(--d0)) * var(--slope));
-      scale: calc(1515 / var(--d0));
+      translate: calc(var(--a) * -33.4) calc(var(--a) * 120);
+      scale: 1.853;
       opacity: 0;
+    }
+  }
+
+  .metro-track {
+    position: absolute;
+    inset: 0;
+    z-index: var(--layer-transit);
+    perspective: calc(1400 * var(--a));
+    perspective-origin: calc(835 * var(--a)) calc(530 * var(--a));
+    clip-path: inset(0 0 0 calc(690 * var(--a)));
+    pointer-events: none;
+  }
+
+  .metro-train {
+    position: absolute;
+    left: calc(1206 * var(--a));
+    top: calc(539 * var(--a));
+    width: calc(394 * var(--a));
+    transform-origin: 100% 100%;
+    rotate: y -76.31deg;
+    animation: metro-track 16s linear -2s infinite;
+  }
+
+  .metro-train img {
+    width: 100%;
+    height: auto;
+  }
+
+  @keyframes metro-track {
+    0% {
+      translate: calc(var(--a) * -1656.9) 0 calc(var(--a) * -6801.2);
+    }
+    16% {
+      translate: calc(var(--a) * -946.8) 0 calc(var(--a) * -3886.4);
+    }
+    31% {
+      translate: calc(var(--a) * -473.4) 0 calc(var(--a) * -1943.2);
+    }
+    41% {
+      translate: calc(var(--a) * -236.7) 0 calc(var(--a) * -971.6);
+    }
+    53% {
+      translate: calc(var(--a) * 0) 0 calc(var(--a) * 0);
+    }
+    61%,
+    100% {
+      translate: calc(var(--a) * 123.1) 0 calc(var(--a) * 505.2);
     }
   }
 
@@ -719,29 +857,34 @@
   }
 
   @media (orientation: portrait) {
-    .car-run {
-      --lane-dx: -0.2;
+    .car-rig {
+      animation-name: car-drive-portrait;
+      animation-duration: 12s;
     }
 
-    .metro-run {
-      --d0: 247;
+    .metro-track {
+      display: none;
     }
 
     .bus-flight {
       --bus-from: calc(var(--a) * -95) calc(var(--a) * 22);
-      --bus-to: calc(var(--a) * 60) calc(var(--a) * -18);
+      --bus-to: calc(var(--a) * 35) calc(var(--a) * -18);
       --bus-far: 0.45;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .scene-orbit,
-    .car-run,
-    .car-run img,
-    .metro-run,
+    .car-rig,
+    .car-body,
+    .metro-train,
     .bus-flight,
     .bus-flight img {
       animation: none;
+    }
+
+    .exhaust {
+      display: none;
     }
   }
 

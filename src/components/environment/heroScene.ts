@@ -33,13 +33,13 @@ export type CloudLayer = HeroLayer & { part: -1 | 1 };
 
 export const HERO_ART = {
   desktop: {
-    src: `${HERO_BASE}/backgrounds/city-desktop-v3.webp`,
-    width: 1672,
+    src: `${HERO_BASE}/backgrounds/city-desktop-v4.webp`,
+    width: 1670,
     height: 941,
     cropLeftMax: 40,
   },
   mobile: {
-    src: `${HERO_BASE}/backgrounds/city-mobile-v3.webp`,
+    src: `${HERO_BASE}/backgrounds/city-mobile-v4-road.webp`,
     width: 600,
     height: 941,
   },
@@ -50,7 +50,21 @@ export const HERO_BRANDING = {
   desktopScale: 1.221,
   mobileScale: 0.78,
   desktop: { vx: 0.5, y: 490 } satisfies Placement,
-  mobile: { vx: 0.5, y: 520 } satisfies Placement,
+  mobile: { vx: 0.5, y: 440 } satisfies Placement,
+};
+
+export const CAR_RIG = {
+  src: `${HERO_BASE}/vehicles/car-rear.png`,
+  width: 1017,
+  height: 592,
+  desktop: { x: 350.5, y: 606.7, w: 160.2 } satisfies Placement,
+  mobile: { x: 200.5, y: 606.7, w: 160.2 } satisfies Placement,
+};
+
+export const METRO_TRACK = {
+  src: `${HERO_BASE}/vehicles/metro.png`,
+  width: 512,
+  height: 130,
 };
 
 export const HERO_LAYERS: HeroLayer[] = [
@@ -72,7 +86,7 @@ export const HERO_LAYERS: HeroLayer[] = [
     height: 80,
     z: "var(--layer-distant)",
     desktop: { vx: 0.43, y: 50, w: 45 },
-    mobile: { x: 230, vy: 0.27, w: 22 },
+    mobile: { x: 470, vy: 0.17, w: 22 },
     orbit: { rx: 24, ry: 6, bank: 6, time: 9, delay: -2 },
   },
   {
@@ -92,7 +106,7 @@ export const HERO_LAYERS: HeroLayer[] = [
     height: 112,
     z: "var(--layer-ambient)",
     desktop: { vx: 0.855, y: 255, w: 120 },
-    mobile: { x: 380, vy: 0.3, w: 70 },
+    mobile: { x: 380, vy: 0.215, w: 70 },
     orbit: { rx: 4, ry: 8, bank: 0.5, time: 19, delay: -11, reverse: true },
   },
   {
@@ -117,31 +131,20 @@ export const HERO_LAYERS: HeroLayer[] = [
   },
   {
     id: "palm-crown",
-    src: `${HERO_BASE}/backgrounds/city-desktop-v3-palm-crown.png`,
-    width: 202,
-    height: 340,
+    src: `${HERO_BASE}/backgrounds/city-desktop-v4-palm-crown.png`,
+    width: 165,
+    height: 300,
     z: "var(--layer-transit)",
-    desktop: { x: 1470, y: 0, w: 202 },
+    desktop: { x: 1505, y: 0, w: 165 },
   },
   {
-    id: "metro",
-    className: "metro-run",
-    src: `${HERO_BASE}/vehicles/metro.png`,
-    width: 512,
-    height: 130,
-    z: "var(--layer-transit)",
-    desktop: { x: 1235, y: 593, w: 230, rotate: 2.4 },
-    mobile: { x: 470, y: 592, w: 60, rotate: 2.4 },
-  },
-  {
-    id: "car",
-    className: "car-run",
-    src: `${HERO_BASE}/vehicles/car.png`,
-    width: 416,
-    height: 173,
-    z: "var(--layer-transit)",
-    desktop: { x: 227, y: 742, w: 187 },
-    mobile: { x: 126, y: 742, w: 187 },
+    id: "road-bend",
+    src: `${HERO_BASE}/backgrounds/city-desktop-v4-road-bend.png`,
+    width: 98,
+    height: 112,
+    z: "var(--layer-atmosphere)",
+    desktop: { x: 300, y: 500, w: 98 },
+    mobile: { x: 150, y: 500, w: 98 },
   },
 ];
 
