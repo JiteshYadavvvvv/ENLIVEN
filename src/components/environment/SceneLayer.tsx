@@ -5,16 +5,14 @@ import {
   type ArtSize,
   HERO_ART,
   type HeroLayer,
-  type HoverPath,
-  type HoverTiming,
+  type Orbit,
   type Placement,
 } from "./heroScene";
 
 const percent = (value: number, total: number) =>
   `${+((value / total) * 100).toFixed(3)}%`;
 
-const artLength = (amount: HoverPath["drift"][number]) =>
-  typeof amount === "number" ? `calc(var(--a) * ${amount})` : amount;
+const artLength = (amount: number) => `calc(var(--a) * ${amount})`;
 
 function left(placement: Placement, art: ArtSize) {
   if ("x" in placement) return percent(placement.x, art.width);
@@ -43,21 +41,14 @@ function placementVars(
   };
 }
 
-function hoverVars(path: HoverPath, suffix: "d" | "m") {
+function orbitVars(orbit: Orbit) {
   return {
-    [`--bob-${suffix}`]: artLength(path.bob),
-    [`--drift-from-${suffix}`]: artLength(path.drift[0]),
-    [`--drift-to-${suffix}`]: artLength(path.drift[1]),
-    [`--tilt-${suffix}`]: `${path.tilt}deg`,
-  };
-}
-
-function hoverTimingVars(timing: HoverTiming) {
-  return {
-    "--bob-time": `${timing.bob}s`,
-    "--drift-time": `${timing.drift}s`,
-    "--tilt-time": `${timing.tilt}s`,
-    "--hover-delay": `${timing.delay}s`,
+    "--rx": artLength(orbit.rx),
+    "--ry": artLength(orbit.ry),
+    "--bank": `${orbit.reverse ? -orbit.bank : orbit.bank}deg`,
+    "--orbit-time": `${orbit.time}s`,
+    "--orbit-delay": `${orbit.delay}s`,
+    "--orbit-dir": orbit.reverse ? "reverse" : "normal",
   };
 }
 
@@ -66,7 +57,7 @@ type SceneLayerProps = {
   z: string;
   desktop: Placement;
   mobile?: Placement;
-  hoverTiming?: HoverTiming;
+  orbit?: Orbit;
   className?: string;
   style?: CSSProperties;
   children: ReactNode;
@@ -77,27 +68,22 @@ export function SceneLayer({
   z,
   desktop,
   mobile,
-  hoverTiming,
+  orbit,
   className = "",
   style,
   children,
 }: SceneLayerProps) {
-  const mobileHover = mobile?.hover ?? desktop.hover;
-  const hovers = Boolean(desktop.hover && hoverTiming);
-
   return (
     <div
       data-layer={id}
       data-portrait={mobile ? undefined : "hidden"}
-      className={`scene-layer ${hovers ? "scene-hover" : ""} ${className}`}
+      className={`scene-layer ${orbit ? "scene-orbit" : ""} ${className}`}
       style={
         {
           zIndex: z,
           ...placementVars(desktop, HERO_ART.desktop, ""),
           ...(mobile && placementVars(mobile, HERO_ART.mobile, "m")),
-          ...(hovers && desktop.hover && hoverVars(desktop.hover, "d")),
-          ...(hovers && mobileHover && hoverVars(mobileHover, "m")),
-          ...(hovers && hoverTiming && hoverTimingVars(hoverTiming)),
+          ...(orbit && orbitVars(orbit)),
           ...style,
         } as CSSProperties
       }
@@ -144,7 +130,7 @@ export function SceneImage({
       className={layer.className}
       desktop={layer.desktop}
       mobile={layer.mobile}
-      hoverTiming={layer.hoverTiming}
+      orbit={layer.orbit}
     >
       {children ?? <LayerArt layer={layer} />}
     </SceneLayer>

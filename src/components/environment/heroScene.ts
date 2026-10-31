@@ -2,25 +2,18 @@ const HERO_BASE = "/assets/enliven-hero";
 
 export type ArtSize = { width: number; height: number };
 
-type Amount = number | `${number}cqw`;
-
-export type HoverPath = {
-  bob: number;
-  drift: [Amount, Amount];
-  tilt: number;
-};
-
-export type HoverTiming = {
-  bob: number;
-  drift: number;
-  tilt: number;
+export type Orbit = {
+  rx: number;
+  ry: number;
+  bank: number;
+  time: number;
   delay: number;
+  reverse?: boolean;
 };
 
 export type Placement = {
   w?: number;
   rotate?: number;
-  hover?: HoverPath;
 } & ({ x: number } | { vx: number } | { vr: number; w: number }) &
   ({ y: number } | { vy: number });
 
@@ -33,7 +26,7 @@ export type HeroLayer = {
   z: string;
   desktop: Placement;
   mobile?: Placement;
-  hoverTiming?: HoverTiming;
+  orbit?: Orbit;
 };
 
 export type CloudLayer = HeroLayer & { part: -1 | 1 };
@@ -56,24 +49,20 @@ export const HERO_BRANDING = {
   cardSrc: `${HERO_BASE}/ui/enter-card.png`,
   mobileScale: 0.6376,
   desktop: { vx: 0.5, y: 495 } satisfies Placement,
-  mobile: { vx: 0.5, y: 371 } satisfies Placement,
+  mobile: { vx: 0.5, y: 352 } satisfies Placement,
 };
 
 export const HERO_LAYERS: HeroLayer[] = [
   {
     id: "island-small",
+    className: "scene-distant",
     src: `${HERO_BASE}/islands/island-small.png`,
     width: 162,
     height: 101,
     z: "var(--layer-distant)",
-    desktop: {
-      vx: 0.435,
-      y: 106,
-      w: 61,
-      hover: { bob: -4, drift: [-3, 3], tilt: 0.4 },
-    },
-    mobile: { vx: 0.44, vy: 0.14, w: 40 },
-    hoverTiming: { bob: 13, drift: 23, tilt: 19, delay: -7 },
+    desktop: { x: 790, y: 100, w: 50 },
+    mobile: { x: 258, vy: 0.06, w: 26 },
+    orbit: { rx: 2, ry: 4, bank: 0.2, time: 31, delay: -9 },
   },
   {
     id: "drone-02",
@@ -81,19 +70,9 @@ export const HERO_LAYERS: HeroLayer[] = [
     width: 115,
     height: 80,
     z: "var(--layer-distant)",
-    desktop: {
-      vx: 0.22,
-      y: 135,
-      w: 45,
-      hover: { bob: -6, drift: [-20, 2], tilt: 2.5 },
-    },
-    mobile: {
-      vx: 0.31,
-      vy: 0.195,
-      w: 26,
-      hover: { bob: -5, drift: [-10, 6], tilt: 2.5 },
-    },
-    hoverTiming: { bob: 2.7, drift: 10, tilt: 3.8, delay: -3 },
+    desktop: { x: 545, y: 70, w: 45 },
+    mobile: { x: 255, vy: 0.24, w: 22 },
+    orbit: { rx: 24, ry: 6, bank: 6, time: 9, delay: -2 },
   },
   {
     id: "island-large-left",
@@ -101,19 +80,9 @@ export const HERO_LAYERS: HeroLayer[] = [
     width: 163,
     height: 113,
     z: "var(--layer-ambient)",
-    desktop: {
-      vx: 0.272,
-      y: 123,
-      w: 140,
-      hover: { bob: -12, drift: [-6, 8], tilt: 0.8 },
-    },
-    mobile: {
-      vx: 0.2,
-      vy: 0.095,
-      w: 70,
-      hover: { bob: -7, drift: [-4, 5], tilt: 0.8 },
-    },
-    hoverTiming: { bob: 9.5, drift: 17, tilt: 13, delay: -2 },
+    desktop: { x: 340, y: 60, w: 150 },
+    mobile: { x: 160, vy: 0.07, w: 72 },
+    orbit: { rx: 5, ry: 11, bank: 0.6, time: 23, delay: -4 },
   },
   {
     id: "island-large-right",
@@ -121,19 +90,9 @@ export const HERO_LAYERS: HeroLayer[] = [
     width: 234,
     height: 112,
     z: "var(--layer-ambient)",
-    desktop: {
-      vx: 0.585,
-      y: 250,
-      w: 110,
-      hover: { bob: -9, drift: [5, -5], tilt: 0.6 },
-    },
-    mobile: {
-      vx: 0.69,
-      vy: 0.235,
-      w: 100,
-      hover: { bob: -6, drift: [4, -4], tilt: 0.6 },
-    },
-    hoverTiming: { bob: 11, drift: 19, tilt: 15, delay: -4 },
+    desktop: { x: 620, y: 135, w: 120 },
+    mobile: { x: 320, vy: 0.225, w: 64 },
+    orbit: { rx: 4, ry: 8, bank: 0.5, time: 19, delay: -11, reverse: true },
   },
   {
     id: "drone-01",
@@ -141,57 +100,37 @@ export const HERO_LAYERS: HeroLayer[] = [
     width: 130,
     height: 87,
     z: "var(--layer-ambient)",
-    desktop: {
-      vx: 0.583,
-      y: 147,
-      w: 66,
-      hover: { bob: -8, drift: [-20, 25], tilt: 3 },
-    },
-    mobile: {
-      vx: 0.46,
-      vy: 0.21,
-      w: 30,
-      hover: { bob: -6, drift: [-14, 6], tilt: 3 },
-    },
-    hoverTiming: { bob: 3.2, drift: 12, tilt: 4.5, delay: -1 },
+    desktop: { x: 900, y: 175, w: 60 },
+    mobile: { x: 335, vy: 0.06, w: 26 },
+    orbit: { rx: 32, ry: 7, bank: 7, time: 13, delay: -6, reverse: true },
   },
   {
     id: "rocket-bus",
+    className: "bus-flight",
     src: `${HERO_BASE}/vehicles/rocket-bus.png`,
     width: 333,
     height: 173,
     z: "var(--layer-ambient)",
-    desktop: {
-      vx: 0.667,
-      y: 131,
-      w: 205,
-      hover: { bob: -10, drift: [0, "7cqw"], tilt: 1.2 },
-    },
-    mobile: {
-      vx: 0.64,
-      vy: 0.12,
-      w: 124,
-      hover: { bob: -6, drift: ["-6cqw", 0], tilt: 1.2 },
-    },
-    hoverTiming: { bob: 6.5, drift: 23, tilt: 9, delay: -5 },
+    desktop: { x: 1080, y: 120, w: 205 },
+    mobile: { x: 240, vy: 0.145, w: 100 },
+  },
+  {
+    id: "palm-crown",
+    src: `${HERO_BASE}/backgrounds/city-desktop-v2-palm-crown.png`,
+    width: 284,
+    height: 250,
+    z: "var(--layer-transit)",
+    desktop: { x: 1250, y: 0, w: 284 },
   },
   {
     id: "metro",
-    className: "metro-run",
+    className: "metro-shuttle",
     src: `${HERO_BASE}/vehicles/metro.png`,
     width: 512,
     height: 130,
     z: "var(--layer-transit)",
-    desktop: { x: 222, y: 428, w: 272 },
-    mobile: { x: 105, y: 416, w: 180 },
-  },
-  {
-    id: "palm-occluder",
-    src: `${HERO_BASE}/backgrounds/city-desktop-v2-palm.png`,
-    width: 128,
-    height: 176,
-    z: "var(--layer-transit)",
-    desktop: { x: 224, y: 300, w: 128 },
+    desktop: { vx: 0.5, y: 430, w: 272, rotate: -4 },
+    mobile: { x: 245, y: 438, w: 180, rotate: 2.4 },
   },
   {
     id: "car",
@@ -215,7 +154,7 @@ export const HERO_CLOUDS: CloudLayer[] = [
     height: 852,
     z: "var(--layer-atmosphere)",
     desktop: { vx: 0.33, y: 600, w: 900 },
-    mobile: { vx: 0.42, vy: 0.72, w: 300 },
+    mobile: { vx: 0.5, vy: 0.8, w: 260 },
   },
   {
     id: "cloud-wide-left",
@@ -226,7 +165,7 @@ export const HERO_CLOUDS: CloudLayer[] = [
     height: 301,
     z: "var(--layer-atmosphere)",
     desktop: { vx: 0.42, y: 690, w: 480 },
-    mobile: { vx: 0.55, vy: 0.85, w: 220 },
+    mobile: { vx: 0.62, vy: 0.9, w: 200 },
   },
   {
     id: "cloud-wide-right",
