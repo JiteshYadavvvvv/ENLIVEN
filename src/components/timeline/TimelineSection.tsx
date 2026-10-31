@@ -1,7 +1,7 @@
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { TIMELINE } from "@/content/timeline";
 
-import MissionRoute from "./MissionRoute";
+import MissionMap from "./MissionMap";
 import "./timeline.css";
 
 export default function TimelineSection() {
@@ -21,7 +21,7 @@ export default function TimelineSection() {
               Mission timeline
             </h2>
           </ScrollReveal>
-          <MissionRoute milestones={TIMELINE} />
+          <MissionMap checkpoints={TIMELINE} />
         </div>
       </div>
     </section>
