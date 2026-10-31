@@ -424,7 +424,7 @@
   }
 
   .hero-branding {
-    --b: min(var(--a), 0.19cqw);
+    --b: min(var(--a) * var(--bs), 0.19cqw);
   }
 
   @media (orientation: portrait) {
@@ -515,12 +515,14 @@
     filter: saturate(0.8) contrast(0.9) brightness(1.06);
   }
 
-  .car-drive {
-    transform-origin: 50% 100%;
-    animation: car-drive 14s linear -1.8s infinite;
+  .car-run {
+    --q0: 220;
+    --lane-dx: -0.427;
+    transform-origin: 45% 100%;
+    animation: car-run 13s linear -2s infinite;
   }
 
-  .car-drive img {
+  .car-run img {
     animation: suspension 0.8s ease-in-out infinite alternate;
   }
 
@@ -530,107 +532,135 @@
     }
   }
 
-  @keyframes car-drive {
+  @keyframes car-run {
     0% {
-      translate: calc(var(--a) * -468) calc(var(--a) * 93);
-      scale: 1.694;
-    }
-    2.6% {
-      translate: calc(var(--a) * -268) calc(var(--a) * 70);
-      scale: 1.522;
-    }
-    7% {
-      translate: calc(var(--a) * -128) calc(var(--a) * 36);
-      scale: 1.269;
-    }
-    12.8% {
-      translate: 0 0;
-      scale: 1;
-    }
-    19.9% {
-      translate: calc(var(--a) * 67) calc(var(--a) * -34);
-      scale: 0.746;
-    }
-    27.9% {
-      translate: calc(var(--a) * 107) calc(var(--a) * -62);
-      scale: 0.537;
-    }
-    36.7% {
-      translate: calc(var(--a) * 127) calc(var(--a) * -84);
-      scale: 0.373;
-    }
-    46.1% {
-      translate: calc(var(--a) * 132) calc(var(--a) * -100);
-      scale: 0.254;
-      opacity: 1;
-    }
-    56.7% {
-      translate: calc(var(--a) * 122) calc(var(--a) * -112);
-      scale: 0.164;
-    }
-    69.4% {
-      translate: calc(var(--a) * 94) calc(var(--a) * -121);
-      scale: 0.097;
+      translate: calc(var(--a) * 80 * var(--lane-dx)) calc(var(--a) * 80);
+      scale: calc(300 / var(--q0));
       opacity: 0;
     }
-    69.5%,
+    3% {
+      opacity: 1;
+    }
+    9.75% {
+      translate: calc(var(--a) * -17 * var(--lane-dx)) calc(var(--a) * -17);
+      scale: calc(203 / var(--q0));
+    }
+    19.5% {
+      translate: calc(var(--a) * -83 * var(--lane-dx)) calc(var(--a) * -83);
+      scale: calc(137 / var(--q0));
+    }
+    29.25% {
+      translate: calc(var(--a) * -127.6 * var(--lane-dx))
+        calc(var(--a) * -127.6);
+      scale: calc(92.4 / var(--q0));
+    }
+    39% {
+      translate: calc(var(--a) * -157.6 * var(--lane-dx))
+        calc(var(--a) * -157.6);
+      scale: calc(62.4 / var(--q0));
+    }
+    48.75% {
+      translate: calc(var(--a) * -177.9 * var(--lane-dx))
+        calc(var(--a) * -177.9);
+      scale: calc(42.1 / var(--q0));
+    }
+    58.5% {
+      translate: calc(var(--a) * -191.6 * var(--lane-dx))
+        calc(var(--a) * -191.6);
+      scale: calc(28.4 / var(--q0));
+    }
+    68.25% {
+      translate: calc(var(--a) * -200.8 * var(--lane-dx))
+        calc(var(--a) * -200.8);
+      scale: calc(19.2 / var(--q0));
+      opacity: 1;
+    }
+    78% {
+      translate: calc(var(--a) * -207 * var(--lane-dx)) calc(var(--a) * -207);
+      scale: calc(13 / var(--q0));
+      opacity: 0;
+    }
+    78.1%,
     100% {
-      translate: calc(var(--a) * -468) calc(var(--a) * 93);
-      scale: 1.694;
+      translate: calc(var(--a) * 80 * var(--lane-dx)) calc(var(--a) * 80);
+      scale: calc(300 / var(--q0));
       opacity: 0;
     }
   }
 
-  @keyframes car-drive-portrait {
+  .metro-run {
+    --d0: 947;
+    --slope: 0.0633;
+    transform-origin: 50% 100%;
+    animation: metro-run 22s linear -6s infinite;
+  }
+
+  @keyframes metro-run {
     0% {
-      translate: calc(var(--a) * -285) calc(var(--a) * 58);
-      scale: 1.52;
-    }
-    6.9% {
-      translate: calc(var(--a) * -100) calc(var(--a) * 26);
-      scale: 1.23;
-    }
-    13.6% {
-      translate: 0 0;
-      scale: 1;
-    }
-    20.8% {
-      translate: calc(var(--a) * 18) calc(var(--a) * -22);
-      scale: 0.8;
-    }
-    30% {
-      translate: calc(var(--a) * 24) calc(var(--a) * -44);
-      scale: 0.61;
-    }
-    38.8% {
-      translate: calc(var(--a) * 16) calc(var(--a) * -60);
-      scale: 0.46;
-    }
-    47.3% {
-      translate: calc(var(--a) * 2) calc(var(--a) * -72);
-      scale: 0.357;
-      opacity: 1;
-    }
-    56.8% {
-      translate: calc(var(--a) * -17) calc(var(--a) * -82);
-      scale: 0.268;
-    }
-    68.2% {
-      translate: calc(var(--a) * -38) calc(var(--a) * -91);
-      scale: 0.188;
+      translate: calc(var(--a) * (114 - var(--d0)))
+        calc(var(--a) * (114 - var(--d0)) * var(--slope));
+      scale: calc(114 / var(--d0));
       opacity: 0;
     }
-    68.3%,
+    9.2% {
+      translate: calc(var(--a) * (133 - var(--d0)))
+        calc(var(--a) * (133 - var(--d0)) * var(--slope));
+      scale: calc(133 / var(--d0));
+      opacity: 1;
+    }
+    19.1% {
+      translate: calc(var(--a) * (161 - var(--d0)))
+        calc(var(--a) * (161 - var(--d0)) * var(--slope));
+      scale: calc(161 / var(--d0));
+    }
+    27.8% {
+      translate: calc(var(--a) * (199 - var(--d0)))
+        calc(var(--a) * (199 - var(--d0)) * var(--slope));
+      scale: calc(199 / var(--d0));
+    }
+    36% {
+      translate: calc(var(--a) * (256 - var(--d0)))
+        calc(var(--a) * (256 - var(--d0)) * var(--slope));
+      scale: calc(256 / var(--d0));
+    }
+    43.2% {
+      translate: calc(var(--a) * (341 - var(--d0)))
+        calc(var(--a) * (341 - var(--d0)) * var(--slope));
+      scale: calc(341 / var(--d0));
+    }
+    49.2% {
+      translate: calc(var(--a) * (473 - var(--d0)))
+        calc(var(--a) * (473 - var(--d0)) * var(--slope));
+      scale: calc(473 / var(--d0));
+    }
+    54.5% {
+      translate: calc(var(--a) * (710 - var(--d0)))
+        calc(var(--a) * (710 - var(--d0)) * var(--slope));
+      scale: calc(710 / var(--d0));
+    }
+    57.7% {
+      translate: calc(var(--a) * (1042 - var(--d0)))
+        calc(var(--a) * (1042 - var(--d0)) * var(--slope));
+      scale: calc(1042 / var(--d0));
+    }
+    60% {
+      translate: calc(var(--a) * (1515 - var(--d0)))
+        calc(var(--a) * (1515 - var(--d0)) * var(--slope));
+      scale: calc(1515 / var(--d0));
+      opacity: 1;
+    }
+    60.1%,
     100% {
-      translate: calc(var(--a) * -285) calc(var(--a) * 58);
-      scale: 1.52;
+      translate: calc(var(--a) * (1515 - var(--d0)))
+        calc(var(--a) * (1515 - var(--d0)) * var(--slope));
+      scale: calc(1515 / var(--d0));
       opacity: 0;
     }
   }
 
   .bus-flight {
-    --bus-from: calc(var(--a) * -129) calc(var(--a) * 24);
-    --bus-to: calc(var(--a) * 460) calc(var(--a) * -75);
+    --bus-from: calc(var(--a) * -230) calc(var(--a) * 60);
+    --bus-to: calc(var(--a) * 420) calc(var(--a) * -55);
     --bus-far: 0.42;
     animation:
       bus-cruise 30s cubic-bezier(0.45, 0, 0.85, 0.55) -12s infinite,
@@ -687,53 +717,13 @@
     }
   }
 
-  .metro-shuttle {
-    --wordmark-half: calc(1.49 * min(min(var(--a), 0.19cqw) * 208, 30cqw));
-    --metro-away: calc(50cqw - var(--wordmark-half) - var(--a) * 8);
-    left: calc(var(--view-left) + 50cqw + var(--wordmark-half) + var(--a) * 12);
-    clip-path: inset(-100vmax -100vmax -100vmax calc(var(--a) * -10));
-  }
-
-  .metro-shuttle img {
-    animation: metro-shuttle 24s -9s infinite;
-  }
-
-  @keyframes metro-shuttle {
-    0%,
-    6% {
-      translate: calc(var(--a) * -290) 0;
-      animation-timing-function: cubic-bezier(0.2, 0.55, 0.35, 1);
-    }
-    32%,
-    50% {
-      translate: 0 0;
-      animation-timing-function: cubic-bezier(0.6, 0, 0.8, 0.45);
-    }
-    74%,
-    100% {
-      translate: var(--metro-away) 0;
-    }
-  }
-
-  @keyframes metro-pass {
-    0% {
-      transform: translate(calc(var(--a) * -335), calc(var(--a) * -37));
-    }
-    52%,
-    100% {
-      transform: translate(calc(var(--a) * 255), calc(var(--a) * 29));
-    }
-  }
-
-  @container (1 < aspect-ratio < 1.3) {
-    .metro-shuttle {
-      display: none;
-    }
-  }
-
   @media (orientation: portrait) {
-    .car-drive {
-      animation: car-drive-portrait 11s linear -1.5s infinite;
+    .car-run {
+      --lane-dx: -0.2;
+    }
+
+    .metro-run {
+      --d0: 247;
     }
 
     .bus-flight {
@@ -741,25 +731,15 @@
       --bus-to: calc(var(--a) * 60) calc(var(--a) * -18);
       --bus-far: 0.45;
     }
-
-    .metro-shuttle {
-      left: var(--mx);
-      clip-path: inset(-100vmax -100vmax -100vmax calc(var(--a) * -145));
-    }
-
-    .metro-shuttle img {
-      transform-origin: 0 100%;
-      animation: metro-pass 16s linear -4.7s infinite;
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .scene-orbit,
-    .car-drive,
-    .car-drive img,
+    .car-run,
+    .car-run img,
+    .metro-run,
     .bus-flight,
-    .bus-flight img,
-    .metro-shuttle img {
+    .bus-flight img {
       animation: none;
     }
   }

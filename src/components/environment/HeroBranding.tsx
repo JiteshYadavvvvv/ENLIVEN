@@ -13,7 +13,12 @@ export default function HeroBranding({ href }: { href: string }) {
       desktop={HERO_BRANDING.desktop}
       mobile={HERO_BRANDING.mobile}
       className="hero-branding pointer-events-auto -translate-x-1/2"
-      style={{ "--mbs": HERO_BRANDING.mobileScale } as CSSProperties}
+      style={
+        {
+          "--bs": HERO_BRANDING.desktopScale,
+          "--mbs": HERO_BRANDING.mobileScale,
+        } as CSSProperties
+      }
     >
       <RevealOnLoad className="relative flex flex-col items-center">
         <h1 className="wordmark-enliven">ENLIVEN</h1>
