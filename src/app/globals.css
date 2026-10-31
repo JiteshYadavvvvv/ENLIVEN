@@ -752,57 +752,59 @@
 
   .metro-track {
     --crop: 0;
-    --track-start: calc(
-      var(--view-left) +
-      50cqw +
-      min(var(--a) * var(--bs), 0.19cqw) *
-      141
-    );
+    --junction: calc((690 - var(--crop)) * var(--a));
     position: absolute;
     inset: 0;
     z-index: var(--layer-transit);
     perspective: calc(1400 * var(--a));
     perspective-origin: calc((835 - var(--crop)) * var(--a))
-      calc(530 * var(--a));
-    clip-path: inset(0 0 0 var(--track-start));
+      calc(532.4 * var(--a));
+    mask-image: linear-gradient(
+      90deg,
+      transparent var(--junction),
+      #000 calc(var(--junction) + 16 * var(--a))
+    );
     pointer-events: none;
   }
 
   .metro-train {
     position: absolute;
-    left: calc((1265.3 - var(--crop)) * var(--a));
-    top: calc(556 * var(--a));
-    width: calc(334.7 * var(--a));
-    transform-origin: 100% 100%;
-    rotate: y -74.99deg;
+    left: calc((1600 - var(--crop)) * var(--a));
+    top: calc(641.12 * var(--a));
+    transform-origin: 0 0;
+    rotate: y -75.964deg;
     animation: metro-run 17s linear infinite;
   }
 
   .metro-train img {
-    width: 100%;
+    position: absolute;
+    left: calc(-1618.55 * var(--a));
+    top: calc(-241.94 * var(--a));
+    width: calc(977.4 * var(--a));
+    max-width: none;
     height: auto;
+    transform-origin: calc(1854.3 * var(--a)) calc(212.86 * var(--a));
+    transform: scale(0.16667) perspective(calc(1661.85 * var(--a)))
+      rotateY(50.145deg);
   }
 
   @keyframes metro-run {
     0% {
-      translate: calc(var(--a) * -1483.3) 0 calc(var(--a) * -5531.7);
+      translate: calc(var(--a) * -1572.44) 0 calc(var(--a) * -6289.6);
     }
-    8.8% {
-      translate: calc(var(--a) * -828.8) 0 calc(var(--a) * -3090.9);
-    }
-    73.5%,
+    76.5%,
     100% {
-      translate: calc(var(--a) * 114) 0 calc(var(--a) * 425);
+      translate: calc(var(--a) * 283.77) 0 calc(var(--a) * 1135.06);
     }
   }
 
   @keyframes metro-run-portrait {
     0% {
-      translate: calc(var(--a) * -1579.9) 0 calc(var(--a) * -5892);
+      translate: calc(var(--a) * -1572.44) 0 calc(var(--a) * -6289.6);
     }
-    64%,
+    56.3%,
     100% {
-      translate: calc(var(--a) * -893.6) 0 calc(var(--a) * -3332.4);
+      translate: calc(var(--a) * -848.89) 0 calc(var(--a) * -3395.49);
     }
   }
 
@@ -873,11 +875,11 @@
 
     .metro-track {
       --crop: 150;
-      --track-start: calc(540 * var(--a));
     }
 
     .metro-train {
       animation-name: metro-run-portrait;
+      animation-duration: 9s;
     }
 
     .bus-flight {

@@ -62,9 +62,9 @@ export const CAR_RIG = {
 };
 
 export const METRO_TRACK = {
-  src: `${HERO_BASE}/vehicles/metro.png`,
-  width: 512,
-  height: 130,
+  src: `${HERO_BASE}/vehicles/metro-side-v2.png`,
+  width: 2172,
+  height: 724,
 };
 
 export const HERO_LAYERS: HeroLayer[] = [
