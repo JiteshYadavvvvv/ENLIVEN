@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue } from "next/font/google";
+import { Barlow, Bebas_Neue } from "next/font/google";
 import { preload } from "react-dom";
 
 import "./globals.css";
@@ -13,6 +13,12 @@ import SmoothScrollProvider from "@/utils/SmoothScrollProvider";
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas",
   weight: "400",
+  subsets: ["latin"],
+});
+
+const barlow = Barlow({
+  variable: "--font-barlow",
+  weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
 
@@ -44,7 +50,7 @@ export default function RootLayout({
   });
 
   return (
-    <html lang="en" className={bebasNeue.variable}>
+    <html lang="en" className={`${bebasNeue.variable} ${barlow.variable}`}>
       <body className="antialiased">
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>

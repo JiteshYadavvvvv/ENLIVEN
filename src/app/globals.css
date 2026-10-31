@@ -32,6 +32,7 @@
     "Pricedown", var(--font-bebas), Impact, "Arial Narrow", sans-serif;
   --font-body: var(--font-display);
   --font-display-gta: var(--font-display);
+  --font-text: var(--font-barlow), system-ui, sans-serif;
 
   --tracking-display: 0.04em;
 

@@ -1,70 +1,78 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { MotionConfig, motion, useScroll, useTransform } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
 
 import { usePrefersReducedMotion } from "@/utils/useReducedMotion";
 
-const CLOUD_BASE = "/assets/enliven-hero/clouds";
-const BANK = [
-  { left: "-14%", top: "3vh", width: "50vw", flip: false },
-  { left: "24%", top: "6vh", width: "44vw", flip: true },
-  { left: "60%", top: "1vh", width: "54vw", flip: false },
-];
+const CLOUDS = "/assets/enliven-countdown/clouds";
 
 export default function CloudGate() {
   const gateRef = useRef<HTMLDivElement>(null);
   const still = usePrefersReducedMotion();
   const { scrollYProgress } = useScroll({
     target: gateRef,
-    offset: ["start end", "start start"],
+    offset: ["start end", "end start"],
   });
-  const reach = still ? 0 : 38;
-  const leftX = useTransform(scrollYProgress, [0, 1], ["0vw", `${-reach}vw`]);
-  const rightX = useTransform(scrollYProgress, [0, 1], ["0vw", `${reach}vw`]);
-  const swell = useTransform(scrollYProgress, [0, 1], [1, still ? 1 : 1.18]);
+  const reach = still ? 0 : 42;
+  const leftX = useTransform(scrollYProgress, [0, 0.8], ["0vw", `${-reach}vw`]);
+  const rightX = useTransform(scrollYProgress, [0, 0.8], ["0vw", `${reach}vw`]);
+  const lift = useTransform(
+    scrollYProgress,
+    [0, 0.8],
+    ["0vh", still ? "0vh" : "-6vh"],
+  );
 
   return (
-    <div ref={gateRef} className="cloud-gate" aria-hidden>
-      <motion.div
-        className="cloud-gate-wing cloud-gate-left"
-        style={{ x: leftX, scale: swell }}
-      >
+    <MotionConfig reducedMotion="user">
+      <div ref={gateRef} className="cloud-gate" aria-hidden>
         <Image
-          src={`${CLOUD_BASE}/innerve-cloud-soft.webp`}
+          src={`${CLOUDS}/cloud-veil.webp`}
           alt=""
-          width={1500}
-          height={852}
-          sizes="70vw"
+          loading="eager"
+          width={2400}
+          height={300}
+          sizes="115vw"
+          className="gate-veil"
         />
-      </motion.div>
-      <motion.div
-        className="cloud-gate-wing cloud-gate-right"
-        style={{ x: rightX, scale: swell }}
-      >
-        <Image
-          src={`${CLOUD_BASE}/innerve-cloud-soft.webp`}
-          alt=""
-          width={1500}
-          height={852}
-          sizes="70vw"
-        />
-      </motion.div>
-      <div className="cloud-gate-bank">
-        {BANK.map((cloud) => (
+        <motion.div
+          className="gate-wing gate-wing-left"
+          style={{ x: leftX, y: lift }}
+        >
           <Image
-            key={cloud.left}
-            src={`${CLOUD_BASE}/innerve-cloud-soft.webp`}
+            src={`${CLOUDS}/cloud-sunlit-b.webp`}
             alt=""
+            loading="eager"
+            width={1458}
+            height={778}
+            sizes="70vw"
+          />
+        </motion.div>
+        <div className="gate-core">
+          <Image
+            src={`${CLOUDS}/cloud-sunlit-a.webp`}
+            alt=""
+            loading="eager"
             width={1500}
             height={852}
-            sizes="55vw"
-            style={{ left: cloud.left, top: cloud.top, width: cloud.width }}
-            className={cloud.flip ? "-scale-x-100" : undefined}
+            sizes="60vw"
           />
-        ))}
+        </div>
+        <motion.div
+          className="gate-wing gate-wing-right"
+          style={{ x: rightX, y: lift }}
+        >
+          <Image
+            src={`${CLOUDS}/cloud-sunlit-a.webp`}
+            alt=""
+            loading="eager"
+            width={1500}
+            height={852}
+            sizes="70vw"
+          />
+        </motion.div>
       </div>
-    </div>
+    </MotionConfig>
   );
 }
