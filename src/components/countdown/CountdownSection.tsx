@@ -30,6 +30,7 @@ export default function CountdownSection() {
       aria-labelledby="countdown-title"
       className="countdown"
     >
+      <div aria-hidden className="grain-overlay" />
       <CloudGate />
       <div className="countdown-inner">
         <p className="mission-tag">

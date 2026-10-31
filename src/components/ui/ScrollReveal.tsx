@@ -3,17 +3,17 @@
 import { MotionConfig, motion } from "motion/react";
 import type { ReactNode } from "react";
 
-type VaultRevealProps = {
+type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
 };
 
-export default function VaultReveal({
+export default function ScrollReveal({
   children,
   className,
   delay = 0,
-}: VaultRevealProps) {
+}: ScrollRevealProps) {
   return (
     <MotionConfig reducedMotion="user">
       <motion.div

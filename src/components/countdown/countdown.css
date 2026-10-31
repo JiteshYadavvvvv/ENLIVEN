@@ -6,15 +6,8 @@
   position: relative;
   z-index: 10;
   overflow-x: clip;
-  background: linear-gradient(
-    180deg,
-    var(--sky-cloud) 0%,
-    #ffd9bf 16%,
-    #ff9d84 38%,
-    #c9518f 64%,
-    #3b2066 88%,
-    #1c1338 100%
-  );
+  --sunset-ground: #f2826e;
+  background: var(--sunset-ground);
   color: var(--board-ink);
 }
 
@@ -29,7 +22,7 @@
   max-width: 72rem;
   margin-inline: auto;
   padding: clamp(7rem, 17vh, 11rem) clamp(1rem, 4vw, 3rem)
-    clamp(5rem, 14vh, 9rem);
+    calc(clamp(4.5rem, 12vh, 8rem) + var(--prize-cut));
 }
 
 .cloud-gate {
@@ -121,7 +114,7 @@
 
 .mission-board {
   width: min(100%, 62rem);
-  margin-top: clamp(0.5rem, 2vw, 1.5rem);
+  margin-top: clamp(1rem, 3.2vw, 2.75rem);
   background: linear-gradient(180deg, #2a1f55 0%, var(--board-deep) 100%);
   border: 4px solid var(--board-frame);
   border-radius: 1.1rem;

@@ -20,10 +20,7 @@ import {
 
 import { usePrefersReducedMotion } from "@/utils/useReducedMotion";
 
-const HINGE_ANGLES = [75, 105];
-const BOLT_ANGLES = Array.from({ length: 24 }, (_, index) => index * 15).filter(
-  (angle) => !HINGE_ANGLES.includes(angle),
-);
+const BOLT_ANGLES = Array.from({ length: 24 }, (_, index) => index * 15);
 const DIAL_TICKS = Array.from({ length: 60 }, (_, index) => index);
 const DIAL_NUMBERS = Array.from({ length: 12 }, (_, index) => index * 5);
 const SPOKE_ANGLES = [0, 120, 240];
@@ -221,27 +218,6 @@ export default function VaultDoor() {
             className="vault-bevel"
           />
           <circle cx="200" cy="200" r="182" className="vault-seam" />
-
-          {[134, 226].map((top) => (
-            <g key={top}>
-              <rect
-                x="362"
-                y={top}
-                width="36"
-                height="40"
-                rx="6"
-                className="vault-hinge"
-              />
-              <rect
-                x="388"
-                y={top + 4}
-                width="6"
-                height="32"
-                rx="3"
-                className="vault-hinge-pin"
-              />
-            </g>
-          ))}
 
           {BOLT_ANGLES.map((angle) => (
             <g key={angle} transform={`rotate(${angle} 200 200)`}>

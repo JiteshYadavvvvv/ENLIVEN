@@ -1,9 +1,8 @@
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import { PRIZES } from "@/content/prizes";
-
 import PrizeAmount from "./PrizeAmount";
 import PrizeLadder, { type PodiumTier } from "./PrizeLadder";
 import VaultDoor from "./VaultDoor";
-import VaultReveal from "./VaultReveal";
 import "./prizes.css";
 
 const PODIUM: PodiumTier[] = [
@@ -26,20 +25,21 @@ export default function PrizesSection() {
   return (
     <section id="prizes" aria-labelledby="prizes-title" className="prize-vault">
       <div className="prize-vault-floor">
+        <div aria-hidden className="grain-overlay" />
         <div className="prize-vault-inner">
-          <VaultReveal className="prize-heading">
+          <ScrollReveal className="prize-heading">
             <h2 id="prizes-title" className="prize-title">
               The prize <span>vault</span>
             </h2>
-          </VaultReveal>
+          </ScrollReveal>
 
-          <VaultReveal className="vault-stage" delay={0.1}>
+          <ScrollReveal className="vault-stage" delay={0.1}>
             <VaultDoor />
             <div className="vault-readout">
               <span className="vault-readout-label">Total prize pool</span>
               <PrizeAmount amount={prizePoolTotal()} />
             </div>
-          </VaultReveal>
+          </ScrollReveal>
 
           <PrizeLadder tiers={PODIUM} />
 

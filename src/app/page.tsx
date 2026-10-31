@@ -13,6 +13,7 @@ import MetroTrack from "@/components/environment/MetroTrack";
 import { SceneImage } from "@/components/environment/SceneLayer";
 import Navbar from "@/components/layout/Navbar";
 import PrizesSection from "@/components/prizes/PrizesSection";
+import TracksSection from "@/components/tracks/TracksSection";
 
 const ENTER_HREF = "/";
 
@@ -61,6 +62,7 @@ export default function Home() {
 
       <CountdownSection />
       <PrizesSection />
+      <TracksSection />
     </main>
   );
 }
