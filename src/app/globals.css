@@ -751,23 +751,31 @@
   }
 
   .metro-track {
+    --crop: 0;
+    --track-start: calc(
+      var(--view-left) +
+      50cqw +
+      min(var(--a) * var(--bs), 0.19cqw) *
+      141
+    );
     position: absolute;
     inset: 0;
     z-index: var(--layer-transit);
     perspective: calc(1400 * var(--a));
-    perspective-origin: calc(835 * var(--a)) calc(530 * var(--a));
-    clip-path: inset(0 0 0 calc(690 * var(--a)));
+    perspective-origin: calc((835 - var(--crop)) * var(--a))
+      calc(530 * var(--a));
+    clip-path: inset(0 0 0 var(--track-start));
     pointer-events: none;
   }
 
   .metro-train {
     position: absolute;
-    left: calc(1206 * var(--a));
-    top: calc(539 * var(--a));
-    width: calc(394 * var(--a));
+    left: calc((1265.3 - var(--crop)) * var(--a));
+    top: calc(556 * var(--a));
+    width: calc(334.7 * var(--a));
     transform-origin: 100% 100%;
-    rotate: y -76.31deg;
-    animation: metro-track 16s linear -2s infinite;
+    rotate: y -74.99deg;
+    animation: metro-run 17s linear infinite;
   }
 
   .metro-train img {
@@ -775,25 +783,26 @@
     height: auto;
   }
 
-  @keyframes metro-track {
+  @keyframes metro-run {
     0% {
-      translate: calc(var(--a) * -1656.9) 0 calc(var(--a) * -6801.2);
+      translate: calc(var(--a) * -1483.3) 0 calc(var(--a) * -5531.7);
     }
-    16% {
-      translate: calc(var(--a) * -946.8) 0 calc(var(--a) * -3886.4);
+    8.8% {
+      translate: calc(var(--a) * -828.8) 0 calc(var(--a) * -3090.9);
     }
-    31% {
-      translate: calc(var(--a) * -473.4) 0 calc(var(--a) * -1943.2);
-    }
-    41% {
-      translate: calc(var(--a) * -236.7) 0 calc(var(--a) * -971.6);
-    }
-    53% {
-      translate: calc(var(--a) * 0) 0 calc(var(--a) * 0);
-    }
-    61%,
+    73.5%,
     100% {
-      translate: calc(var(--a) * 123.1) 0 calc(var(--a) * 505.2);
+      translate: calc(var(--a) * 114) 0 calc(var(--a) * 425);
+    }
+  }
+
+  @keyframes metro-run-portrait {
+    0% {
+      translate: calc(var(--a) * -1579.9) 0 calc(var(--a) * -5892);
+    }
+    64%,
+    100% {
+      translate: calc(var(--a) * -893.6) 0 calc(var(--a) * -3332.4);
     }
   }
 
@@ -863,7 +872,12 @@
     }
 
     .metro-track {
-      display: none;
+      --crop: 150;
+      --track-start: calc(540 * var(--a));
+    }
+
+    .metro-train {
+      animation-name: metro-run-portrait;
     }
 
     .bus-flight {
