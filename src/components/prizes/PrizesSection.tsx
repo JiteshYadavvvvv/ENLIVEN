@@ -1,11 +1,26 @@
-import { EVENT } from "@/content/event";
 import { PRIZES } from "@/content/prizes";
 
 import PrizeAmount from "./PrizeAmount";
-import PrizeLadder from "./PrizeLadder";
+import PrizeLadder, { type PodiumTier } from "./PrizeLadder";
 import VaultDoor from "./VaultDoor";
 import VaultReveal from "./VaultReveal";
 import "./prizes.css";
+
+const PODIUM: PodiumTier[] = [
+  { rank: 1, title: "First place", metal: "gold", prize: PRIZES.first },
+  { rank: 2, title: "Second place", metal: "silver", prize: PRIZES.second },
+  { rank: 3, title: "Third place", metal: "bronze", prize: PRIZES.third },
+];
+
+function prizePoolTotal() {
+  const placeAmounts = PODIUM.map((tier) => tier.prize.amount);
+  if (placeAmounts.includes(null)) return null;
+  const awardAmounts = PRIZES.specialAwards.map((award) => award.amount);
+  return [...placeAmounts, ...awardAmounts].reduce<number>(
+    (total, amount) => total + (amount ?? 0),
+    0,
+  );
+}
 
 export default function PrizesSection() {
   return (
@@ -13,29 +28,27 @@ export default function PrizesSection() {
       <div className="prize-vault-floor">
         <div className="prize-vault-inner">
           <VaultReveal className="prize-heading">
-            <p className="prize-kicker">{EVENT.edition} · Rewards</p>
             <h2 id="prizes-title" className="prize-title">
               The prize <span>vault</span>
             </h2>
-            <p className="prize-lede">{PRIZES.note}</p>
           </VaultReveal>
 
           <VaultReveal className="vault-stage" delay={0.1}>
             <VaultDoor />
             <div className="vault-readout">
               <span className="vault-readout-label">Total prize pool</span>
-              <PrizeAmount amount={PRIZES.pool} />
+              <PrizeAmount amount={prizePoolTotal()} />
             </div>
           </VaultReveal>
 
-          <PrizeLadder tiers={PRIZES.podium} />
+          <PrizeLadder tiers={PODIUM} />
 
           {PRIZES.specialAwards.length > 0 && (
             <ul className="vault-honours">
               {PRIZES.specialAwards.map((award) => (
                 <li key={award.title}>
                   <h3>{award.title}</h3>
-                  <p>{award.description}</p>
+                  {award.description && <p>{award.description}</p>}
                   <PrizeAmount amount={award.amount} />
                 </li>
               ))}

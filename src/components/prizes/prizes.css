@@ -56,27 +56,7 @@
   text-align: center;
 }
 
-.prize-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8em;
-  font-family: var(--font-text);
-  font-size: clamp(0.75rem, 1vw, 0.85rem);
-  font-weight: 600;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--vault-gold);
-}
-
-.prize-kicker::before {
-  content: "";
-  width: 2.4rem;
-  height: 2px;
-  background: currentColor;
-}
-
 .prize-title {
-  margin-top: 0.9rem;
   font-family: var(--font-display-gta);
   font-size: clamp(2.9rem, 12vw, 4.6rem);
   line-height: 0.88;
@@ -93,28 +73,51 @@
   color: var(--vault-gold);
 }
 
-.prize-lede {
-  max-width: 30rem;
-  margin: 1.7rem auto 0;
-  font-family: var(--font-text);
-  font-size: clamp(0.98rem, 1.25vw, 1.12rem);
-  line-height: 1.55;
-  text-wrap: balance;
-  color: rgb(255 243 226 / 0.74);
-}
-
 .vault-stage {
   grid-area: vault;
   position: relative;
   width: min(72vw, 28rem);
 }
 
+.vault-mount {
+  position: relative;
+}
+
+.vault-mount::before {
+  content: "";
+  position: absolute;
+  inset: 8% 2% -6%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(0 0 0 / 0.6), transparent);
+}
+
 .vault-door {
+  position: relative;
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 1.6rem 2.2rem rgb(0 0 0 / 0.55));
+  touch-action: pan-y pinch-zoom;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.vault-bevel {
+  fill: none;
+  stroke: rgb(255 230 166 / 0.22);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.vault-hinge {
+  fill: #3a2650;
+  stroke: var(--vault-gold-deep);
+  stroke-width: 2.5;
+}
+
+.vault-hinge-pin {
+  fill: var(--vault-gold);
 }
 
 .vault-frame {
@@ -152,7 +155,21 @@
 
 .vault-tick {
   stroke: #3b220a;
-  stroke-width: 2;
+  stroke-width: 1.6;
+}
+
+.vault-numeral {
+  font-family: var(--font-text);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: #3b220a;
+}
+
+.vault-index {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
 }
 
 .vault-index {
@@ -163,6 +180,12 @@
   fill: #120a1c;
   stroke: var(--vault-gold-deep);
   stroke-width: 3;
+}
+
+.vault-core-bevel {
+  fill: none;
+  stroke: rgb(255 243 226 / 0.06);
+  stroke-width: 2;
 }
 
 .vault-spoke,
@@ -178,8 +201,76 @@
   stroke-width: 2;
 }
 
+.vault-spoke-groove {
+  stroke: rgb(255 236 186 / 0.55);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.vault-socket,
+.vault-hub-bolt {
+  fill: var(--vault-gold-deep);
+}
+
+.vault-hub-ring {
+  fill: none;
+  stroke: var(--vault-bolt-edge);
+  stroke-width: 2;
+}
+
 .vault-hub-cap {
   fill: var(--color-magenta);
+}
+
+.vault-control {
+  cursor: grab;
+  outline: none;
+}
+
+.vault-control[data-turning="true"] {
+  cursor: grabbing;
+}
+
+.vault-dial-grip {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 46;
+  pointer-events: stroke;
+}
+
+.vault-handle-grip {
+  fill: transparent;
+}
+
+.vault-focus {
+  fill: none;
+  stroke: var(--color-cyan);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 7;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.vault-control:focus-visible .vault-focus {
+  opacity: 1;
+}
+
+.vault-dial,
+.vault-grip {
+  transition:
+    fill 0.2s ease,
+    stroke 0.2s ease;
+}
+
+.vault-control:hover .vault-dial,
+.vault-control[data-turning="true"] .vault-dial {
+  stroke: #ffd168;
+}
+
+.vault-control:hover .vault-grip,
+.vault-control[data-turning="true"] .vault-grip {
+  fill: #fff4d2;
 }
 
 .vault-readout {
@@ -190,21 +281,43 @@
   gap: 0.3rem;
   width: min(84%, 21rem);
   margin: -11% auto 0;
-  padding: 0.85rem 1.2rem 0.95rem;
-  background: var(--vault-steel);
-  border: 2px solid var(--vault-gold);
-  border-top: 5px solid var(--color-magenta);
-  box-shadow: 0 0.55rem 0 #07040c;
+  padding: 0.8rem 2.4rem 0.9rem;
+  border-radius: 0.35rem;
+  background: #f2b53a;
+  color: #2a1606;
+  box-shadow:
+    inset 0 2px 0 rgb(255 240 200 / 0.65),
+    inset 0 -3px 0 rgb(120 70 10 / 0.45),
+    0 0.55rem 0 #07040c;
   text-align: center;
+}
+
+.vault-readout::before,
+.vault-readout::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  translate: 0 -50%;
+  background: #8a5810;
+  box-shadow: inset 0 1px 0 rgb(255 230 170 / 0.5);
+}
+
+.vault-readout::before {
+  left: 0.85rem;
+}
+
+.vault-readout::after {
+  right: 0.85rem;
 }
 
 .vault-readout-label {
   font-family: var(--font-text);
-  font-size: 0.72rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--vault-gold);
+  letter-spacing: 0.04em;
 }
 
 .prize-amount {
@@ -234,15 +347,27 @@
   flex-basis: 100%;
   margin-top: 0.35rem;
   font-family: var(--font-text);
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  color: rgb(255 243 226 / 0.6);
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: rgb(255 243 226 / 0.62);
+}
+
+.prize-currency {
+  margin-right: 0.06em;
+  font-family: var(--font-text), system-ui, sans-serif;
+  font-size: 0.8em;
+  font-weight: 700;
 }
 
 .vault-readout .prize-amount {
   font-size: clamp(1.9rem, 3vw, 2.6rem);
-  color: var(--vault-ink);
+  color: #1a0e06;
+}
+
+.vault-readout .prize-amount small {
+  color: rgb(42 22 6 / 0.72);
 }
 
 .prize-ladder {
@@ -310,6 +435,7 @@
   line-height: 0.8;
   color: transparent;
   -webkit-text-stroke: 2px var(--tier);
+  transition: color 0.35s ease;
 }
 
 .prize-tier[data-metal="gold"] {
@@ -333,6 +459,14 @@
 
 .prize-tier[data-metal="gold"] .prize-tier-title {
   font-size: clamp(1.5rem, 5.6vw, 2.4rem);
+}
+
+.prize-tier-note {
+  margin-top: 0.45rem;
+  font-family: var(--font-text);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: rgb(255 243 226 / 0.74);
 }
 
 .prize-perks {
@@ -411,10 +545,6 @@
     font-size: clamp(3.4rem, 5.6vw, 6.6rem);
   }
 
-  .prize-lede {
-    margin-inline: 0;
-  }
-
   .vault-stage {
     align-self: center;
     justify-self: center;
@@ -451,6 +581,10 @@
   }
 }
 
+.prize-tier:hover .prize-rank {
+  color: var(--tier);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .prize-tier,
   .prize-tier::before {
@@ -459,5 +593,12 @@
 
   .prize-tier:hover {
     translate: none;
+  }
+
+  .vault-focus,
+  .vault-dial,
+  .vault-grip,
+  .prize-rank {
+    transition: none;
   }
 }

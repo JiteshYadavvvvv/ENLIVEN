@@ -2,13 +2,18 @@
 
 import { MotionConfig, motion } from "motion/react";
 
-import type { PrizeTier } from "@/content/prizes";
+import type { PlacePrize } from "@/content/prizes";
 
 import PrizeAmount from "./PrizeAmount";
 
-const TIER_METALS = ["gold", "silver", "bronze"];
+export type PodiumTier = {
+  rank: number;
+  title: string;
+  metal: "gold" | "silver" | "bronze";
+  prize: PlacePrize;
+};
 
-export default function PrizeLadder({ tiers }: { tiers: PrizeTier[] }) {
+export default function PrizeLadder({ tiers }: { tiers: PodiumTier[] }) {
   return (
     <MotionConfig reducedMotion="user">
       <ol className="prize-ladder">
@@ -16,7 +21,7 @@ export default function PrizeLadder({ tiers }: { tiers: PrizeTier[] }) {
           <motion.li
             key={tier.rank}
             className="prize-tier"
-            data-metal={TIER_METALS[index] ?? "bronze"}
+            data-metal={tier.metal}
             initial={{ opacity: 0, x: 56 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.6 }}
@@ -31,15 +36,18 @@ export default function PrizeLadder({ tiers }: { tiers: PrizeTier[] }) {
             </span>
             <div className="prize-tier-body">
               <h3 className="prize-tier-title">{tier.title}</h3>
-              {tier.perks.length > 0 && (
+              {tier.prize.description && (
+                <p className="prize-tier-note">{tier.prize.description}</p>
+              )}
+              {tier.prize.perks.length > 0 && (
                 <ul className="prize-perks">
-                  {tier.perks.map((perk) => (
+                  {tier.prize.perks.map((perk) => (
                     <li key={perk}>{perk}</li>
                   ))}
                 </ul>
               )}
             </div>
-            <PrizeAmount amount={tier.amount} />
+            <PrizeAmount amount={tier.prize.amount} />
           </motion.li>
         ))}
       </ol>

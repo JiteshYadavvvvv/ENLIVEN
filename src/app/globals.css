@@ -68,6 +68,12 @@
 
   html {
     -webkit-text-size-adjust: 100%;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
   }
 
   body {
@@ -265,6 +271,7 @@
     width: min(86vw, 22rem);
     overflow-y: auto;
     overscroll-behavior: contain;
+    scrollbar-width: none;
     background: var(--color-midnight);
     border-left: 3px solid var(--color-magenta);
     box-shadow: -1.5rem 0 3rem

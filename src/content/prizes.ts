@@ -1,28 +1,37 @@
-export type PrizeTier = {
-  rank: number;
-  title: string;
-  amount: string | null;
+export type PlacePrize = {
+  amount: number | null;
+  description: string | null;
   perks: string[];
 };
 
 export type SpecialAward = {
   title: string;
-  amount: string | null;
-  description: string;
+  amount: number | null;
+  description: string | null;
 };
 
-export const PRIZES: {
-  note: string;
-  pool: string | null;
-  podium: PrizeTier[];
+export type PrizeVault = {
+  first: PlacePrize;
+  second: PlacePrize;
+  third: PlacePrize;
   specialAwards: SpecialAward[];
-} = {
-  note: "Every reward stays locked in the vault until the official prize announcement.",
-  pool: null,
-  podium: [
-    { rank: 1, title: "First place", amount: null, perks: [] },
-    { rank: 2, title: "Second place", amount: null, perks: [] },
-    { rank: 3, title: "Third place", amount: null, perks: [] },
-  ],
+};
+
+export const PRIZES: PrizeVault = {
+  first: {
+    amount: null,
+    description: null,
+    perks: [],
+  },
+  second: {
+    amount: null,
+    description: null,
+    perks: [],
+  },
+  third: {
+    amount: null,
+    description: null,
+    perks: [],
+  },
   specialAwards: [],
 };
