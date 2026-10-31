@@ -112,6 +112,7 @@
   line-height: 0.95;
   text-align: center;
   text-transform: uppercase;
+  text-wrap: balance;
   color: var(--board-ink);
   -webkit-text-stroke: 0.035em var(--board-frame);
   paint-order: stroke fill;
@@ -383,11 +384,38 @@
   );
 }
 
-@media (max-width: 640px) {
+@media (orientation: portrait) and (min-width: 641px) and (max-width: 1023px) {
+  .countdown-title {
+    font-size: 8.4vw;
+  }
+
   .board-units {
-    --flap-size: clamp(2.6rem, 14vw, 3.6rem);
-    grid-template-columns: repeat(2, auto);
-    row-gap: 1.4rem;
+    --flap-size: 8.6vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .countdown-title {
+    font-size: clamp(1.9rem, 10.4vw, 2.6rem);
+  }
+
+  .board-units {
+    --flap-size: clamp(1.6rem, 8.3vw, 2.6rem);
+    gap: clamp(0.6rem, 3.4vw, 1rem);
+    padding-inline: clamp(0.6rem, 3vw, 1rem);
+  }
+
+  .board-unit {
+    gap: 0.4rem;
+  }
+
+  .flap::before {
+    display: none;
+  }
+
+  .board-unit-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.2em;
   }
 
   .board-manifest {

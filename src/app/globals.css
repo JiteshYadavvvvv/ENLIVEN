@@ -217,6 +217,127 @@
 }
 
 @layer components {
+  .nav-icon-button {
+    display: inline-grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.6rem;
+    color: var(--color-paper);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      scale 0.15s ease;
+  }
+
+  .nav-icon-button:hover {
+    color: var(--color-cyan);
+    background: color-mix(in srgb, var(--color-paper) 12%, transparent);
+  }
+
+  .nav-icon-button:active {
+    scale: 0.9;
+  }
+
+  .nav-icon-button:focus-visible {
+    outline: 2px solid var(--color-cyan);
+    outline-offset: 2px;
+  }
+
+  .mission-menu {
+    position: fixed;
+    inset: 0;
+    z-index: var(--layer-hud);
+  }
+
+  .mission-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--color-void) 64%, transparent);
+    backdrop-filter: blur(6px);
+  }
+
+  .mission-menu-panel {
+    position: absolute;
+    inset: 0 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: min(86vw, 22rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--color-midnight);
+    border-left: 3px solid var(--color-magenta);
+    box-shadow: -1.5rem 0 3rem
+      color-mix(in srgb, var(--color-void) 55%, transparent);
+  }
+
+  .mission-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.75rem 0.75rem 0.75rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mission-menu-links {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1.25rem;
+  }
+
+  .mission-menu-links a {
+    display: flex;
+    align-items: baseline;
+    gap: 0.9rem;
+    min-height: 3.5rem;
+    padding: 0.85rem 0.25rem 0.6rem;
+    border-bottom: 1px solid var(--color-border);
+    font-family: var(--font-display-gta);
+    font-size: clamp(1.7rem, 8vw, 2.1rem);
+    letter-spacing: var(--tracking-display);
+    text-transform: uppercase;
+    color: var(--color-paper);
+    transition:
+      color 0.2s ease,
+      translate 0.2s ease;
+  }
+
+  .mission-menu-links a:hover,
+  .mission-menu-links a:focus-visible {
+    color: var(--color-cyan);
+    translate: 0.35rem 0;
+    outline: none;
+  }
+
+  .mission-menu-index {
+    font-family: var(--font-text);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    color: var(--color-magenta);
+  }
+
+  .mission-menu-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    padding: 1.5rem 1.25rem max(1.5rem, env(safe-area-inset-bottom));
+  }
+
+  @media (min-width: 48rem) {
+    .mission-menu {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-icon-button,
+    .mission-menu-links a {
+      transition: none;
+    }
+  }
+
   .hud-label {
     display: inline-flex;
     align-items: center;
