@@ -49,6 +49,11 @@
   --layer-content: 10;
   --layer-character: 15;
   --layer-hud: 20;
+  --extrude-magenta:
+    0.006em 0.012em 0 #e8489f, 0.012em 0.024em 0 #d23a92,
+    0.018em 0.036em 0 #b82d82, 0.024em 0.048em 0 #9c2172,
+    0.03em 0.06em 0 #801863, 0.036em 0.072em 0 #661254,
+    0.042em 0.084em 0 #2a0f2e, 0.05em 0.11em 0.14em rgb(20 6 30 / 0.5);
 }
 
 @layer base {
@@ -771,15 +776,7 @@
     color: #fff3e2;
     -webkit-text-stroke: 0.035em #2a0f2e;
     paint-order: stroke fill;
-    text-shadow:
-      0.006em 0.012em 0 #e8489f,
-      0.012em 0.024em 0 #d23a92,
-      0.018em 0.036em 0 #b82d82,
-      0.024em 0.048em 0 #9c2172,
-      0.03em 0.06em 0 #801863,
-      0.036em 0.072em 0 #661254,
-      0.042em 0.084em 0 #2a0f2e,
-      0.05em 0.11em 0.14em rgb(20 6 30 / 0.5);
+    text-shadow: var(--extrude-magenta);
   }
 
   .enter-cta {

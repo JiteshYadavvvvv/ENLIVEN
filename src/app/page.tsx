@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 
+import CountdownSection from "@/components/countdown/CountdownSection";
 import EnvironmentBackground from "@/components/environment/EnvironmentBackground";
 import EnvironmentScene from "@/components/environment/EnvironmentScene";
 import HeroBranding from "@/components/environment/HeroBranding";
@@ -51,6 +52,8 @@ export default function Home() {
         />
         */}
       </EnvironmentScene>
+
+      <CountdownSection />
     </main>
   );
 }
