@@ -12,6 +12,7 @@ import MetroTrack from "@/components/environment/MetroTrack";
 // import Messenger from "@/components/environment/Messenger";
 import { SceneImage } from "@/components/environment/SceneLayer";
 import Navbar from "@/components/layout/Navbar";
+import PrizesSection from "@/components/prizes/PrizesSection";
 
 const ENTER_HREF = "/";
 
@@ -59,6 +60,7 @@ export default function Home() {
       </EnvironmentScene>
 
       <CountdownSection />
+      <PrizesSection />
     </main>
   );
 }
