@@ -42,11 +42,12 @@ export default function PrizesSection() {
             </div>
           </ScrollReveal>
 
-          <PrizeLadder tiers={PODIUM} />
-
-          {PRIZES.sparkAwards.length > 0 && (
-            <SparkAwards awards={PRIZES.sparkAwards} />
-          )}
+          <div className="prize-standings">
+            <PrizeLadder tiers={PODIUM} />
+            {PRIZES.sparkAwards.length > 0 && (
+              <SparkAwards awards={PRIZES.sparkAwards} />
+            )}
+          </div>
         </div>
       </div>
     </section>

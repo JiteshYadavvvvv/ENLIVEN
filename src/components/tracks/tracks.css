@@ -1,10 +1,25 @@
 .track-arena {
   --arena-paper: #f5ecdf;
   --arena-ink: #1b0f24;
+  --paper-edge: clamp(0.6rem, 1vw, 0.9rem);
   position: relative;
+  z-index: 12;
+  margin-top: calc(var(--tracks-cut) * -1);
   overflow: hidden;
-  background: var(--arena-paper);
+  clip-path: polygon(0 0, 100% var(--tracks-cut), 100% 100%, 0 100%);
+  background: var(--color-magenta);
   color: var(--arena-ink);
+}
+
+.track-paper {
+  position: relative;
+  clip-path: polygon(
+    0 var(--paper-edge),
+    100% calc(var(--tracks-cut) + var(--paper-edge)),
+    100% 100%,
+    0 100%
+  );
+  background: var(--arena-paper);
 }
 
 .track-arena-inner {
@@ -12,8 +27,9 @@
   width: 100%;
   max-width: 100rem;
   margin-inline: auto;
-  padding: clamp(4rem, 10vh, 7.5rem) clamp(1rem, 5vw, 4rem)
-    clamp(5rem, 12vh, 9rem);
+  padding: calc(var(--tracks-cut) + clamp(3rem, 8vh, 6rem))
+    clamp(1rem, 5vw, 4rem)
+    calc(clamp(5rem, 12vh, 9rem) + var(--mission-step) * 3);
 }
 
 .track-mosaic {
