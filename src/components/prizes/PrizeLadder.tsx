@@ -2,15 +2,14 @@
 
 import { MotionConfig, motion } from "motion/react";
 
-import type { PlacePrize } from "@/content/prizes";
+import type { PrizeCategory } from "@/content/prizes";
 
 import PrizeAmount from "./PrizeAmount";
 
 export type PodiumTier = {
   rank: number;
-  title: string;
   metal: "gold" | "silver" | "bronze";
-  prize: PlacePrize;
+  prize: PrizeCategory;
 };
 
 export default function PrizeLadder({ tiers }: { tiers: PodiumTier[] }) {
@@ -31,11 +30,17 @@ export default function PrizeLadder({ tiers }: { tiers: PodiumTier[] }) {
               ease: [0.22, 1, 0.36, 1],
             }}
           >
-            <span className="prize-rank" aria-hidden>
-              {String(tier.rank).padStart(2, "0")}
-            </span>
+            <svg viewBox="0 0 64 76" className="prize-medal" aria-hidden="true">
+              <path d="M16 2H30L36 26H22Z" className="prize-medal-ribbon" />
+              <path d="M34 2H48L42 26H28Z" className="prize-medal-ribbon" />
+              <circle cx="32" cy="48" r="25" className="prize-medal-disc" />
+              <circle cx="32" cy="48" r="18" className="prize-medal-rim" />
+              <text x="32" y="49" className="prize-medal-rank">
+                {tier.rank}
+              </text>
+            </svg>
             <div className="prize-tier-body">
-              <h3 className="prize-tier-title">{tier.title}</h3>
+              <h3 className="prize-tier-title">{tier.prize.title}</h3>
               {tier.prize.description && (
                 <p className="prize-tier-note">{tier.prize.description}</p>
               )}

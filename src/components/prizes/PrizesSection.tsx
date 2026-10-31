@@ -2,23 +2,24 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import { PRIZES } from "@/content/prizes";
 import PrizeAmount from "./PrizeAmount";
 import PrizeLadder, { type PodiumTier } from "./PrizeLadder";
+import SparkAwards from "./SparkAwards";
 import VaultDoor from "./VaultDoor";
 import "./prizes.css";
 
-const PODIUM: PodiumTier[] = [
-  { rank: 1, title: "First place", metal: "gold", prize: PRIZES.first },
-  { rank: 2, title: "Second place", metal: "silver", prize: PRIZES.second },
-  { rank: 3, title: "Third place", metal: "bronze", prize: PRIZES.third },
-];
+const METALS: PodiumTier["metal"][] = ["gold", "silver", "bronze"];
+
+const PODIUM: PodiumTier[] = PRIZES.podium.map((prize, index) => ({
+  rank: index + 1,
+  metal: METALS[index],
+  prize,
+}));
 
 function prizePoolTotal() {
-  const placeAmounts = PODIUM.map((tier) => tier.prize.amount);
-  if (placeAmounts.includes(null)) return null;
-  const awardAmounts = PRIZES.specialAwards.map((award) => award.amount);
-  return [...placeAmounts, ...awardAmounts].reduce<number>(
-    (total, amount) => total + (amount ?? 0),
-    0,
+  const amounts = [...PRIZES.podium, ...PRIZES.sparkAwards].map(
+    (category) => category.amount,
   );
+  if (amounts.includes(null)) return null;
+  return amounts.reduce<number>((total, amount) => total + (amount ?? 0), 0);
 }
 
 export default function PrizesSection() {
@@ -43,16 +44,8 @@ export default function PrizesSection() {
 
           <PrizeLadder tiers={PODIUM} />
 
-          {PRIZES.specialAwards.length > 0 && (
-            <ul className="vault-honours">
-              {PRIZES.specialAwards.map((award) => (
-                <li key={award.title}>
-                  <h3>{award.title}</h3>
-                  {award.description && <p>{award.description}</p>}
-                  <PrizeAmount amount={award.amount} />
-                </li>
-              ))}
-            </ul>
+          {PRIZES.sparkAwards.length > 0 && (
+            <SparkAwards awards={PRIZES.sparkAwards} />
           )}
         </div>
       </div>

@@ -1,47 +1,107 @@
-export type TrackAccent = "magenta" | "cyan" | "sunset" | "violet";
+export type TrackArt =
+  | "health"
+  | "arvr"
+  | "edutech"
+  | "gamedev"
+  | "fintech"
+  | "cybersec"
+  | "blockchain"
+  | "logistics"
+  | "defence";
 
-export type TrackEmblemShape = "circuit" | "orbit" | "shield" | "spark";
+export type TrackPaint =
+  | "cyan"
+  | "violet"
+  | "sunset"
+  | "magenta"
+  | "gold"
+  | "midnight"
+  | "coral"
+  | "cobalt"
+  | "olive";
+
+export type TrackPanel = "feature" | "tall" | "wide" | "block" | "slim";
 
 export type Track = {
   id: string;
-  name: string | null;
-  summary: string | null;
-  focus: string[];
-  accent: TrackAccent;
-  emblem: TrackEmblemShape;
+  name: string;
+  description: string | null;
+  art: TrackArt;
+  paint: TrackPaint;
+  panel: TrackPanel;
 };
 
 export const TRACKS: Track[] = [
   {
-    id: "track-placeholder-1",
-    name: null,
-    summary: null,
-    focus: [],
-    accent: "magenta",
-    emblem: "circuit",
+    id: "health",
+    name: "Health",
+    description: null,
+    art: "health",
+    paint: "cyan",
+    panel: "feature",
   },
   {
-    id: "track-placeholder-2",
-    name: null,
-    summary: null,
-    focus: [],
-    accent: "cyan",
-    emblem: "orbit",
+    id: "ar-vr",
+    name: "AR/VR",
+    description: null,
+    art: "arvr",
+    paint: "violet",
+    panel: "tall",
   },
   {
-    id: "track-placeholder-3",
-    name: null,
-    summary: null,
-    focus: [],
-    accent: "sunset",
-    emblem: "shield",
+    id: "edutech",
+    name: "EduTech",
+    description: null,
+    art: "edutech",
+    paint: "sunset",
+    panel: "tall",
   },
   {
-    id: "track-placeholder-4",
-    name: null,
-    summary: null,
-    focus: [],
-    accent: "violet",
-    emblem: "spark",
+    id: "gamedev",
+    name: "GameDev",
+    description: null,
+    art: "gamedev",
+    paint: "magenta",
+    panel: "wide",
+  },
+  {
+    id: "fintech",
+    name: "FinTech",
+    description: null,
+    art: "fintech",
+    paint: "gold",
+    panel: "block",
+  },
+  {
+    id: "cybersec",
+    name: "CyberSec",
+    description: null,
+    art: "cybersec",
+    paint: "midnight",
+    panel: "feature",
+  },
+  {
+    id: "blockchain",
+    name: "BlockChain",
+    description: null,
+    art: "blockchain",
+    paint: "coral",
+    panel: "tall",
+  },
+  {
+    id: "logistics",
+    name: "Logistics",
+    description: null,
+    art: "logistics",
+    paint: "cobalt",
+    panel: "feature",
+  },
+  {
+    id: "defence",
+    name: "Defence",
+    description: null,
+    art: "defence",
+    paint: "olive",
+    panel: "slim",
   },
 ];

@@ -37,7 +37,7 @@
 .prize-vault-inner {
   position: relative;
   display: grid;
-  grid-template-areas: "heading" "vault" "ladder" "honours";
+  grid-template-areas: "heading" "vault" "ladder" "sparks";
   justify-items: center;
   row-gap: clamp(2rem, 6vw, 3rem);
   width: 100%;
@@ -416,24 +416,55 @@
   --tier: var(--vault-bronze);
 }
 
-.prize-rank {
-  font-family: var(--font-display-gta);
-  font-size: clamp(2.6rem, 9vw, 3.6rem);
-  line-height: 0.8;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--tier);
-  transition: color 0.35s ease;
+.prize-medal {
+  width: clamp(2.6rem, 8vw, 3.3rem);
+  height: auto;
+  overflow: visible;
+  transition: rotate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.prize-medal-ribbon {
+  fill: var(--color-magenta);
+  stroke: #07040c;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+}
+
+.prize-medal-ribbon + .prize-medal-ribbon {
+  fill: var(--color-purple);
+}
+
+.prize-medal-disc {
+  fill: var(--tier);
+  stroke: #07040c;
+  stroke-width: 3.5;
+}
+
+.prize-medal-rim {
+  fill: none;
+  stroke: rgb(7 4 12 / 0.45);
+  stroke-width: 2;
+}
+
+.prize-medal-rank {
+  font-family: var(--font-text);
+  font-size: 22px;
+  font-weight: 800;
+  text-anchor: middle;
+  dominant-baseline: central;
+  fill: #1a0e06;
+}
+
+.prize-tier:hover .prize-medal {
+  rotate: -8deg;
 }
 
 .prize-tier[data-metal="gold"] {
   padding-block: clamp(1.1rem, 2.2vw, 1.7rem);
 }
 
-.prize-tier[data-metal="gold"] .prize-rank {
-  font-size: clamp(3.3rem, 12vw, 5rem);
-  color: var(--tier);
-  -webkit-text-stroke: 0;
-  text-shadow: 0.05em 0.05em 0 #3b220a;
+.prize-tier[data-metal="gold"] .prize-medal {
+  width: clamp(3.3rem, 10vw, 4.4rem);
 }
 
 .prize-tier-title {
@@ -477,46 +508,95 @@
   display: none;
 }
 
-.vault-honours {
-  grid-area: honours;
-  display: flex;
-  flex-wrap: wrap;
+.spark-awards {
+  grid-area: sparks;
+  display: grid;
   gap: 0.85rem;
-  width: 100%;
+  width: min(100%, 40rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.vault-honours li {
-  flex: 1 1 16rem;
-  padding: 1.1rem 1.3rem 1.2rem;
-  background: var(--vault-steel);
-  border-top: 4px solid var(--color-magenta);
+.spark-award {
+  --spark: var(--color-magenta);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 1rem;
+  padding: 1rem 1.6rem 1.1rem 1.5rem;
+  background: var(--spark);
+  color: #1b0f24;
+  clip-path: polygon(0.9rem 0, 100% 0, calc(100% - 0.9rem) 100%, 0 100%);
+  transition: translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.vault-honours h3 {
+.spark-award[data-tone="visionary"] {
+  --spark: var(--color-cyan);
+}
+
+.spark-award:hover {
+  translate: 0 -0.25rem;
+}
+
+.spark-mark {
+  grid-row: span 2;
+  width: 2.4rem;
+  height: 2.4rem;
+  fill: #fff3e2;
+  stroke: #1b0f24;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  transition: rotate 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.spark-award:hover .spark-mark {
+  rotate: 45deg;
+}
+
+.spark-award-title {
   font-family: var(--font-display-gta);
-  font-size: 1.4rem;
+  font-size: clamp(1.35rem, 4.4vw, 1.75rem);
+  line-height: 1;
   text-transform: uppercase;
 }
 
-.vault-honours .prize-amount[data-sealed] {
-  justify-content: flex-start;
-}
-
-.vault-honours p {
-  margin: 0.35rem 0 0.7rem;
+.spark-award-note {
+  margin-top: 0.35rem;
   font-family: var(--font-text);
   font-size: 0.92rem;
-  line-height: 1.5;
-  color: rgb(255 243 226 / 0.72);
+  line-height: 1.45;
+}
+
+.spark-award .prize-perks {
+  color: rgb(27 15 36 / 0.8);
+}
+
+.spark-award .prize-amount {
+  grid-column: 2;
+  justify-self: start;
+  margin-top: 0.45rem;
+  color: #1b0f24;
+}
+
+.spark-award .prize-amount[data-sealed] {
+  font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+}
+
+.spark-award .prize-amount small {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .spark-awards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (min-width: 64rem) {
   .prize-vault-inner {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-    grid-template-areas: "vault heading" "vault ladder" "honours honours";
+    grid-template-areas: "vault heading" "vault ladder" "vault sparks";
     justify-items: stretch;
     column-gap: clamp(2.5rem, 5vw, 6rem);
     row-gap: clamp(1.8rem, 3vw, 2.6rem);
@@ -538,7 +618,8 @@
     width: min(100%, 38rem);
   }
 
-  .prize-ladder {
+  .prize-ladder,
+  .spark-awards {
     align-self: start;
     width: 100%;
   }
@@ -551,14 +632,6 @@
     margin-left: 12%;
   }
 
-  .prize-rank {
-    font-size: clamp(2.8rem, 4vw, 4.2rem);
-  }
-
-  .prize-tier[data-metal="gold"] .prize-rank {
-    font-size: clamp(3.6rem, 5.4vw, 5.8rem);
-  }
-
   .prize-tier-title {
     font-size: clamp(1.4rem, 2vw, 2.1rem);
   }
@@ -568,13 +641,12 @@
   }
 }
 
-.prize-tier:hover .prize-rank {
-  color: var(--tier);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .prize-tier,
-  .prize-tier::before {
+  .prize-tier::before,
+  .prize-medal,
+  .spark-award,
+  .spark-mark {
     transition: none;
   }
 
@@ -584,8 +656,14 @@
 
   .vault-focus,
   .vault-dial,
-  .vault-grip,
-  .prize-rank {
+  .vault-grip {
     transition: none;
+  }
+
+  .prize-tier:hover .prize-medal,
+  .spark-award:hover,
+  .spark-award:hover .spark-mark {
+    rotate: none;
+    translate: none;
   }
 }
