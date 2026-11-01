@@ -41,10 +41,10 @@ const FINISH_STOP = 4;
 const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
   mob: {
     width: 400,
-    height: 1500,
-    road: "M200 -40C200 40 90 40 90 130C90 260 310 260 310 400C310 540 90 520 90 670C90 820 290 800 290 960C290 1100 100 1100 100 1260C100 1350 160 1420 220 1540",
-    exit: "M220 1540C228 1556 232 1572 232 1592V1900",
-    marks: [0.1059, 0.2896, 0.4744, 0.6602, 0.8458],
+    height: 1380,
+    road: "M200 -50C200 40 90 40 90 130C90 260 310 260 310 400C310 540 90 520 90 670C90 820 290 800 290 960C290 1100 100 1100 100 1260",
+    exit: "",
+    marks: [0.1295, 0.3456, 0.5631, 0.7816, 1],
     points: [
       [90, 130, "right"],
       [310, 400, "left"],
@@ -55,10 +55,10 @@ const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
   },
   tab: {
     width: 800,
-    height: 1460,
-    road: "M400 -40C400 60 180 40 180 140C180 280 620 260 620 410C620 560 180 530 180 680C180 820 660 800 640 920C630 990 580 1000 520 990C420 980 220 1120 220 1270C220 1370 320 1420 400 1500",
-    exit: "M400 1500C416 1516 424 1536 424 1560V1900",
-    marks: [0.1063, 0.2978, 0.4899, 0.739, 0.8946],
+    height: 1380,
+    road: "M400 -50C400 60 180 40 180 140C180 280 620 260 620 410C620 560 180 530 180 680C180 820 660 800 640 920C630 990 580 1000 520 990C420 980 220 1120 220 1270",
+    exit: "",
+    marks: [0.1211, 0.3347, 0.5489, 0.8266, 1],
     points: [
       [180, 140, "right"],
       [620, 410, "left"],
@@ -68,17 +68,17 @@ const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
     ],
   },
   desk: {
-    width: 1000,
-    height: 1560,
-    road: "M500 -40C500 60 250 50 250 150C250 290 750 280 750 430C750 580 250 560 250 710C250 860 820 800 800 930C790 1010 700 1040 600 1030C480 1020 320 1180 320 1340C320 1450 450 1490 500 1600",
-    exit: "M500 1600C510 1622 516 1640 516 1662V1900",
-    marks: [0.1042, 0.2929, 0.4822, 0.7565, 0.8991],
+    width: 1200,
+    height: 1580,
+    road: "M600 -60C600 60 240 50 240 160C240 320 960 310 960 480C960 650 240 640 240 810C240 980 1040 960 1020 1070C1000 1140 950 1150 880 1140C700 1130 340 1300 340 1470",
+    exit: "",
+    marks: [0.1172, 0.3336, 0.5515, 0.8226, 1],
     points: [
-      [250, 150, "right"],
-      [750, 430, "left"],
-      [250, 710, "right"],
-      [600, 1030, "below"],
-      [320, 1340, "right"],
+      [240, 160, "right"],
+      [960, 480, "left"],
+      [240, 810, "right"],
+      [880, 1140, "left"],
+      [340, 1470, "right"],
     ],
   },
 };
@@ -292,21 +292,27 @@ export default function MissionMap({
               );
             })}
             <path d={terrain.road} className="map-road-edge" />
-            <path d={terrain.exit} className="map-road-edge" />
+            {terrain.exit && (
+              <path d={terrain.exit} className="map-road-edge" />
+            )}
             <path d={terrain.road} className="map-road" />
-            <path d={terrain.exit} className="map-road" />
+            {terrain.exit && <path d={terrain.exit} className="map-road" />}
             <path d={terrain.road} className="map-road-dashes" />
-            <path d={terrain.exit} className="map-road-dashes" />
+            {terrain.exit && (
+              <path d={terrain.exit} className="map-road-dashes" />
+            )}
             <motion.path
               d={terrain.road}
               className="map-road-lit"
               style={{ pathLength: still ? 1 : lit }}
             />
-            <motion.path
-              d={terrain.exit}
-              className="map-road-lit"
-              style={{ pathLength: still ? 1 : exitLit }}
-            />
+            {terrain.exit && (
+              <motion.path
+                d={terrain.exit}
+                className="map-road-lit"
+                style={{ pathLength: still ? 1 : exitLit }}
+              />
+            )}
           </svg>
         );
       })}

@@ -1,3 +1,4 @@
+import DistrictRoute from "@/components/partners/DistrictRoute";
 import ScrollRise from "@/components/ui/ScrollRise";
 import { TIMELINE } from "@/content/timeline";
 
@@ -21,6 +22,7 @@ export default function TimelineSection() {
           </ScrollRise>
           <MissionMap checkpoints={TIMELINE} />
         </div>
+        <DistrictRoute to="#sponsor" kicker="Next stop" name="PARTNERS" />
       </div>
     </section>
   );

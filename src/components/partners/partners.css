@@ -49,83 +49,6 @@
   --road-px: calc(var(--road-span) / var(--road-units));
 }
 
-.district-approach {
-  position: absolute;
-  top: 0;
-  left: calc(50% + var(--road-px) * var(--road-shift));
-  z-index: 6;
-  width: calc(var(--road-px) * 30);
-  height: calc(var(--district-arch) * 0.2 + 4px);
-  translate: -50% 0;
-  background: linear-gradient(
-    90deg,
-    #07040c 0 16.7%,
-    #35274b 16.7% 38.3%,
-    var(--district-gold) 38.3% 61.7%,
-    #35274b 61.7% 83.3%,
-    #07040c 83.3%
-  );
-}
-
-.district-gate {
-  position: absolute;
-  top: calc(var(--district-arch) * 0.2 - 0.2rem);
-  left: calc(50% + var(--road-px) * (var(--road-shift) + 15) + 0.9rem);
-  z-index: 7;
-  translate: 0 -100%;
-  padding-bottom: 0.7rem;
-  pointer-events: none;
-}
-
-.district-gate::before,
-.district-gate::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  width: 0.25rem;
-  height: 0.85rem;
-  background: #3d2050;
-}
-
-.district-gate::before {
-  left: 20%;
-}
-
-.district-gate::after {
-  right: 20%;
-}
-
-.district-gate span {
-  display: block;
-  padding: 0.3rem 0.65rem 0.24rem;
-  border: 2px solid var(--district-ink);
-  outline: 2px solid var(--district-gold);
-  outline-offset: -5px;
-  background: var(--color-magenta);
-  font-family: var(--font-display-gta);
-  font-size: clamp(0.72rem, 1vw, 0.9rem);
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--district-cream);
-}
-
-@media (min-width: 48rem) {
-  .district-scene {
-    --road-span: min(46rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
-    --road-units: 800;
-    --road-shift: 24;
-  }
-}
-
-@media (min-width: 64rem) {
-  .district-scene {
-    --road-span: min(72rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
-    --road-units: 1000;
-    --road-shift: 16;
-  }
-}
-
 .district-horizon-rim {
   fill: none;
   stroke: var(--district-gold);
@@ -754,8 +677,8 @@
 
 .district-wall {
   position: relative;
-  padding: clamp(5rem, 10vw, 7rem) clamp(1rem, 5vw, 4rem)
-    clamp(4.5rem, 10vh, 7rem);
+  padding: clamp(5.5rem, 11vw, 8rem) clamp(1rem, 5vw, 4rem)
+    clamp(5.5rem, 12vh, 8.5rem);
   background-color: var(--district-plum);
   background-image: repeating-linear-gradient(
     90deg,
@@ -785,6 +708,11 @@
 }
 
 .district-route {
+  --district-ink: #1b0f24;
+  --district-cream: #fff3e2;
+  --district-gold: #ffd23f;
+  --district-plum: #2b1638;
+  --district-magenta-deep: #9c0f78;
   --route-h: clamp(8.5rem, 14vw, 13rem);
   position: relative;
   height: var(--route-h);

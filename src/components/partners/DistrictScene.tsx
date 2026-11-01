@@ -62,10 +62,6 @@ export default function DistrictScene({
         />
         <path d="M0 100Q800 -60 1600 100" className="district-horizon-rim" />
       </svg>
-      <span aria-hidden className="district-approach" />
-      <p className="district-gate">
-        <span>{SPONSOR_CALL.gate}</span>
-      </p>
 
       <div className="district-stage">
         <div aria-hidden className="district-backdrop">

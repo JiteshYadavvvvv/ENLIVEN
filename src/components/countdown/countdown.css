@@ -21,8 +21,8 @@
   width: 100%;
   max-width: 72rem;
   margin-inline: auto;
-  padding: clamp(7rem, 17vh, 11rem) clamp(1rem, 4vw, 3rem)
-    calc(clamp(4.5rem, 12vh, 8rem) + var(--prize-cut));
+  padding: clamp(7.5rem, 18vh, 12rem) clamp(1rem, 4vw, 3rem)
+    calc(clamp(5.5rem, 14vh, 9.5rem) + var(--prize-cut));
 }
 
 .cloud-gate {
