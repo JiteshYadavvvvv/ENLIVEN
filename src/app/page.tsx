@@ -12,6 +12,7 @@ import MetroTrack from "@/components/environment/MetroTrack";
 // import Messenger from "@/components/environment/Messenger";
 import { SceneImage } from "@/components/environment/SceneLayer";
 import FaqSection from "@/components/faq/FaqSection";
+import FooterSection from "@/components/footer/FooterSection";
 import Navbar from "@/components/layout/Navbar";
 import PartnersSection from "@/components/partners/PartnersSection";
 import PrizesSection from "@/components/prizes/PrizesSection";
@@ -69,6 +70,7 @@ export default function Home() {
       <TimelineSection />
       <PartnersSection />
       <FaqSection />
+      <FooterSection />
     </main>
   );
 }
