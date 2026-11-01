@@ -1,84 +1,55 @@
-import { FiArrowUpRight, FiClock } from "react-icons/fi";
+import {
+  SPONSOR_CATEGORIES,
+  SPONSORS,
+  type Sponsor,
+  type SponsorLineup,
+} from "@/content/sponsorship";
 
-import { SPONSORSHIP } from "@/content/sponsorship";
-
-import StageScene from "./StageScene";
+import AdWall from "./AdWall";
+import DistrictScene from "./DistrictScene";
 import "./partners.css";
 
-const VALANCE_SCALLOPS = 20;
-
-function valancePath() {
-  const step = 1600 / VALANCE_SCALLOPS;
-  let path = "M0 0H1600V34";
-  for (let index = VALANCE_SCALLOPS; index > 0; index--) {
-    const x = index * step;
-    path += `Q${x - step / 2} 78 ${x - step} 34`;
-  }
-  return `${path}Z`;
+function billingOrder(first: Sponsor, second: Sponsor) {
+  const featured =
+    Number(Boolean(second.featured)) - Number(Boolean(first.featured));
+  if (featured !== 0) return featured;
+  const order =
+    (first.order ?? Number.MAX_SAFE_INTEGER) -
+    (second.order ?? Number.MAX_SAFE_INTEGER);
+  if (order !== 0) return order;
+  return first.name.localeCompare(second.name);
 }
 
-function PartnerCall() {
-  const { enquiry, brochure } = SPONSORSHIP;
-  return (
-    <div className="stage-calls">
-      {enquiry.href ? (
-        <a
-          href={enquiry.href}
-          target="_blank"
-          rel="noreferrer"
-          className="stage-cta"
-        >
-          {enquiry.label}
-          <FiArrowUpRight aria-hidden />
-        </a>
-      ) : (
-        <p className="stage-cta" data-pending>
-          <FiClock aria-hidden />
-          {enquiry.pendingLabel}
-        </p>
-      )}
-      {brochure.href && (
-        <a
-          href={brochure.href}
-          target="_blank"
-          rel="noreferrer"
-          className="stage-brochure"
-        >
-          {brochure.label}
-        </a>
-      )}
-    </div>
-  );
+function buildLineup(): SponsorLineup[] {
+  return SPONSOR_CATEGORIES.map((category) => ({
+    category,
+    sponsors: SPONSORS.filter(
+      (sponsor) => sponsor.category === category.id,
+    ).sort(billingOrder),
+  })).filter((lineup) => lineup.sponsors.length > 0);
 }
+
+function rooftopOrder(lineup: SponsorLineup[]) {
+  const marquee = lineup.filter((entry) => entry.category.stage === "marquee");
+  const flanks = lineup.filter((entry) => entry.category.stage === "billboard");
+  const split = Math.ceil(flanks.length / 2);
+  return [...flanks.slice(0, split), ...marquee, ...flanks.slice(split)];
+}
+
+const LINEUP = buildLineup();
+const ROOFTOP = rooftopOrder(LINEUP);
+const STREET = LINEUP.filter((entry) => entry.category.stage === "signboard");
 
 export default function PartnersSection() {
-  const { headline, invitation, stageWords } = SPONSORSHIP;
-
   return (
-    <section
-      id="sponsor"
-      aria-labelledby="sponsor-title"
-      className="partner-stage"
-    >
-      <svg
-        viewBox="0 0 1600 80"
-        preserveAspectRatio="none"
-        className="stage-valance"
-        aria-hidden="true"
-      >
-        <path d={valancePath()} />
-      </svg>
-      <StageScene words={stageWords} />
-      <div className="stage-front">
-        <div aria-hidden className="grain-overlay" />
-        <div className="stage-front-inner">
-          <h2 id="sponsor-title" className="stage-title">
-            {headline}
-          </h2>
-          <p className="stage-invite">{invitation}</p>
-          <PartnerCall />
+    <section id="sponsor" aria-labelledby="sponsor-title" className="district">
+      <DistrictScene rooftop={ROOFTOP} />
+      {STREET.length > 0 && (
+        <div className="district-wall">
+          <div aria-hidden className="grain-overlay" />
+          <AdWall lineups={STREET} />
         </div>
-      </div>
+      )}
     </section>
   );
 }
