@@ -34,6 +34,7 @@ type MapLayout = {
 const DAY = 86_400_000;
 const MAP_SIZES: MapSize[] = ["mob", "tab", "desk"];
 const MISSION_STOP = 3;
+const FINISH_STOP = 4;
 
 const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
   mob: {
@@ -213,12 +214,8 @@ export default function MissionMap({
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     const fraction = routeFraction(progress, layout);
-    if (fraction > lit.get()) lit.set(fraction);
-  });
-
-  useMotionValueEvent(lit, "change", (fraction) => {
-    const count = layout.marks.filter((mark) => fraction >= mark - 0.01).length;
-    setReached((current) => Math.max(current, count));
+    lit.set(fraction);
+    setReached(layout.marks.filter((mark) => fraction >= mark - 0.01).length);
   });
 
   const litCount = still ? stops.length : reached;
@@ -244,6 +241,15 @@ export default function MissionMap({
               >
                 <circle cx="4" cy="4" r="1.8" />
               </pattern>
+              <pattern
+                id={`map-checker-${mapSize}`}
+                width="28"
+                height="28"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect width="28" height="28" className="map-checker-light" />
+                <path d="M0 0h14v14H0ZM14 14h14v14H14Z" />
+              </pattern>
             </defs>
             <rect
               width={terrain.width}
@@ -254,15 +260,28 @@ export default function MissionMap({
             {terrain.points.map(([x, y], index) => {
               const radius =
                 index === MISSION_STOP
-                  ? terrain.width * 0.16
-                  : terrain.width * 0.1;
+                  ? terrain.width * 0.17
+                  : terrain.width * 0.11;
               return (
-                <g key={`${x}-${y}`}>
+                <g
+                  key={`${x}-${y}`}
+                  className="map-pad-group"
+                  data-lit={index < litCount}
+                >
                   <path
                     d={padPath(x + 8, y + 12, radius)}
                     className="map-pad-shadow"
                   />
-                  <path d={padPath(x, y, radius)} className="map-pad" />
+                  <path
+                    d={padPath(x, y, radius)}
+                    className="map-pad"
+                    fill={
+                      index === FINISH_STOP
+                        ? `url(#map-checker-${mapSize})`
+                        : undefined
+                    }
+                    data-finish={index === FINISH_STOP || undefined}
+                  />
                 </g>
               );
             })}
@@ -290,6 +309,9 @@ export default function MissionMap({
               data-lit={index < litCount}
               style={placement(index)}
             >
+              {checkpoint.sigil === "finish" && (
+                <span aria-hidden className="map-burst" />
+              )}
               <span className="map-node">
                 <MapSigil sigil={checkpoint.sigil} />
               </span>

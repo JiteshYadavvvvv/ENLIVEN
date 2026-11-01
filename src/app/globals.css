@@ -53,7 +53,7 @@
   --prize-cut: clamp(2.5rem, 6vw, 6.5rem);
   --tracks-cut: clamp(2.25rem, 5vw, 5.5rem);
   --mission-step: clamp(1.1rem, 2.2vw, 2.25rem);
-  --partner-tear: clamp(0.9rem, 1.6vw, 1.4rem);
+  --partner-tear: clamp(1.4rem, 2.6vw, 2.4rem);
   --extrude-magenta:
     0.006em 0.012em 0 #e8489f, 0.012em 0.024em 0 #d23a92,
     0.018em 0.036em 0 #b82d82, 0.024em 0.048em 0 #9c2172,

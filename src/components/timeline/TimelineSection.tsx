@@ -1,4 +1,4 @@
-import ScrollReveal from "@/components/ui/ScrollReveal";
+import ScrollRise from "@/components/ui/ScrollRise";
 import { TIMELINE } from "@/content/timeline";
 
 import MissionMap from "./MissionMap";
@@ -16,11 +16,9 @@ export default function TimelineSection() {
       <div className="mission-floor">
         <div aria-hidden className="grain-overlay" />
         <div className="mission-inner">
-          <ScrollReveal>
-            <h2 id="timeline-title" className="mission-title">
-              Mission timeline
-            </h2>
-          </ScrollReveal>
+          <ScrollRise id="timeline-title" className="mission-title">
+            Mission <span>timeline</span>
+          </ScrollRise>
           <MissionMap checkpoints={TIMELINE} />
         </div>
       </div>

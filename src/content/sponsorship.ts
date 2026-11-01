@@ -1,51 +1,20 @@
-export type SponsorTier = {
-  name: string;
-  summary: string | null;
-  perks: string[];
-};
-
-export type PartnerBrand = {
-  name: string;
-  href: string | null;
-};
-
 export type SponsorshipContent = {
-  headline: { lead: string; accent: string };
-  pitch: string;
-  contract: {
-    title: string;
-    clauses: string[];
-    organiserRole: string;
-    partnerLine: string;
-    partnerRole: string;
-  };
+  headline: string;
+  invitation: string;
+  stageWords: string[];
   enquiry: { label: string; href: string | null; pendingLabel: string };
   brochure: { label: string; href: string | null };
-  tiers: SponsorTier[];
-  partners: PartnerBrand[];
 };
 
 export const SPONSORSHIP: SponsorshipContent = {
-  headline: { lead: "Partner with", accent: "ENLIVEN 4" },
-  pitch:
-    "ENLIVEN is the flagship tech event by Google Developer Groups, Army Institute of Technology, Pune. Bring your brand into its fourth edition and connect with the student and developer community that drives it.",
-  contract: {
-    title: "Partnership agreement",
-    clauses: [
-      "Associate your brand with the flagship tech event by GDG AIT Pune.",
-      "Connect with the student and developer community at ENLIVEN 4.",
-      "Partnership tiers and benefits will be announced.",
-    ],
-    organiserRole: "GDG AIT Pune",
-    partnerLine: "Your brand",
-    partnerRole: "Partner",
-  },
+  headline: "Partner with ENLIVEN 4",
+  invitation:
+    "Take the stage with GDG AIT Pune and connect with the student and developer community.",
+  stageWords: ["Your", "brand"],
   enquiry: {
     label: "Start a partnership",
     href: null,
     pendingLabel: "Sponsorship enquiries open soon",
   },
   brochure: { label: "Sponsorship brochure", href: null },
-  tiers: [],
-  partners: [],
 };
