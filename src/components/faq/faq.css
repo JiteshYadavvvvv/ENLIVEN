@@ -47,6 +47,7 @@
   font-family: var(--font-display-gta);
   font-size: clamp(3.4rem, 11vw, 10rem);
   line-height: 0.86;
+  padding-bottom: 0.16em;
   text-transform: uppercase;
   color: var(--faq-cream);
   -webkit-text-stroke: 0.03em var(--faq-ink);

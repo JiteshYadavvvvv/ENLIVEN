@@ -45,35 +45,32 @@
 .district-scene {
   --road-span: min(28rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
   --road-units: 400;
+  --road-shift: 32;
   --road-px: calc(var(--road-span) / var(--road-units));
 }
 
-.approach-edge,
-.approach-road,
-.approach-lit {
-  fill: none;
-  vector-effect: non-scaling-stroke;
-}
-
-.approach-edge {
-  stroke: #07040c;
-  stroke-width: calc(var(--road-px) * 30);
-}
-
-.approach-road {
-  stroke: #35274b;
-  stroke-width: calc(var(--road-px) * 20);
-}
-
-.approach-lit {
-  stroke: var(--district-gold);
-  stroke-width: calc(var(--road-px) * 7);
+.district-approach {
+  position: absolute;
+  top: 0;
+  left: calc(50% + var(--road-px) * var(--road-shift));
+  z-index: 6;
+  width: calc(var(--road-px) * 30);
+  height: calc(var(--district-arch) * 0.2 + 4px);
+  translate: -50% 0;
+  background: linear-gradient(
+    90deg,
+    #07040c 0 16.7%,
+    #35274b 16.7% 38.3%,
+    var(--district-gold) 38.3% 61.7%,
+    #35274b 61.7% 83.3%,
+    #07040c 83.3%
+  );
 }
 
 .district-gate {
   position: absolute;
   top: calc(var(--district-arch) * 0.2 - 0.2rem);
-  left: calc(50% + var(--road-px) * 15 + 0.9rem);
+  left: calc(50% + var(--road-px) * (var(--road-shift) + 15) + 0.9rem);
   z-index: 7;
   translate: 0 -100%;
   padding-bottom: 0.7rem;
@@ -117,6 +114,7 @@
   .district-scene {
     --road-span: min(46rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
     --road-units: 800;
+    --road-shift: 24;
   }
 }
 
@@ -124,6 +122,7 @@
   .district-scene {
     --road-span: min(72rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
     --road-units: 1000;
+    --road-shift: 16;
   }
 }
 

@@ -13,14 +13,14 @@ export default function ShardField() {
     <div aria-hidden className="faq-shards" data-failed={failed || undefined}>
       {!failed && (
         <AeroShards
-          shardColor="#7a2f86"
+          shardColor="#a3449b"
           accentColor="#ff2bd6"
           backgroundColor="transparent"
           material="glass"
           count={650}
           shardSize={0.9}
           speed={0.55}
-          glow={0.22}
+          glow={0.3}
           grain={0.05}
           vignette={0.55}
           depthOfField={0.8}
