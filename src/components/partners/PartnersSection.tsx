@@ -6,6 +6,7 @@ import {
 } from "@/content/sponsorship";
 
 import AdWall from "./AdWall";
+import DistrictRoute from "./DistrictRoute";
 import DistrictScene from "./DistrictScene";
 import "./partners.css";
 
@@ -50,6 +51,7 @@ export default function PartnersSection() {
           <AdWall lineups={STREET} />
         </div>
       )}
+      <DistrictRoute />
     </section>
   );
 }

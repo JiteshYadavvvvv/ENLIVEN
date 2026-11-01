@@ -26,16 +26,6 @@ function boardSide(index: number, rooftop: SponsorLineup[]) {
   return "center";
 }
 
-function FacadeBanner({ side }: { side: "left" | "right" }) {
-  return (
-    <span aria-hidden className="facade-banner" data-side={side}>
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M24 4l5 15 15 5-15 5-5 15-5-15-15-5 15-5Z" />
-      </svg>
-    </span>
-  );
-}
-
 export default function DistrictScene({
   rooftop,
 }: {
@@ -70,8 +60,14 @@ export default function DistrictScene({
           d="M0 0H1600V100Q800 -60 0 100Z"
           className="district-horizon-night"
         />
+        <path d="M800 -4V21" className="approach-edge" />
+        <path d="M800 -4V21" className="approach-road" />
+        <path d="M800 -4V21" className="approach-lit" />
         <path d="M0 100Q800 -60 1600 100" className="district-horizon-rim" />
       </svg>
+      <p className="district-gate">
+        <span>{SPONSOR_CALL.gate}</span>
+      </p>
 
       <div className="district-stage">
         <div aria-hidden className="district-backdrop">
@@ -128,8 +124,6 @@ export default function DistrictScene({
         </div>
 
         <div className="district-facade">
-          <FacadeBanner side="left" />
-          <FacadeBanner side="right" />
           {headliners && (
             <div className="district-sign">
               <p className="district-sign-plaque">{SPONSOR_CALL.signPlaque}</p>

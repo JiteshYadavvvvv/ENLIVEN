@@ -5,6 +5,7 @@ import {
   useMotionValue,
   useMotionValueEvent,
   useScroll,
+  useTransform,
 } from "motion/react";
 import {
   type CSSProperties,
@@ -29,6 +30,7 @@ type MapLayout = {
   road: string;
   marks: number[];
   points: [number, number, LabelSide][];
+  exit: string;
 };
 
 const DAY = 86_400_000;
@@ -41,6 +43,7 @@ const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
     width: 400,
     height: 1500,
     road: "M200 -40C200 40 90 40 90 130C90 260 310 260 310 400C310 540 90 520 90 670C90 820 290 800 290 960C290 1100 100 1100 100 1260C100 1350 160 1420 220 1540",
+    exit: "M220 1540C236 1572 200 1580 200 1610V1900",
     marks: [0.1059, 0.2896, 0.4744, 0.6602, 0.8458],
     points: [
       [90, 130, "right"],
@@ -54,6 +57,7 @@ const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
     width: 800,
     height: 1460,
     road: "M400 -40C400 60 180 40 180 140C180 280 620 260 620 410C620 560 180 530 180 680C180 820 660 800 640 920C630 990 580 1000 520 990C420 980 220 1120 220 1270C220 1370 320 1420 400 1500",
+    exit: "M400 1500C424 1524 400 1540 400 1560V1900",
     marks: [0.1063, 0.2978, 0.4899, 0.739, 0.8946],
     points: [
       [180, 140, "right"],
@@ -67,6 +71,7 @@ const MAP_LAYOUTS: Record<MapSize, MapLayout> = {
     width: 1000,
     height: 1560,
     road: "M500 -40C500 60 250 50 250 150C250 290 750 280 750 430C750 580 250 560 250 710C250 860 820 800 800 930C790 1010 700 1040 600 1030C480 1020 320 1180 320 1340C320 1450 450 1490 500 1600",
+    exit: "M500 1600C510 1622 500 1634 500 1650V1900",
     marks: [0.1042, 0.2929, 0.4822, 0.7565, 0.8991],
     points: [
       [250, 150, "right"],
@@ -219,6 +224,7 @@ export default function MissionMap({
   });
 
   const litCount = still ? stops.length : reached;
+  const exitLit = useTransform(lit, [0.985, 1], [0, 1]);
 
   return (
     <div ref={mapRef} className="mission-map">
@@ -292,6 +298,14 @@ export default function MissionMap({
               d={terrain.road}
               className="map-road-lit"
               style={{ pathLength: still ? 1 : lit }}
+            />
+            <path d={terrain.exit} className="map-road-edge" />
+            <path d={terrain.exit} className="map-road" />
+            <path d={terrain.exit} className="map-road-dashes" />
+            <motion.path
+              d={terrain.exit}
+              className="map-road-lit"
+              style={{ pathLength: still ? 1 : exitLit }}
             />
           </svg>
         );

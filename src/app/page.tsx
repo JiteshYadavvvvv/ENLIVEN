@@ -11,6 +11,7 @@ import MetroTrack from "@/components/environment/MetroTrack";
 // Character is temporarily disabled for the GTA hero rebuild (see below).
 // import Messenger from "@/components/environment/Messenger";
 import { SceneImage } from "@/components/environment/SceneLayer";
+import FaqSection from "@/components/faq/FaqSection";
 import Navbar from "@/components/layout/Navbar";
 import PartnersSection from "@/components/partners/PartnersSection";
 import PrizesSection from "@/components/prizes/PrizesSection";
@@ -67,6 +68,7 @@ export default function Home() {
       <TracksSection />
       <TimelineSection />
       <PartnersSection />
+      <FaqSection />
     </main>
   );
 }

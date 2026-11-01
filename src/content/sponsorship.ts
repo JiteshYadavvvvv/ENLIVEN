@@ -75,6 +75,7 @@ export const SPONSOR_CALL = {
   title: "The Partners",
   plaque: "Space available",
   signPlaque: "Now leasing",
+  gate: "Partners District",
   headline: "Put your brand in the world.",
   line: "Join ENLIVEN 4 and connect your brand with the next generation of builders, creators and innovators.",
   button: "Become a partner",

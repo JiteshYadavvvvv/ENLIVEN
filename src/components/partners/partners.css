@@ -42,6 +42,91 @@
   fill: var(--district-ink);
 }
 
+.district-scene {
+  --road-span: min(28rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
+  --road-units: 400;
+  --road-px: calc(var(--road-span) / var(--road-units));
+}
+
+.approach-edge,
+.approach-road,
+.approach-lit {
+  fill: none;
+  vector-effect: non-scaling-stroke;
+}
+
+.approach-edge {
+  stroke: #07040c;
+  stroke-width: calc(var(--road-px) * 30);
+}
+
+.approach-road {
+  stroke: #35274b;
+  stroke-width: calc(var(--road-px) * 20);
+}
+
+.approach-lit {
+  stroke: var(--district-gold);
+  stroke-width: calc(var(--road-px) * 7);
+}
+
+.district-gate {
+  position: absolute;
+  top: calc(var(--district-arch) * 0.2 - 0.2rem);
+  left: calc(50% + var(--road-px) * 15 + 0.9rem);
+  z-index: 7;
+  translate: 0 -100%;
+  padding-bottom: 0.7rem;
+  pointer-events: none;
+}
+
+.district-gate::before,
+.district-gate::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0.25rem;
+  height: 0.85rem;
+  background: #3d2050;
+}
+
+.district-gate::before {
+  left: 20%;
+}
+
+.district-gate::after {
+  right: 20%;
+}
+
+.district-gate span {
+  display: block;
+  padding: 0.3rem 0.65rem 0.24rem;
+  border: 2px solid var(--district-ink);
+  outline: 2px solid var(--district-gold);
+  outline-offset: -5px;
+  background: var(--color-magenta);
+  font-family: var(--font-display-gta);
+  font-size: clamp(0.72rem, 1vw, 0.9rem);
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--district-cream);
+}
+
+@media (min-width: 48rem) {
+  .district-scene {
+    --road-span: min(46rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
+    --road-units: 800;
+  }
+}
+
+@media (min-width: 64rem) {
+  .district-scene {
+    --road-span: min(72rem, 100vw - 2 * clamp(1rem, 5vw, 4rem));
+    --road-units: 1000;
+  }
+}
+
 .district-horizon-rim {
   fill: none;
   stroke: var(--district-gold);
@@ -88,7 +173,7 @@
   padding: calc(var(--district-arch) + clamp(1rem, 3.5vh, 2.5rem))
     clamp(1rem, 5vw, 4rem) 0;
   font-family: var(--font-display-gta);
-  font-size: clamp(3rem, 10.5vw, 8.2rem);
+  font-size: clamp(3rem, min(8.6vw, 15svh), 14rem);
   line-height: 0.84;
   text-transform: uppercase;
   color: var(--district-cream);
@@ -129,42 +214,25 @@
   box-shadow: 0 -0.9rem 0 #20102b;
 }
 
-.facade-banner {
-  position: absolute;
-  top: 0;
-  display: grid;
-  place-items: center;
-  width: clamp(2.6rem, 4vw, 3.6rem);
-  height: calc(var(--facade) * 0.75);
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 86%, 0 100%);
-  background: var(--color-magenta);
-}
-
-.facade-banner[data-side="left"] {
-  left: 6%;
-}
-
-.facade-banner[data-side="right"] {
-  right: 6%;
-}
-
-.facade-banner svg {
-  width: 62%;
-  fill: var(--district-cream);
+.district-scene:not([data-headliners]) .district-facade {
+  height: clamp(1.2rem, 2vw, 2rem);
+  padding: 0;
 }
 
 .billboard {
   --rise: min(1, var(--lit) / 0.18);
   --glow: clamp(0, (var(--lit) - 0.45) / 0.2, 1);
   --sign: clamp(0, (var(--lit) - 0.52) / 0.14, 1);
-  --frame-w: clamp(0.4rem, 0.7vw, 0.65rem);
-  --pylon: clamp(1.6rem, 4vh, 3rem);
-  --beam-w: 8rem;
+  --frame-w: clamp(0.4rem, 1.6cqi, 1.1rem);
+  --lamp-w: clamp(1.8rem, 5.4cqi, 3.8rem);
+  --pylon: clamp(1.6rem, 4.5svh, 4.5rem);
+  --beam-w: 30cqi;
+  container-type: inline-size;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: clamp(14rem, 22vw, 22rem);
+  width: clamp(14rem, 21vw, 32rem);
   opacity: var(--rise);
   translate: 0 calc((1 - var(--rise)) * 4rem);
   transform-origin: 50% 100%;
@@ -192,13 +260,12 @@
 
 .billboard[data-size="marquee"],
 .billboard[data-size="lease"] {
-  --pylon: clamp(3rem, 8vh, 5.5rem);
-  --beam-w: 12rem;
-  width: clamp(20rem, 40vw, 40rem);
+  --pylon: clamp(3rem, 9svh, 9rem);
+  width: clamp(20rem, min(40vw, 112svh), 64rem);
 }
 
 .billboard[data-size="lease"] {
-  width: clamp(20rem, 46vw, 44rem);
+  width: clamp(20rem, min(46vw, 118svh), 72rem);
 }
 
 .billboard[data-size="lightbox"] {
@@ -208,13 +275,13 @@
 .billboard-plaque {
   position: relative;
   z-index: 5;
-  margin-bottom: calc(var(--frame-w) * -1 - 0.55rem);
-  padding: 0.45rem 1.15rem 0.35rem;
+  margin-bottom: calc(var(--frame-w) * -1 - 0.55em);
+  padding: 0.42em 1em 0.32em;
   border: 3px solid var(--district-ink);
   background: var(--district-gold);
   box-shadow: 0.25rem 0.25rem 0 var(--district-ink);
   font-family: var(--font-display-gta);
-  font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+  font-size: clamp(0.9rem, 3.6cqi, 1.6rem);
   line-height: 1;
   text-transform: uppercase;
   white-space: nowrap;
@@ -225,7 +292,7 @@
 
 .billboard[data-size="marquee"] .billboard-plaque,
 .billboard[data-size="lease"] .billboard-plaque {
-  font-size: clamp(1.1rem, 1.8vw, 1.6rem);
+  font-size: clamp(1.1rem, 3.2cqi, 2.4rem);
 }
 
 .billboard-frame {
@@ -253,7 +320,7 @@
   place-items: center;
   min-height: 9rem;
   aspect-ratio: 1.6 / 1;
-  padding: clamp(1.4rem, 3vw, 2.2rem) clamp(0.9rem, 2.2vw, 1.8rem);
+  padding: clamp(1.3rem, 5.5cqi, 3.6rem) clamp(0.9rem, 4.5cqi, 3rem);
   overflow: hidden;
   background: var(--district-cream);
 }
@@ -309,7 +376,7 @@
 .billboard-lamp {
   --on: clamp(0, (var(--lit) - 0.24 - var(--k) * 0.07) / 0.04, 1);
   position: relative;
-  width: 2.2rem;
+  width: var(--lamp-w);
   height: 100%;
 }
 
@@ -318,8 +385,8 @@
   position: absolute;
   bottom: 100%;
   left: 50%;
-  width: 0.3rem;
-  height: calc(2.3rem + var(--frame-w));
+  width: calc(var(--lamp-w) * 0.14);
+  height: calc(var(--lamp-w) * 1.05 + var(--frame-w));
   translate: -50% calc(var(--frame-w) * -1);
   background: var(--district-ink);
 }
@@ -327,10 +394,10 @@
 .billboard-lamp::after {
   content: "";
   position: absolute;
-  top: calc(var(--frame-w) * -1 - 2.6rem);
+  top: calc(var(--frame-w) * -1 - var(--lamp-w) * 1.18);
   left: 50%;
-  width: 2.2rem;
-  height: 0.85rem;
+  width: var(--lamp-w);
+  height: calc(var(--lamp-w) * 0.38);
   translate: -50% 0;
   border-radius: 0.2rem 0.2rem 0.45rem 0.45rem;
   background: linear-gradient(
@@ -346,10 +413,10 @@
 
 .billboard-beam {
   position: absolute;
-  top: calc(var(--frame-w) * -1 - 1.75rem);
+  top: calc(var(--frame-w) * -1 - var(--lamp-w) * 0.8);
   left: 50%;
   width: var(--beam-w);
-  height: calc(100% + 1.75rem);
+  height: calc(100% + var(--lamp-w) * 0.8);
   translate: -50% 0;
   clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
   background: linear-gradient(
@@ -365,8 +432,8 @@
 
 .billboard-catwalk {
   width: 106%;
-  height: 0.85rem;
-  margin-top: 0.55rem;
+  height: clamp(0.6rem, 1.7cqi, 1.3rem);
+  margin-top: calc(var(--frame-w) + 0.15rem);
   border-top: 0.22rem solid #4a2b5e;
   background-color: var(--district-ink);
   background-image: repeating-linear-gradient(
@@ -399,7 +466,7 @@
 .billboard-pylons::before,
 .billboard-pylons::after {
   content: "";
-  width: 0.7rem;
+  width: clamp(0.5rem, 1.4cqi, 1.1rem);
   height: 100%;
   background: var(--district-ink);
 }
@@ -425,7 +492,7 @@
 
 .logo-plate {
   --show: clamp(0, (var(--lit) - 0.6 - var(--j) * 0.035) / 0.16, 1);
-  --plate-w: clamp(7rem, 10vw, 9.5rem);
+  --plate-w: clamp(5.5rem, 34cqi, 13rem);
   position: relative;
   width: var(--plate-w);
   aspect-ratio: 2 / 1;
@@ -433,16 +500,20 @@
   scale: calc(0.88 + 0.12 * var(--show));
 }
 
+.billboard[data-size="lightbox"] .logo-plate {
+  --plate-w: clamp(5.5rem, 22cqi, 10rem);
+}
+
 .billboard[data-size="marquee"] .logo-plate {
-  --plate-w: clamp(10rem, 17vw, 17rem);
+  --plate-w: clamp(9rem, 36cqi, 26rem);
 }
 
 .logo-plate[data-featured] {
-  --plate-w: clamp(9rem, 13vw, 12rem);
+  --plate-w: clamp(6.5rem, 42cqi, 16rem);
 }
 
 .billboard[data-size="marquee"] .logo-plate[data-featured] {
-  --plate-w: clamp(12rem, 21vw, 21rem);
+  --plate-w: clamp(11rem, 44cqi, 32rem);
 }
 
 .logo-plate[data-surface="dark"] {
@@ -485,7 +556,8 @@
 
 .partner-call[data-placement="billboard"] {
   --reveal: clamp(0, (var(--lit) - 0.62) / 0.2, 1);
-  max-width: 32rem;
+  max-width: 76cqi;
+  gap: clamp(0.7rem, 2.2cqi, 1.6rem);
   opacity: var(--reveal);
   translate: 0 calc((1 - var(--reveal)) * 1.25rem);
 }
@@ -581,6 +653,21 @@
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--district-cream);
+}
+
+.partner-call[data-placement="billboard"] .partner-call-headline {
+  font-size: clamp(1.6rem, 6.8cqi, 5.2rem);
+}
+
+.partner-call[data-placement="billboard"] .partner-call-line {
+  max-width: 64cqi;
+  font-size: clamp(0.9rem, 2.2cqi, 1.45rem);
+}
+
+.partner-call[data-placement="billboard"] .partner-call-button {
+  min-height: clamp(2.9rem, 7cqi, 4.6rem);
+  padding: 0.75em 1.35em 0.65em;
+  font-size: clamp(1rem, 2.7cqi, 2rem);
 }
 
 .partner-call[data-placement="sign"] {
@@ -698,6 +785,205 @@
   max-width: 100%;
 }
 
+.district-route {
+  --route-h: clamp(8.5rem, 14vw, 13rem);
+  position: relative;
+  height: var(--route-h);
+  overflow: hidden;
+  background: var(--district-ink);
+}
+
+.route-road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 42%;
+  border-top: 0.3rem solid var(--district-cream);
+  border-bottom: 0.3rem solid var(--district-gold);
+  background: #241731;
+}
+
+.route-lane {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: clamp(0.3rem, 0.5vw, 0.5rem);
+  translate: 0 -50%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--district-gold) 0 3.2rem,
+    transparent 3.2rem 6rem
+  );
+  animation: lane-drift 2.8s linear infinite;
+}
+
+@keyframes lane-drift {
+  to {
+    background-position-x: -6rem;
+  }
+}
+
+.route-rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 42%;
+  height: 1.6rem;
+  border-top: 0.45rem solid var(--color-magenta);
+  background: repeating-linear-gradient(
+    90deg,
+    #9c0f78 0 0.35rem,
+    transparent 0.35rem 2.4rem
+  );
+}
+
+.route-lamps {
+  position: absolute;
+  inset: 0 0 42%;
+  display: flex;
+  justify-content: space-around;
+  pointer-events: none;
+}
+
+.route-lamp {
+  position: relative;
+  width: 0.35rem;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 0 18%, #3d2050 18%);
+}
+
+.route-lamp::before {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 0;
+  width: 1.6rem;
+  height: 0.5rem;
+  border-radius: 0 0.3rem 0.3rem 0;
+  background: #3d2050;
+  box-shadow: 1rem 0.35rem 0 -0.1rem var(--district-gold);
+}
+
+.route-lamp::after {
+  content: "";
+  position: absolute;
+  top: 18%;
+  left: 1.2rem;
+  width: 4.5rem;
+  height: 220%;
+  translate: -50% 0;
+  clip-path: polygon(44% 0, 56% 0, 100% 100%, 0 100%);
+  background: linear-gradient(
+    to bottom,
+    rgb(255 216 120 / 0.38),
+    rgb(255 216 120 / 0) 75%
+  );
+  animation: lamp-hum 4.5s ease-in-out infinite alternate;
+}
+
+.route-lamp:nth-child(2n)::after {
+  animation-delay: -1.8s;
+}
+
+@keyframes lamp-hum {
+  to {
+    opacity: 0.72;
+  }
+}
+
+.route-sign {
+  position: absolute;
+  top: 12%;
+  right: clamp(1rem, 7vw, 7rem);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  column-gap: 0.7rem;
+  padding: 0.55rem 1rem 0.5rem 1.1rem;
+  border: 3px solid var(--district-ink);
+  outline: 0.25rem solid var(--district-gold);
+  outline-offset: -0.55rem;
+  background: var(--color-magenta);
+  box-shadow: 0.4rem 0.4rem 0 var(--district-ink);
+  color: var(--district-cream);
+  transition: translate 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.route-sign::before,
+.route-sign::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  width: 0.45rem;
+  height: calc(var(--route-h) * 0.32);
+  background: #3d2050;
+}
+
+.route-sign::before {
+  left: 18%;
+}
+
+.route-sign::after {
+  right: 18%;
+}
+
+.route-sign:hover {
+  translate: 0 -0.2rem;
+}
+
+.route-sign:focus-visible {
+  outline-color: var(--district-cream);
+}
+
+.route-sign-kicker {
+  grid-column: 1;
+  font-family: var(--font-text);
+  font-size: clamp(0.72rem, 1vw, 0.85rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.route-sign-name {
+  grid-column: 1;
+  font-family: var(--font-display-gta);
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.route-sign-arrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  width: clamp(1.6rem, 2.6vw, 2.2rem);
+  height: auto;
+  animation: sign-nudge 1.6s ease-in-out infinite;
+}
+
+@keyframes sign-nudge {
+  50% {
+    translate: 0 0.25rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .route-lamp:nth-child(n + 5) {
+    display: none;
+  }
+
+  .route-sign {
+    right: 50%;
+    translate: 50% 0;
+  }
+
+  .route-sign:hover {
+    translate: 50% -0.2rem;
+  }
+}
+
 @media (max-width: 63.99rem), (max-height: 44rem) {
   .district-scene,
   .district-scene:not([data-headliners]) {
@@ -707,7 +993,7 @@
   .district-stage {
     position: relative;
     height: auto;
-    min-height: 100svh;
+    min-height: 0;
   }
 }
 
@@ -716,7 +1002,7 @@
     flex-wrap: wrap;
     align-content: flex-end;
     gap: 3.25rem 0.9rem;
-    padding-top: 3rem;
+    padding-top: clamp(3.5rem, 9vw, 5rem);
   }
 
   .billboard,
@@ -748,14 +1034,6 @@
     --pylon: 1.4rem;
   }
 
-  .logo-plate {
-    --plate-w: clamp(5.5rem, 17vw, 8.5rem);
-  }
-
-  .billboard[data-size="marquee"] .logo-plate {
-    --plate-w: clamp(9rem, 30vw, 15rem);
-  }
-
   .district-facade {
     height: auto;
     padding: 1.75rem 1rem 2.25rem;
@@ -782,22 +1060,6 @@
 
   .billboard[data-size="lease"] .billboard-face {
     aspect-ratio: auto;
-  }
-
-  .logo-plate {
-    --plate-w: clamp(5.5rem, 34vw, 8rem);
-  }
-
-  .billboard[data-size="marquee"] .logo-plate {
-    --plate-w: clamp(9rem, 56vw, 14rem);
-  }
-
-  .billboard[data-size="lightbox"] .logo-plate {
-    --plate-w: calc(50% - 0.8rem);
-  }
-
-  .facade-banner {
-    display: none;
   }
 }
 
@@ -838,5 +1100,15 @@
   .partner-call-button:hover,
   .partner-call-button:active {
     translate: none;
+  }
+
+  .route-lane,
+  .route-lamp::after,
+  .route-sign-arrow {
+    animation: none;
+  }
+
+  .route-sign {
+    transition: none;
   }
 }
