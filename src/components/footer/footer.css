@@ -183,8 +183,8 @@
   width: 100%;
   max-width: clamp(75rem, 88vw, 88rem);
   margin-inline: auto;
-  padding: clamp(3.5rem, 8vh, 6.5rem) clamp(1rem, 5vw, 4rem)
-    clamp(2.5rem, 5vh, 4rem);
+  padding: clamp(4.5rem, 10vh, 7.5rem) clamp(1rem, 5vw, 4rem)
+    clamp(3.5rem, 7vh, 5rem);
 }
 
 /* ----------------------------------------------------

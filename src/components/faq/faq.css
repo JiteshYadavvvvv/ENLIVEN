@@ -34,8 +34,8 @@
   width: 100%;
   max-width: 92rem;
   margin-inline: auto;
-  padding: clamp(5.5rem, 12vh, 9rem) clamp(1rem, 5vw, 4rem)
-    clamp(6rem, 14vh, 9.5rem);
+  padding: clamp(6.5rem, 14vh, 10.5rem) clamp(1rem, 5vw, 4rem)
+    clamp(7rem, 16vh, 11rem);
 }
 
 .faq-intro {

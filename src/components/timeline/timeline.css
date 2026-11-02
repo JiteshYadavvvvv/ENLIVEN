@@ -42,13 +42,30 @@
   background: var(--mission-ink);
 }
 
+.timeline-topography-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 5%,
+    black 92%,
+    transparent 100%
+  );
+}
+
 .mission-inner {
   position: relative;
+  z-index: 2;
   width: 100%;
   max-width: 100rem;
   margin-inline: auto;
-  padding: calc(var(--s) * 3 + clamp(4.5rem, 11vh, 8rem)) clamp(1rem, 5vw, 4rem)
-    calc(clamp(3.5rem, 8vh, 5.5rem) + var(--partner-tear));
+  padding: calc(var(--s) * 3 + clamp(5.5rem, 13vh, 9.5rem))
+    clamp(1rem, 5vw, 4rem) calc(clamp(4.5rem, 10vh, 7rem) + var(--partner-tear));
 }
 
 .mission-title {

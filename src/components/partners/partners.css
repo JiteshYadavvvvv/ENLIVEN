@@ -677,8 +677,8 @@
 
 .district-wall {
   position: relative;
-  padding: clamp(5.5rem, 11vw, 8rem) clamp(1rem, 5vw, 4rem)
-    clamp(5.5rem, 12vh, 8.5rem);
+  padding: clamp(6.5rem, 13vw, 9.5rem) clamp(1rem, 5vw, 4rem)
+    clamp(6.5rem, 14vh, 10rem);
   background-color: var(--district-plum);
   background-image: repeating-linear-gradient(
     90deg,

@@ -44,8 +44,8 @@
   width: 100%;
   max-width: 100rem;
   margin-inline: auto;
-  padding: calc(var(--cut) + clamp(4.5rem, 11vh, 8.5rem)) clamp(1rem, 5vw, 4rem)
-    calc(clamp(5.5rem, 13vh, 9.5rem) + var(--tracks-cut));
+  padding: calc(var(--cut) + clamp(5.5rem, 13vh, 10rem)) clamp(1rem, 5vw, 4rem)
+    calc(clamp(6.5rem, 15vh, 11rem) + var(--tracks-cut));
 }
 
 .prize-heading {

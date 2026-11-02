@@ -27,9 +27,9 @@
   width: 100%;
   max-width: 100rem;
   margin-inline: auto;
-  padding: calc(var(--tracks-cut) + clamp(4rem, 10vh, 7.5rem))
+  padding: calc(var(--tracks-cut) + clamp(5rem, 12vh, 9rem))
     clamp(1rem, 5vw, 4rem)
-    calc(clamp(6rem, 14vh, 10.5rem) + var(--mission-step) * 3);
+    calc(clamp(7rem, 16vh, 12rem) + var(--mission-step) * 3);
 }
 
 .track-mosaic {

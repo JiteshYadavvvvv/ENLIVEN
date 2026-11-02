@@ -152,4 +152,3 @@ export const FOOTER_CONFIG: FooterConfig = {
     copyright: "© 2026–2027 ENLIVEN 4. All rights reserved.",
   },
 };
-
