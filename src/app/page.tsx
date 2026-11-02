@@ -18,6 +18,7 @@ import PartnersSection from "@/components/partners/PartnersSection";
 import PrizesSection from "@/components/prizes/PrizesSection";
 import TimelineSection from "@/components/timeline/TimelineSection";
 import TracksSection from "@/components/tracks/TracksSection";
+import FloatingControls from "@/components/ui/FloatingControls";
 
 const ENTER_HREF = "/";
 
@@ -71,6 +72,7 @@ export default function Home() {
       <PartnersSection />
       <FaqSection />
       <FooterSection />
+      <FloatingControls />
     </main>
   );
 }
