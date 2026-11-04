@@ -21,7 +21,13 @@ export default function HeroBranding({ href }: { href: string }) {
       }
     >
       <RevealOnLoad className="relative flex flex-col items-center">
-        <h1 className="wordmark-enliven">ENLIVEN</h1>
+        <h1 className="wordmark-enliven">
+          ENLIVEN
+          <span className="sr-only">
+            {" "}
+            4 — Flagship Technology Event by GDG AIT Pune
+          </span>
+        </h1>
         <EnterButton
           href={href}
           imageSrc={HERO_BRANDING.cardSrc}

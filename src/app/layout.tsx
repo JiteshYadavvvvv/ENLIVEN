@@ -3,6 +3,7 @@ import { Barlow, Bebas_Neue } from "next/font/google";
 import { preload } from "react-dom";
 
 import "./globals.css";
+import StructuredData from "@/components/seo/StructuredData";
 import SmoothScrollProvider from "@/utils/SmoothScrollProvider";
 
 // Bebas Neue is only the swap-period fallback for Pricedown (declared via
@@ -27,9 +28,69 @@ const barlow = Barlow({
 const PRICEDOWN_SRC = "/fonts/pricedown/Pricedown%20Bl.otf";
 
 export const metadata: Metadata = {
-  title: "ENLIVEN",
+  metadataBase: new URL("https://enlivenn.tech"),
+
+  title: {
+    default: "ENLIVEN 4 | GDG AIT Pune — Flagship Technology Event",
+    template: "%s | ENLIVEN 4",
+  },
   description:
-    "ENLIVEN is the flagship tech event by Google Developer Groups, Army Institute of Technology, Pune. Enliven 4 marks its fourth edition.",
+    "ENLIVEN 4 is the flagship technology event by Google Developer Groups at Army Institute of Technology, Pune. Explore nine innovation tracks, prizes and opportunities to build, compete and connect.",
+  keywords: [
+    "ENLIVEN",
+    "ENLIVEN 4",
+    "ENLIVEN AIT Pune",
+    "ENLIVEN GDG",
+    "GDG AIT Pune",
+    "GDG AIT Pune ENLIVEN",
+    "ENLIVEN technology event",
+    "ENLIVEN hackathon Pune",
+    "Google Developer Groups AIT",
+    "Army Institute of Technology tech event",
+  ],
+  authors: [{ name: "GDG AIT Pune", url: "https://enlivenn.tech/" }],
+  creator: "GDG AIT Pune",
+
+  alternates: {
+    canonical: "https://enlivenn.tech/",
+  },
+
+  openGraph: {
+    title: "ENLIVEN 4 | GDG AIT Pune — Flagship Technology Event",
+    description:
+      "ENLIVEN 4 is the flagship technology event by Google Developer Groups at Army Institute of Technology, Pune. Nine innovation tracks. One epic destination.",
+    url: "https://enlivenn.tech/",
+    siteName: "ENLIVEN 4",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "ENLIVEN 4 — Flagship Technology Event by GDG AIT Pune",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "ENLIVEN 4 | GDG AIT Pune — Flagship Technology Event",
+    description:
+      "ENLIVEN 4 is the flagship technology event by GDG AIT Pune. Nine innovation tracks. One epic destination.",
+    images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -52,6 +113,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${bebasNeue.variable} ${barlow.variable}`}>
       <body className="antialiased">
+        <StructuredData />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
